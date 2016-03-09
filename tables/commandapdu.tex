@@ -1,0 +1,22 @@
+\begin{table}[h!]
+\caption{Command APDU layout.}
+\label{tbl:cmdAPDU}
+\centering
+
+    \begin{tabular}{ | l | c | l |}
+        \hline
+        \thead{Name}
+        & \thead{Number of bytes}
+        & \thead{Description} \\ \hline
+
+        CLA  & 1 & Command type class, type of command \\ \hline
+        INS & 1 & Instruction code, command to run \\ \hline
+        P1 & 1 & Free parameter \\ \hline
+        P2 & 1 & Free parameter \\ \hline
+        LC & 0, 1 or 3 & Length of payload \\ \hline
+        Payload & 0 - 65535 & Payload data \\ \hline
+        LE & 0, 1, 2 or 3 & Expected response length \\ \hline
+
+    \end{tabular}
+
+\end{table}

@@ -1,0 +1,349 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.4 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{cheetahSec}{online}{}
+  \field{sortinit}{2}
+  \field{note}{Last visited: 15.02.2016}
+  \field{title}{2015 Cheetah Mobile Security Report}
+  \verb{url}
+  \verb http://www.cmcm.com/article/share/2016-01-13/919.html
+  \endverb
+  \field{year}{2016}
+\endentry
+
+\entry{google}{online}{}
+  \field{sortinit}{A}
+  \field{note}{Last visited: 13.01.2016}
+  \field{title}{About Google}
+  \verb{url}
+  \verb http://www.google.com/about/
+  \endverb
+  \field{year}{2016}
+\endentry
+
+\entry{javacardlimits}{online}{}
+  \field{sortinit}{A}
+  \field{note}{Last visited: 19.11.2015}
+  \field{title}{An Introduction to Java Card Technology - Part 1}
+  \verb{url}
+  \verb http://www.oracle.com/technetwork/java/javacard/javacard1-139251.html
+  \endverb
+  \field{year}{2003}
+\endentry
+
+\entry{androidNFCminSDK}{online}{}
+  \field{sortinit}{A}
+  \field{note}{Last visited: 13.01.2016}
+  \field{title}{Android NFC, Requesting NFC Access in the Android Manifest}
+  \verb{url}
+  \verb http://developer.android.com/guide/topics/connectivity/nfc/nfc.html#man
+  \verb ifest
+  \endverb
+  \field{year}{2015}
+\endentry
+
+\entry{androidIDE}{online}{}
+  \field{sortinit}{A}
+  \field{note}{Last visited: 21.01.2016}
+  \field{title}{Android Studio Overview}
+  \verb{url}
+  \verb http://developer.android.com/tools/studio/index.html
+  \endverb
+  \field{year}{2015}
+\endentry
+
+\entry{exchangePolicies}{online}{}
+  \field{sortinit}{A}
+  \field{note}{Last visited: 10.02.2016}
+  \field{title}{Android support for Microsoft Exchange in pure Google devices}
+  \verb{url}
+  \verb https://static.googleusercontent.com/media/www.google.com/no//help/hc/i
+  \verb mages/android/MicrosoftExchangePoliciesinAndroid.pdf
+  \endverb
+  \field{year}{2013}
+\endentry
+
+\entry{tlsOWASP}{online}{}
+  \field{sortinit}{B}
+  \field{note}{Last visited: 03.02.2016}
+  \field{title}{Benefits of TLS, OWASP}
+  \verb{url}
+  \verb https://www.owasp.org/index.php/Transport_Layer_Protection_Cheat_Sheet#
+  \verb Benefits
+  \endverb
+  \field{year}{2016}
+\endentry
+
+\entry{eclipseJCDE}{online}{}
+  \field{sortinit}{E}
+  \field{note}{Last visited: 18.01.2016}
+  \field{title}{EclipseJCDE, Sourceforge.net}
+  \verb{url}
+  \verb http://eclipse-jcde.sourceforge.net/
+  \endverb
+  \field{year}{2008}
+\endentry
+
+\entry{exchangePoliciesTech}{online}{}
+  \field{sortinit}{E}
+  \field{note}{Last visited: 10.02.2016}
+  \field{title}{Exchange ActiveSync - Overview}
+  \verb{url}
+  \verb https://technet.microsoft.com/en-us/library/aa998357(v=exchg.150).aspx#
+  \verb overview
+  \endverb
+  \field{year}{2015}
+\endentry
+
+\entry{globalplatform}{online}{}
+  \field{sortinit}{G}
+  \field{note}{Last visited: 18.01.2016}
+  \field{title}{GlobalPlatformPro, Github.com}
+  \verb{url}
+  \verb https://github.com/martinpaljak/GlobalPlatformPro
+  \endverb
+  \field{year}{2008}
+\endentry
+
+\entry{gemaltoidgo8030}{online}{}
+  \field{sortinit}{I}
+  \field{note}{Last visited: 16.02.2016}
+  \field{title}{IDCore 8030 MicroSD card, Datasheet}
+  \verb{url}
+  \verb http://www.gemalto.com/products/top_javacard/download/IDCore8030_Datash
+  \verb eet.pdf
+  \endverb
+  \field{year}{2015}
+\endentry
+
+\entry{GemaltoIDGo800}{online}{}
+  \field{sortinit}{I}
+  \field{note}{Last visited: 21.01.2016}
+  \field{title}{IDGo 800 Middleware and SDK for Mobile Devices}
+  \verb{url}
+  \verb http://www.gemalto.com/products/idgo_800/index.html
+  \endverb
+  \field{year}{2016}
+\endentry
+
+\entry{intelliJIDEA}{online}{}
+  \field{sortinit}{I}
+  \field{note}{Last visited: 21.01.2016}
+  \field{title}{IntelliJ IDEA}
+  \verb{url}
+  \verb https://www.jetbrains.com/idea/
+  \endverb
+  \field{year}{2016}
+\endentry
+
+\entry{iso7816-4}{online}{}
+  \field{sortinit}{I}
+  \field{note}{Last visited: 19.01.2016}
+  \field{title}{ISO 7816 Part 4: Interindustry Commands for Interchange}
+  \verb{url}
+  \verb http://www.cardwerk.com/smartcards/smartcard_standard_ISO7816-4.aspx
+  \endverb
+  \field{year}{2015}
+\endentry
+
+\entry{iso7810}{misc}{}
+  \field{sortinit}{I}
+  \field{howpublished}{\url{http://www.iso.org/iso/catalogue_detail?csnumber=31432}}
+  \field{note}{Last visited: 18.11.2015}
+  \field{title}{ISO/IEC 7810:2003, Identification cards -- Physical
+  characteristics}
+  \field{year}{2013}
+\endentry
+
+\entry{iso7816}{misc}{}
+  \field{sortinit}{I}
+  \field{howpublished}{\url{http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=54089}}
+  \field{note}{Last visited: 18.11.2015}
+  \field{title}{ISO/IEC 7816:1-2011, Identification cards -- Integrated circuit
+  cards -- Part 1: Cards with contacts -- Physical characteristics}
+  \field{year}{2011}
+\endentry
+
+\entry{javacard305}{online}{}
+  \field{sortinit}{J}
+  \field{note}{Last visited: 19.11.2015}
+  \field{title}{Java Card Platform, Classic Edition 3.0.5}
+  \verb{url}
+  \verb https://docs.oracle.com/javacard/3.0.5/index.html
+  \endverb
+  \field{year}{2015}
+\endentry
+
+\entry{multos}{online}{}
+  \field{sortinit}{M}
+  \field{note}{Last visited: 24.02.2016}
+  \field{title}{MULTOS Smart Card Operating System, cardwerk.com}
+  \verb{url}
+  \verb http://www.cardwerk.com/smartcards/MULTOS/
+  \endverb
+  \field{year}{2015}
+\endentry
+
+\entry{sunMicroSystems}{online}{}
+  \field{sortinit}{O}
+  \field{note}{Last visited: 05.03.2016}
+  \field{title}{Orgacle and Sun Microsystems}
+  \verb{url}
+  \verb https://www.oracle.com/sun/index.html?PHPSESSID=8fd76773d26875481e097a4
+  \verb a27c7a6a1
+  \endverb
+  \field{year}{2016}
+\endentry
+
+\entry{googlePlaySecureDist}{online}{}
+  \field{sortinit}{P}
+  \field{note}{Last visited: 08.02.2016}
+  \field{title}{Protect against harmful apps, Google Play}
+  \verb{url}
+  \verb https://support.google.com/accounts/answer/2812853?hl=en
+  \endverb
+  \field{year}{2016}
+\endentry
+
+\entry{shaRFC}{online}{}
+  \field{sortinit}{R}
+  \field{note}{Last visited: 15.01.2016}
+  \field{title}{RFC4634, US Secure Hash Algorithms (SHA and HMAC-SHA)}
+  \verb{url}
+  \verb https://tools.ietf.org/html/rfc4634
+  \endverb
+  \field{year}{2006}
+\endentry
+
+\entry{googleSafetynet}{online}{}
+  \field{sortinit}{S}
+  \field{note}{Last visited: 08.02.2016}
+  \field{title}{SafetyNet: Google's tamper detection.}
+  \verb{url}
+  \verb https://koz.io/inside-safetynet/
+  \endverb
+  \field{year}{2015}
+\endentry
+
+\entry{schlumberger}{online}{}
+  \field{sortinit}{S}
+  \field{note}{Last visited: 05.03.2016}
+  \field{title}{Schlumberger Limited homepage}
+  \verb{url}
+  \verb http://www.slb.com/
+  \endverb
+  \field{year}{2016}
+\endentry
+
+\entry{cardProcessing}{online}{}
+  \field{sortinit}{S}
+  \field{note}{Last visited: 04.03.2016}
+  \field{title}{Smart Card Technology, The micromodule. CardWerk.}
+  \verb{url}
+  \verb http://www.cardwerk.com/smartcards/smartcard_technology.aspx
+  \endverb
+  \field{year}{2015}
+\endentry
+
+\entry{androidMarketShare}{online}{}
+  \field{sortinit}{S}
+  \field{note}{Last visited: 13.01.2016}
+  \field{title}{Smartphone OS Market Share, 2015 Q2}
+  \verb{url}
+  \verb http://www.idc.com/prodserv/smartphone-os-market-share.jsp
+  \endverb
+  \field{year}{2015}
+\endentry
+
+\entry{sonym2}{online}{}
+  \field{sortinit}{S}
+  \field{note}{Last visited: 18.01.2016}
+  \field{title}{Sony Xperia M2 Aqua, GSMARENA}
+  \verb{url}
+  \verb http://www.gsmarena.com/sony_xperia_m2_aqua-6582.php
+  \endverb
+  \field{year}{2014}
+\endentry
+
+\entry{knownplaintextattack}{online}{}
+  \field{sortinit}{T}
+  \field{note}{Last visited: 24.02.2016}
+  \field{title}{Tech-FAQ, Known Plaintext Attack}
+  \verb{url}
+  \verb http://www.tech-faq.com/known-plaintext-attack.html
+  \endverb
+  \field{year}{2015}
+\endentry
+
+\entry{commoncriteria}{online}{}
+  \field{sortinit}{T}
+  \field{note}{Last visited: 15.02.2016}
+  \field{title}{The Common Criteria}
+  \verb{url}
+  \verb http://www.commoncriteriaportal.org/
+  \endverb
+  \field{year}{2016}
+\endentry
+
+\entry{rfc793}{online}{}
+  \field{sortinit}{T}
+  \field{note}{Last visited: 03.02.2016}
+  \field{title}{Transmission Control Protocol, rfc793}
+  \verb{url}
+  \verb http://tools.ietf.org/html/rfc793
+  \endverb
+  \field{year}{1981}
+\endentry
+
+\entry{javacardapplet}{online}{}
+  \field{sortinit}{W}
+  \field{note}{Last visited: 18.11.2015}
+  \field{title}{Writing a Java Card Applet - About Java Card Technology}
+  \verb{url}
+  \verb http://www.oracle.com/technetwork/java/embedded/javacard/documentation/
+  \verb intro-139322.html#whatjavac
+  \endverb
+  \field{year}{2001}
+\endentry
+
+\entry{javacardinstall}{online}{}
+  \field{sortinit}{W}
+  \field{note}{Last visited: 19.11.2015}
+  \field{title}{Writing a Java Card Applet - Installing the Applet}
+  \verb{url}
+  \verb http://www.oracle.com/technetwork/java/embedded/javacard/documentation/
+  \verb intro-139322.html#cinst
+  \endverb
+  \field{year}{2001}
+\endentry
+
+\entry{javacardprocess}{online}{}
+  \field{sortinit}{W}
+  \field{note}{Last visited: 19.11.2015}
+  \field{title}{Writing a Java Card Applet - Processing Requests}
+  \verb{url}
+  \verb http://www.oracle.com/technetwork/java/embedded/javacard/documentation/
+  \verb intro-139322.html#proreq
+  \endverb
+  \field{year}{2001}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput

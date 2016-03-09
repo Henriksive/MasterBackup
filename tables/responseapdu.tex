@@ -1,0 +1,17 @@
+\begin{table}[h!]
+\caption{Response APDU layout.}
+\label{tbl:rspAPDU}
+\centering
+
+    \begin{tabular}{ | l | c | l |}
+        \hline
+        \thead{Name}
+        & \thead{Number of bytes}
+        & \thead{Description} \\ \hline
+
+        Response & 0-65535 & Response data \\ \hline
+        SW1+SW2 & 2 & Command processing status \\ \hline
+
+    \end{tabular}
+
+\end{table}

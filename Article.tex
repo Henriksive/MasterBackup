@@ -1,0 +1,146 @@
+\documentclass[11pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[none]{hyphenat}
+\usepackage{floatrow}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage[parfill]{parskip}
+\usepackage[backend=bibtex]{biblatex}
+\usepackage{pgfplots}
+\usepackage{xcolor}
+\usepackage{fixltx2e}
+
+
+\usepackage{listings}
+\usepackage{color}
+
+\usepackage[autostyle]{csquotes}
+
+%START JSON DEF
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+
+\definecolor{bblue}{HTML}{4F81BD}
+\definecolor{rred}{HTML}{C0504D}
+\definecolor{ggreen}{HTML}{9BBB59}
+
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+%END JSON DEF
+
+
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{quote}}
+  {\signed{\usebox\mybox}\end{quote}}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{highlight}{RGB}{255, 255, 0}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  xleftmargin=2em,
+  framexleftmargin=1.5em,
+  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}
+}
+
+\newcommand*{\thead}[1]{\multicolumn{1}{| c |}{\bfseries #1}}
+
+\addbibresource{references/references.bib}
+
+
+\title{Master}
+\author{Henrik M. Sivertsgård}
+
+\begin{document}
+
+  \begin{titlepage}
+    \begin{center}
+      \line(1,0){350}
+      \\[1cm]
+      \textsc{\LARGE Mobile data security and cloud storage}
+      \\[1cm]
+      \line(1,0){350}
+    \end{center}
+    Henrik Sivertsgård, HIB: H139734 : UIB: 212779 , henriksive@gmail.com
+    \\[0.2cm]
+    Supervisors: Marcus Bezem, Federico Mancini
+    \\[0.2cm]
+    \today
+  \end{titlepage}
+\input{chapters/Abstract.tex}
+  \newpage
+  \tableofcontents
+
+  \listoffigures
+
+  \listoftables
+
+  \lstlistoflistings
+
+
+
+
+  \input{chapters/Introduction.tex}
+  \input{chapters/Background.tex}
+  %\input{chapters/Attacks.tex} moved to background
+  \input{chapters/SecChallenges.tex}
+  \input{chapters/TestCases.tex}
+  \input{chapters/Conclusion.tex}
+  %\input{chapters/UseCases.tex}
+  %\input{chapters/Tests.tex}
+
+
+  \addcontentsline{toc}{section}{References}
+  \printbibliography
+
+\end{document}
