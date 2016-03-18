@@ -160,17 +160,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.3.2}Test setup}{50}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.3}Tests and Results}{50}
+\contentsline {subsection}{\numberline {4.3.3}Results}{50}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.3.4}Conclusion}{50}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.4}Public-key Cryptography}{50}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.1}Description and Motivation}{50}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.2}Tests and Results}{50}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.3}Conclusion}{50}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {5}Conclusion}{52}
 \defcounter {refsection}{0}\relax 

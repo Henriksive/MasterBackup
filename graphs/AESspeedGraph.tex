@@ -13,7 +13,7 @@
                 ymajorgrids = true,
                 ylabel = {Running time (seconds)},
                 xlabel = {Data size (byte)},
-                symbolic x coords={10000, 32000, 100000, 1000000},
+                symbolic x coords={16, 10000, 32000, 100000, 1000000},
                 xtick = data,
                 scaled y ticks = false,
                 enlarge x limits=0.25,
@@ -26,7 +26,7 @@
                 }
             ]
                 \addplot[style={bblue,fill=bblue,mark=none}]
-                    coordinates {(10000, 20.62) (32000, 61) (100000, 183) (1000000, 1835)};
+                    coordinates {(16, 0.15) (10000, 20.62) (32000, 61) (100000, 183) (1000000, 1835)};
             \end{axis}
     \end{tikzpicture}
 \end{figure}
