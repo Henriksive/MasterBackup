@@ -89,6 +89,17 @@
   \field{year}{2016}
 \endentry
 
+\entry{ownerpin}{online}{}
+  \field{sortinit}{C}
+  \field{note}{Last visited: 28.03.2016}
+  \field{title}{Class OwnerPIN - Javacard documentation}
+  \verb{url}
+  \verb http://www.win.tue.nl/pinpasjc/docs/apis/jc222/javacard/framework/Owner
+  \verb PIN.html
+  \endverb
+  \field{year}{2005}
+\endentry
+
 \entry{eclipseJCDE}{online}{}
   \field{sortinit}{E}
   \field{note}{Last visited: 18.01.2016}

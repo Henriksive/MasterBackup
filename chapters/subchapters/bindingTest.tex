@@ -1,2 +1,55 @@
 % !TEX root = ../../Article.tex
 \section{Binding card and mobile device}
+\subsection{Motivation}
+In section \ref{sec:bindingcardandphone} we describe and motivate a solution where the we want to bind a mobile device to a smart card. We find it important to do an empirical test of the solution due to the fact that we have time constraints regarding running time. The parts of the binding process we want to test is:
+
+\begin{itemize}
+    \item Mobile device is able to transfer public key to smart card.
+    \item Smart card can store the public key from the mobile device.
+    \item Smart card can generate the \textit{verifaction package} from section \ref{sec:proposedSolution}.
+\end{itemize}
+
+\subsection{Implementation}
+In light of the parts of the binding process we want to test the outline of the implementation will be:
+
+\begin{enumerate}
+    \item Mobile devices asks smart card if its authenticated with PIN.
+    \item Smart card responds with yes/no and amount of PIN tries remaining.
+    \item Mobile device prompts user for PIN and sends it to the smart card.
+    \item Smart card verifies PIN or the process skips back to step 2.
+    \item Mobile device sends it public key to the smart card.
+    \item Smart card generates the verification package (figure \ref{fig:h0}).
+    \item Smart card sends the verification package to the mobile device.
+\end{enumerate}
+
+Due to the nature of smart cards we will need to hard code this protocol into the android application and the smart card application. We will use the P1 byte in the APDU to define which step of the process we are in, respectively:
+\begin{itemize}
+    \item \texttt{0x01} for step 1 and 2.
+    \item \texttt{0x02} for step 3 and 4.
+    \item \texttt{0x03} for step 5,6 and 7.
+\end{itemize}
+
+To manage PIN verification and management we will use \texttt{OwnerPIN} class from the javacard framework \cite{ownerpin}. After the PIN is set on the card during installation we can utilize the methods: \texttt{isValidated()} for checking if the right PIN is already provided, \texttt{check(byte[] pin, short offset, byte length)} for checking if the provided PIN is correct and \texttt{getTriesRemaining()} for getting remaining tries.
+
+All public keys are represented as byte arrays when they are transmitted between the mobile device and the smart card. The format for the byte array is \textbar{}ModulusLength\textbar{}Modulus\textbar{}ExponentLength\textbar{}Exponent\textbar{} to allow for extension of key length and dynamic importing. After the APDU is received the public key is stored in a \texttt{RSAPublicKey} object for storage.
+
+When we construct the verification package on the smart card we have to convert the public key of the smart card over to the same format as the mobile device's public key. After we have transformed all relevant keys (see figure \ref{fig:h0}) to byte arrays we can finally put them together, sign the package and encrypt it with the public key of the server.
+
+\subsection{Limitations and challenges}
+\paragraph{Out of memory}\mbox{}\\
+We are dealing with many different byte arrays in our solution, and due to the design of smart cards we will need to allocate memory for these byte arrays when the smart card is initialized. The size of these byte arrays are dependendent on the key sizes we use. Allocating 5 byte arrays of length 500 (which is plenty for 2048-bit keys) is independently fine, but if the smart card application allocates a lot of resource alongside this solution we need to be careful not running out of memory.
+
+Lots of code http://askra.de/software/jcdocs/app-notes-2.2.2/garbagecoll.html \\
+
+\paragraph{Initialization of public keys}\mbox{}\\
+We store the public key of the mobile device on the smart card using \texttt{RSAPublicKey} class and invoke the methods \texttt{setModulus(byte[] buffer, short offset, short length)} and \texttt{setExponent(byte[] buffer, short offset, short length)} to set the incoming modulus and exponent. The problem with this solution is that you are not able to use the two setters without having an initialized \texttt{RSAPublicKey} and the way you initialize a \texttt{RSAPublicKey} is by generating the key during installation. This is highly timeconsuming and we essentially overwrite the generated key with the mobile device key. This process is very unnecessary seen from a resource efficient view.
+
+We are not able to find any other way of initializing a \texttt{RSAPublicKey} and we find it clear that transferring a public key to the smart card is not an intended feature. We are able to make it possible, but this comes at a cost of running time. 
+
+
+
+Limitation on RSA key length crypto \\
+Public keys act weird - init on card first \\
+hardcoded \\
+
+\subsection{Conclusion}
