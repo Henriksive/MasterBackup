@@ -34,7 +34,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.3}Mobile operating system}{13}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.1}Android}{13}
+\contentsline {subsection}{\numberline {2.3.1}Android}{14}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.4}Cryptography}{14}
 \defcounter {refsection}{0}\relax 
@@ -52,7 +52,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.5.4}Authentication challenges}{18}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.5}Unsecure applications}{18}
+\contentsline {subsection}{\numberline {2.5.5}Unsecure applications}{19}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Challenges}{20}
 \defcounter {refsection}{0}\relax 
@@ -170,18 +170,30 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.4.2}Implementation}{52}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.3}Limitations and challenges}{53}
+\contentsline {subsection}{\numberline {4.4.3}Tests and results}{53}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Out of memory}{53}
+\contentsline {paragraph}{Configuration 1}{53}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Initialization of public keys}{53}
+\contentsline {paragraph}{Configuration 2}{53}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.4}Conclusion}{54}
+\contentsline {paragraph}{Installation test}{54}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Conclusion}{55}
+\contentsline {paragraph}{Run test}{54}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Conclusion}{55}
+\contentsline {subsection}{\numberline {4.4.4}Limitations and challenges}{54}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Future work}{55}
+\contentsline {paragraph}{Out of memory}{54}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{References}{55}
+\contentsline {paragraph}{Initialization of public keys}{55}
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Code rigidity}{55}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.4.5}Conclusion}{55}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Conclusion}{56}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.1}Conclusion}{56}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.2}Future work}{56}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{References}{56}

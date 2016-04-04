@@ -35,21 +35,76 @@ All public keys are represented as byte arrays when they are transmitted between
 
 When we construct the verification package on the smart card we have to convert the public key of the smart card over to the same format as the mobile device's public key. After we have transformed all relevant keys (see figure \ref{fig:h0}) to byte arrays we can finally put them together, sign the package and encrypt it with the public key of the server.
 
+\subsection{Tests and results}
+\paragraph{Configuration 1}\mbox{}\\
+This configuration uses 512-bit keys as the public key between the mobile device and smart card. Although we wish to use keys that are greater than 2048-bit we feel that this is a good starting point.
+\begin{itemize}
+    \item NFC card
+    \item 512-bit mobile device public key
+    \item 512-bit smart card public key
+    \item 2048-bit server public key
+    \item 128-bit AES key
+\end{itemize}
+
+\paragraph{Configuration 2}\mbox{}\\
+This configuration uses 2048-bit keys as the public key between the mobile device and smart card to simulate a real-world example.
+\begin{itemize}
+    \item NFC card
+    \item 512-bit mobile device public key
+    \item 512-bit smart card public key
+    \item 2048-bit server public key
+    \item 128-bit AES key
+\end{itemize}
+
+\paragraph{Installation test}\mbox{}\\
+We want to find out if initializing the keys we need for generating the verification package affects the installation of the smart cards. We will deploy and install the smart card application using GlobalPlatfromPro and time how long it takes.
+
+\begin{table}[h!]
+\caption{Time required to install the application on the smart card.}
+\label{tbl:bindingInstall}
+\centering
+    \begin{tabular}{ | c | c | c | c |}
+        \hline
+        \thead{Configuration}
+        & \thead{Average}
+        & \thead{Maximum}
+        & \thead{Minimum} \\ \hline
+
+        1 & 24,05s & 56,30s & 3,79s\\ \hline
+        2 & N/A & N/A & N/A\\ \hline
+    \end{tabular}
+
+\end{table}
+
+\paragraph{Run test}\mbox{}\\
+In this test we will generate the verification package. We will skip the parts of the process involving user input (PIN code).
+\begin{table}[h!]
+\caption{Time required to generate the verification package on the smart card application.}
+\label{tbl:bindingRun}
+\centering
+    \begin{tabular}{ | c | c | c | c |}
+        \hline
+        \thead{Configuration}
+        & \thead{Elapsed time} \\ \hline
+
+        1 & 1,22s\\ \hline
+        2 & N/A\\ \hline
+    \end{tabular}
+
+\end{table}
+
 \subsection{Limitations and challenges}
 \paragraph{Out of memory}\mbox{}\\
-We are dealing with many different byte arrays in our solution, and due to the design of smart cards we will need to allocate memory for these byte arrays when the smart card is initialized. The size of these byte arrays are dependendent on the key sizes we use. Allocating 5 byte arrays of length 500 (which is plenty for 2048-bit keys) is independently fine, but if the smart card application allocates a lot of resource alongside this solution we need to be careful not running out of memory.
+We are dealing with many different byte arrays in our solution, and due to the design of smart cards we will need to allocate memory for these byte arrays when the smart card is initialized. The size of these byte arrays are dependendent on the key sizes we use. Allocating 5 byte arrays of length 500 (which is plenty for 2048-bit keys) is independently fine, but if the smart card application allocates a lot of resource alongside this solution we need to be careful of running out of memory.
 
-Lots of code http://askra.de/software/jcdocs/app-notes-2.2.2/garbagecoll.html \\
+It is important to include hidden memory sinks such as the \texttt{RSAPublicKeys} and the encryption done by the \texttt{Cipher} class. We can just as easily run out of memory by changing our key lengths as when allocating byte arrays.
 
 \paragraph{Initialization of public keys}\mbox{}\\
 We store the public key of the mobile device on the smart card using \texttt{RSAPublicKey} class and invoke the methods \texttt{setModulus(byte[] buffer, short offset, short length)} and \texttt{setExponent(byte[] buffer, short offset, short length)} to set the incoming modulus and exponent. The problem with this solution is that you are not able to use the two setters without having an initialized \texttt{RSAPublicKey} and the way you initialize a \texttt{RSAPublicKey} is by generating the key during installation. This is highly timeconsuming and we essentially overwrite the generated key with the mobile device key. This process is very unnecessary seen from a resource efficient view.
 
-We are not able to find any other way of initializing a \texttt{RSAPublicKey} and we find it clear that transferring a public key to the smart card is not an intended feature. We are able to make it possible, but this comes at a cost of running time. 
+We are not able to find any other way of initializing a \texttt{RSAPublicKey} and we find it clear that transferring a public key to the smart card is not an intended feature. We are able to make it possible, but this comes at a cost of running time.
 
-
-
-Limitation on RSA key length crypto \\
-Public keys act weird - init on card first \\
-hardcoded \\
+\paragraph{Code rigidity}\mbox{}\\
+Because of the design of smart cards our implementation is heavily hardcoded, and as a results is very rigid to change. For instance if the specification of the verification package change it will require excessive work to reflect the changes. One will have to decide make a desicion wether or not this will happen often enough to counter the potential benefits of using smart cards.
 
 \subsection{Conclusion}
