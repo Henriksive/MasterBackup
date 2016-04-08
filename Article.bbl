@@ -377,6 +377,16 @@
   \field{year}{2001}
 \endentry
 
+\entry{signingtrouble2}{online}{}
+  \field{sortinit}{Y}
+  \field{note}{Last visited: 06.04.2016}
+  \field{title}{Yubico Forum - Slow RSA-2048 encryption/signing}
+  \verb{url}
+  \verb http://forum.yubico.com/viewtopic.php?f=26&t=1207
+  \endverb
+  \field{year}{2013}
+\endentry
+
 \lossort
 \endlossort
 

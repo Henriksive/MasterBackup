@@ -50,14 +50,14 @@ This configuration uses 512-bit keys as the public key between the mobile device
 This configuration uses 2048-bit keys as the public key between the mobile device and smart card to simulate a real-world example.
 \begin{itemize}
     \item NFC card
-    \item 512-bit mobile device public key
-    \item 512-bit smart card public key
+    \item 2048-bit mobile device public key
+    \item 2048-bit smart card public key
     \item 2048-bit server public key
     \item 128-bit AES key
 \end{itemize}
 
 \paragraph{Installation test}\mbox{}\\
-We want to find out if initializing the keys we need for generating the verification package affects the installation of the smart cards. We will deploy and install the smart card application using GlobalPlatfromPro and time how long it takes.
+We want to find out if initializing the keys we need for generating the verification package affects the installation of the smart cards. We will deploy and install the smart card application using GlobalPlatfromPro and time how long it takes. Our test set is 100 tests.
 
 \begin{table}[h!]
 \caption{Time required to install the application on the smart card.}
@@ -70,8 +70,8 @@ We want to find out if initializing the keys we need for generating the verifica
         & \thead{Maximum}
         & \thead{Minimum} \\ \hline
 
-        1 & 24,05s & 56,30s & 3,79s\\ \hline
-        2 & N/A & N/A & N/A\\ \hline
+        1 & 24,28s & 59s & 9s\\ \hline
+        2 & 39,42 & 95s & 13s\\ \hline
     \end{tabular}
 
 \end{table}
@@ -93,18 +93,67 @@ In this test we will generate the verification package. We will skip the parts o
 
 \end{table}
 
-\subsection{Limitations and challenges}
+\subsection{Limitations}
+After implementing the solution some limitations and problems became apparent. It is important to consider these when determining the effectiveness of the solution.
+
+\paragraph{Signing not working with 2048-bit key size}\mbox{}\\
+We encountered a bug when switching to "configuration 2". The smart card application started actually crashing, as not in responding with error codes, but actually crashing and losing power. We managed to narrow it down to the exact line of code the application crashes on (see listing \ref{lst:signing2048}).
+
+At first we suspected that the packet was too big or some mismatch in the parameters. The function still crashed with a smaller packet and all parameters are of the correct length/type/value. It is also worth noting that the 2048-bit key are properly initialized and working. Identifying the problem is hard considering the only clues we have are:
+
+\begin{itemize}
+    \item Signing crashes on different input data with 2048-bit key.
+    \item No error codes - Hard crash.
+\end{itemize}
+
+After searching the Internet for others with the same problem it became apparent that others have had troubles with signing. Some report that the running time of their smart cards increase drastically when using to 2048-bit keys \cite{signingtrouble2}. %TODO
+
+\begin{lstlisting}[caption=Java Card failed signing., label=lst:signing2048, escapechar=!]
+public class cardApplication extends Applet implements ExtendedLength{
+
+    private RSAPublicKey k;
+    private Signature sig;
+
+    ...
+
+    private cardApplication() {
+        keys = new KeyPair(
+            KeyPair.ALG_RSA,
+            KeyBuilder.LENGTH_RSA_2048);
+        k = (RSAPublicKey) keys.getPublic();
+    	sig = Signature.getInstance(
+            Signature.ALG_RSA_SHA_PKCS1,
+             false);
+
+        ...
+    }
+
+    public void process(APDU apdu) {
+    	...
+
+        !\colorbox{highlight}{signatureSize = sig.sign(}!
+            !\colorbox{highlight}{packet,}!
+            !\colorbox{highlight}{(short) 0,}!
+            !\colorbox{highlight}{(short) packetSize,}!
+            !\colorbox{highlight}{h0Unencrypted,}!
+            !\colorbox{highlight}{(short) 0);}!
+
+        ...
+    }
+
+    ...
+}
+\end{lstlisting}
+
 \paragraph{Out of memory}\mbox{}\\
 We are dealing with many different byte arrays in our solution, and due to the design of smart cards we will need to allocate memory for these byte arrays when the smart card is initialized. The size of these byte arrays are dependendent on the key sizes we use. Allocating 5 byte arrays of length 500 (which is plenty for 2048-bit keys) is independently fine, but if the smart card application allocates a lot of resource alongside this solution we need to be careful of running out of memory.
 
 It is important to include hidden memory sinks such as the \texttt{RSAPublicKeys} and the encryption done by the \texttt{Cipher} class. We can just as easily run out of memory by changing our key lengths as when allocating byte arrays.
 
-\paragraph{Initialization of public keys}\mbox{}\\
-We store the public key of the mobile device on the smart card using \texttt{RSAPublicKey} class and invoke the methods \texttt{setModulus(byte[] buffer, short offset, short length)} and \texttt{setExponent(byte[] buffer, short offset, short length)} to set the incoming modulus and exponent. The problem with this solution is that you are not able to use the two setters without having an initialized \texttt{RSAPublicKey} and the way you initialize a \texttt{RSAPublicKey} is by generating the key during installation. This is highly timeconsuming and we essentially overwrite the generated key with the mobile device key. This process is very unnecessary seen from a resource efficient view.
-
-We are not able to find any other way of initializing a \texttt{RSAPublicKey} and we find it clear that transferring a public key to the smart card is not an intended feature. We are able to make it possible, but this comes at a cost of running time.
-
 \paragraph{Code rigidity}\mbox{}\\
 Because of the design of smart cards our implementation is heavily hardcoded, and as a results is very rigid to change. For instance if the specification of the verification package change it will require excessive work to reflect the changes. One will have to decide make a desicion wether or not this will happen often enough to counter the potential benefits of using smart cards.
 
 \subsection{Conclusion}
+We have shown that the smart card area of responsibility in the binding process is possible to perform. Test results show that the installation process can be rather long (ranging from 9 seconds to 95 seconds), but that the verification package generation is effective ({\raise.17ex\hbox{$\scriptstyle\sim$}}1 second).
+
+The installation process is a one time process and the keys we generate during it are needed for other cryptographic operations on the card. We find it safe to assume that this process is a cost we can afford. The verification package generation process has such a low processing time that we can also assume that we can afford it. Our conclusion is that the binding process is feasable and that the reward, that smart card and mobile device is locked to each other, greatly outscales the involved costs.
