@@ -57,6 +57,20 @@
 }
 %END JSON DEF
 
+%START BATCH DEF
+\lstdefinelanguage{batch}{
+    basicstyle=\normalfont\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+}
+%END BATCH DEF
+
 
 \def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
   \hbox{}\nobreak\hfil(#1)%
@@ -131,6 +145,7 @@
 
   \input{chapters/Introduction.tex}
   \input{chapters/Background.tex}
+  \input{chapters/Smartcardgoals.tex}
   %\input{chapters/Attacks.tex} moved to background
   \input{chapters/SecChallenges.tex}
   \input{chapters/TestCases.tex}

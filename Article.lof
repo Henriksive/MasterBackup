@@ -4,42 +4,48 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Hybrid Smart card.\relax }}{10}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Hybrid Smart card.\relax }}{11}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Door lock using smart card to unlock.\relax }}{11}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Door lock using smart card to unlock.\relax }}{12}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Micro SD card from Gemalto.\relax }}{13}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Micro SD card from Gemalto.\relax }}{14}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Asymmetric key encryption/decryption using public-private key pair.\relax }}{15}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Asymmetric key encryption/decryption using public-private key pair.\relax }}{16}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Digital signing using public-private key pair.\relax }}{16}
-\defcounter {refsection}{0}\relax 
-\addvspace {10\p@ }
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Trust based on a third party.\relax }}{22}
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Server, mobile device and smart card communication flow.\relax }}{23}
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Verification package structure.\relax }}{25}
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Sequence diagram for binding mobile device with smart card.\relax }}{27}
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Smart card policy challenge.\relax }}{33}
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Smart card policy challenge response.\relax }}{33}
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Smart card policy challenge.\relax }}{34}
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Example policy APDU with two policies\relax }}{36}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Digital signing using public-private key pair.\relax }}{17}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Library package diagram.\relax }}{46}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Screenshot of Eclipse showing JavaCard tools.\relax }}{23}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Data flow of data transfer speed test for NFC.\relax }}{47}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Select APDU sent to smart card via PyApduTool\relax }}{25}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Graphical representation of table 4.1\hbox {}.\relax }}{48}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Library package diagram.\relax }}{32}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Graphical representation of table 4.3\hbox {}.\relax }}{51}
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Trust based on a third party.\relax }}{35}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Server, mobile device and smart card communication flow.\relax }}{36}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Verification package structure.\relax }}{38}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Sequence diagram for binding mobile device with smart card.\relax }}{40}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Smart card policy challenge.\relax }}{46}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Smart card policy challenge response.\relax }}{46}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Smart card policy challenge.\relax }}{47}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Example policy APDU with two policies\relax }}{49}
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Data flow of data transfer speed test for NFC.\relax }}{54}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Graphical representation of table 5.1\hbox {}.\relax }}{55}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Graphical representation of table 5.3\hbox {}.\relax }}{59}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }

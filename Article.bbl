@@ -46,6 +46,23 @@
   \field{year}{2003}
 \endentry
 
+\entry{securityEngineering}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Anderson}{A.}%
+     {Ross}{R.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{AR1}
+  \strng{fullhash}{AR1}
+  \field{sortinit}{A}
+  \field{isbn}{978-0-470-06852-6}
+  \field{title}{Security Engineering - A guide to building dependable
+  distributed systems, 2nd edition}
+  \field{year}{2008}
+\endentry
+
 \entry{androidNFCminSDK}{online}{}
   \field{sortinit}{A}
   \field{note}{Last visited: 13.01.2016}
@@ -242,6 +259,16 @@
   \field{year}{2016}
 \endentry
 
+\entry{pyapdutool}{online}{}
+  \field{sortinit}{P}
+  \field{note}{Last visited: 18.01.2016}
+  \field{title}{pyApduTool User Guide}
+  \verb{url}
+  \verb http://javacardos.com/javacardforum/viewtopic.php?t=38
+  \endverb
+  \field{year}{2015}
+\endentry
+
 \entry{shaRFC}{online}{}
   \field{sortinit}{R}
   \field{note}{Last visited: 15.01.2016}
@@ -322,16 +349,6 @@
   \verb http://www.tech-faq.com/known-plaintext-attack.html
   \endverb
   \field{year}{2015}
-\endentry
-
-\entry{commoncriteria}{online}{}
-  \field{sortinit}{T}
-  \field{note}{Last visited: 15.02.2016}
-  \field{title}{The Common Criteria}
-  \verb{url}
-  \verb http://www.commoncriteriaportal.org/
-  \endverb
-  \field{year}{2016}
 \endentry
 
 \entry{rfc793}{online}{}
