@@ -28,7 +28,7 @@ As we cannot possibly predict all types of uses for the framework we will also i
 The first part of the framework is the application on the smart card.
 
 \subsection{Java Card version}
-The cards we have supports java card 2.2.2 and this is the version we will target. A natural question is "Why don't we target java card 3 and above?". Smart cards used for banking or handling other highly confidential data needs to be evaluated under the Common Criteria \cite[Ch.~26.3.2]{securityEngineering} standards. Potentionally we may handle confidential data and as a result we want smart cards with a Evaluation Assurance Level (EAL) 4 or above. Achieving EAL4 or above is an expensive and long process and the relatively few products have this certification. The micro SD card we have access to are certified with EAL5+, but only supports java card 2.2.2 \cite{gemaltoidgo8030}.
+The cards we have supports java card 2.2.2 and this is the version we will target. A natural question is ``Why don't we target java card 3 and above?''. Smart cards used for banking or handling other highly confidential data needs to be evaluated under the Common Criteria \cite[Ch.~26.3.2]{securityEngineering} standards. Potentionally we may handle confidential data and as a result we want smart cards with a Evaluation Assurance Level (EAL) 4 or above. Achieving EAL4 or above is an expensive and long process and the relatively few products have this certification. The micro SD card we have access to are certified with EAL5, but only supports JavaCard 2.2.2. \cite{gemaltoidgo8030}.
 
 %TODO EAL list
 \begin{table}[h!]
@@ -52,11 +52,9 @@ The cards we have supports java card 2.2.2 and this is the version we will targe
     \end{tabular}
 \end{table}
 
-%TODO beskriv table
+Table \ref{tbl:EAL} shows the difference between EAL levels. Comparing the EAL levels is a rather hard task (other than looking at their name and what they test) as there is no guarantee that what has been tested corresponds to the real world \cite[Ch.~26.3.3]{securityEngineering}.
 
-A natural question we need to ask ourselves is: "Do we want Java card 3?"
-
-
+When we decided on JavaCard 2.2.2. we had to consider if we wanted a newer JavaCard version with more functionality or if we wanted to comply with government directives (EAL requirement). The obvious choice was the latter.
 
 \subsection{Development environment}
 In order to develop applications for the smart cards we will be using Eclipse 3.2 with java development kit version 1.6.45. In order to develop smart card applications more easily we will use the Eclipse-JCDE plugin \cite{eclipseJCDE} which provides a virtual runtime environment along with build tools. Even though Eclipse 3.2 is severely outdated it provides the tools necessary to do the job.
@@ -161,28 +159,36 @@ As seen in \ref{lst:pseudoCard} we allow for 256 cases/uses of the smart card, b
     \item byte AESCRYPTO = (byte) 0x09;
 \end{itemize}
 
-We will not go into detail on how the individual cases are built up. Refer to Appendix A for JavaCard code.
+\texttt{RSACRYPTO} and \texttt{AESCRYPTO} uses P1 to differentiates between encrypting and decrypting. \texttt{0x01} for encryption and \texttt{0x02} for decryption.
+We will not go into detail on how the individual cases are built up as their functionality should be selv-explanatory. Refer to Appendix A for JavaCard code.
+
+\subsection{Extending the JavaCard application}
+When adding more functionality to the JavaCard there are a few things to keep in mind. First of all one should follow the recipe shown in listing \ref{lst:pseudoCard} to minimize clutter and to follow the principles of JavaCard programming. Secondly it is important to keep in mind that JavaCard does not have standard garbage collection (refer to section \ref{sec:javacard}). A direct consequence is that any extension or extra functionality added to the smart card application may lead to ``Out of Memory'' errors.
+
+Installation time of the smart card application may also be affected by extra functionality. Key generation on the smart card is a relatively expensive process, and one may find that it is not worth adding installation time to the whole application for one function. One approach is to split functionality in multiple applications. We will discuss this approach later in chapter \ref{ch:conclusion}, section \ref{sec:future}.
+
 
 \section{Android application}
+The second part of the framework is an Android library. The library will serve as an intermediate between the Android application and the smart card application.
 \subsection{IDE}
 Android Studio \cite{androidIDE} is the official IDE for Android application development. Android Studio is based on IntelliJ IDEA \cite{intelliJIDEA} and provides many automated tools for building, packaging and publishing Android applications.
 \subsection{3rd party libraries}
 As mentioned in section \ref{sec:equipment} Gemalto provides a java library, IDGo800, for using their smart cards.
 
 \begin{aquote}{Gemalto.com \cite{GemaltoIDGo800}}
-"IDGo 800 for Mobiles is a cryptographic middleware that supports the Gemalto IDPrime cards and Secure Elements on Mobile platforms: Contact and contactless smart cards, MicroSD cards, UICC-SIM cards, embedded Secure Elements (eSE) and Trusted Execution Environment (TEE)."
+``IDGo 800 for Mobiles is a cryptographic middleware that supports the Gemalto IDPrime cards and Secure Elements on Mobile platforms: Contact and contactless smart cards, MicroSD cards, UICC-SIM cards, embedded Secure Elements (eSE) and Trusted Execution Environment (TEE).''
 \end{aquote}
 
 The part of IDGo800 SDK we are interested in is very small and enables us to send custom APDUs to micro SD smart cards.
 
-We will be using the "android.nfc" package in order to communicate with NFC smart cards. This package is included in the standard Android SDK which in turns means that all Android devices with a NFC reader and minimum API level 9 \cite{androidNFCminSDK} can use our library.
+We will be using the ``android.nfc'' package in order to communicate with NFC smart cards. This package is included in the standard Android SDK which in turns means that all Android devices with a NFC reader and minimum API level 9 \cite{androidNFCminSDK} can use our library.
 
 \subsection{Application}
 \label{sec:androidApp}
 
-In section \ref{sec:designAndroidGoals} we described the goals of the framework. The first goal we will describe the implementation of is "extendable" or in other words, being able to send custom APDUs. Explaining how this is implemented will give a better understanding of how the framework is built up and makes it easier to understand the pre-implemented methods.
+In section \ref{sec:designAndroidGoals} we described the goals of the framework. The first goal we will describe the implementation of is ``extendable'' or in other words, being able to send custom APDUs. Explaining how this is implemented will give a better understanding of how the framework is built up and makes it easier to understand the pre-implemented methods.
 
-We used the same approach on the Android application as on the smart card application; an autonomous and easy to extend plattform for tests. This resulted in a new library, "smartcardlibrary",  which sole purpose is to transmit APDUs as easily as possible along with some basic functionality.
+We used the same approach on the Android application as on the smart card application; an autonomous and easy to extend plattform for tests. This resulted in a new library, ``smartcardlibrary'',  which sole purpose is to transmit APDUs as easily as possible along with some basic functionality.
 
 \paragraph{Custom APDUs}\mbox{}\\
 To send custom APDUs to a smart card,\texttt{CommunicationController} must be instantiated and the application must know the application identifier of the smart card application. Further the current activity must implement\\ \texttt{NfCSmartcardControllerInterface} or \texttt{MSDSmartcardControllerInterface} (depending on smart card type) in order to be notified when the transaction is complete. Before continuing one will need to call the methods \texttt{setupNFCController} or \texttt{setupmSDController} depending on the smart card. Listing \ref{lst:NFCLibraryExample} shows an example implementation on how an activity may utilize the library for sending custom commands to a NFC smart card.
@@ -235,33 +241,41 @@ Recall the areas we want to cover from the beginning of the chapter. The functio
     \item Sign data using the public key of the smart card.
 \end{itemize}
 
-To use these functionalities one would only need to create an Android \texttt{Activity}, invoke either \texttt{setupNFCController(...)} or \texttt{setupmSDController(...)} (depending on smart card), and utilize the desired methods.
+To use these functionalities one would only need to create an Android \texttt{Activity}, invoke either \texttt{setupNFCController(...)} or \texttt{setupmSDController(...)} (depending on smart card), and utilize the desired methods. In figure \ref{fig:instantiateflow} we can see how \texttt{CommunicationController} is designed to be the abstraction layer between Android activities and smart cards.
+
+
+\begin{figure}[h!]
+  \caption{Abstraction layer between Android activities and smart cards.}
+  \label{fig:instantiateflow}
+  \centering
+    \includegraphics[width=0.95\textwidth]{images/Instantiate_flow.png}
+\end{figure}
+
 The methods available are:
 
 \begin{itemize}
     \item public void disableNFC(...)
-    \item public void bindingStepOne(...)
-    \item public void bindingStepTwo(...)
-    \item public void bindingStepThree(...)
     \item public void signData(...)
     \item public void cryptoRSA(...)
     \item public void cryptoAES(...)
     \item public void getCardPubMod(...)
     \item public void getCardPubExp(...)
-\end{itemize}
-The binding process is designed in three steps. First step is to ask the smart card if it requires a PIN-code and how many attempts are left. Second step requires a PIN-code and if this is correct the smart card application will move on to step three. The last step is sending the public key of the mobile device and getting the verification package from section \ref{sec:proposedSolution}. More discussion on this matter in section \ref{sec:bindingcardandphone}.
-
-The rest of the methods should be self-explanatory and one should refer to the javadoc in Appendix A for parameter requirements and pre-conditions.
-
-Figure \ref{fig:package} shows how the library is structured and the entry point for applications is through the packages:
-
-\begin{itemize}
-    \item com.master.henrik.controller
-    \item com.master.henrik.statics
-    \item com.master.henrik.shared
+    \item public void bindingStepOne(...)
+    \item public void bindingStepTwo(...)
+    \item public void bindingStepThree(...)
 \end{itemize}
 
-%TODO UPDATE
+The methods and their functionality should be self-explanatory except for the binding process. The binding process is designed in three steps. First step is to ask the smart card if it requires a PIN-code and how many attempts are left. Second step requires a PIN-code and if this is correct the smart card application will move on to step three. The last step is sending the public key of the mobile device and getting the verification package from section \ref{sec:proposedSolution}. More discussion on this matter in section \ref{sec:bindingcardandphone}.
+
+Figure \ref{fig:classdiagram_simple} provides a simplefied and technical overview of how the Android side of the library is built up. This diagram also shows which parameters are required for the methods available in \texttt{CommunicationController}. The complete class diagram for the Android library can be found in Appendix \ref{app:c}, figure \ref{fig:classdiagram_extended}.
+
+\begin{figure}[h!]
+  \caption{Simplefied class diagram for Android Library.}
+  \label{fig:classdiagram_simple}
+  \centering
+    \includegraphics[width=0.95\textwidth]{images/Class_Diagram.png}
+\end{figure}
+The package diagram, figure \ref{fig:package}, shows how  the packages in the library are structured.
 
 \begin{figure}[h!]
   \caption{Library package diagram.}
