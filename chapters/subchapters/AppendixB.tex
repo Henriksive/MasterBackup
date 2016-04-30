@@ -81,7 +81,7 @@
 
       public void bindingStepThree(String AID, RSAPublicKey mPub) {
           byte[] publicByteArrModTemp = mPub.getModulus().toByteArray();
-          byte[] publicByteArrMod = Arrays.copyOfRange(publicByteArrModTemp, 1, publicByteArrModTemp.length); //Remove signed short!
+          byte[] publicByteArrMod = Arrays.copyOfRange(publicByteArrModTemp, 1, publicByteArrModTemp.length); //Remove signed short
           byte[] publicByteArrExp = mPub.getPublicExponent().toByteArray();
 
           String publicHexKeyMod = Converter.ByteArrayToHexString(publicByteArrMod);

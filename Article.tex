@@ -16,11 +16,11 @@
 
 \usepackage[autostyle]{csquotes}
 
-%\usepackage[none]{hyphenat} %Choose one
-\tolerance=1
-\emergencystretch=\maxdimen
-\hyphenpenalty=10000
-\hbadness=10000
+\usepackage[none]{hyphenat} %Choose one
+%\tolerance=1
+%\emergencystretch=\maxdimen
+%\hyphenpenalty=10000
+%\hbadness=10000
 
 
 %START JSON DEF
@@ -43,7 +43,7 @@
     showstringspaces=false,
     breaklines=true,
     frame=lines,
-    backgroundcolor=\color{background},
+    %backgroundcolor=\color{background},
     literate=
      *{0}{{{\color{numb}0}}}{1}
       {1}{{{\color{numb}1}}}{1}
@@ -74,7 +74,7 @@
     showstringspaces=false,
     breaklines=true,
     frame=lines,
-    backgroundcolor=\color{background},
+    %backgroundcolor=\color{background},
 }
 %END BATCH DEF
 
@@ -117,7 +117,6 @@
   postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}
 }
 
-\lstset{breaklines=true}
 
 \newcommand*{\thead}[1]{\multicolumn{1}{| c |}{\bfseries #1}}
 

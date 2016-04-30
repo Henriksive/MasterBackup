@@ -12,8 +12,6 @@
   Even though smart cards have some areas with limitations we are able to identify use cases where smart cards can be applicable. In use cases involving cryptography a smart card can store the keys securely aswell as encrypt/decrypt small amounts of data. Due to the fact that smart cards are tamper proof, meaning that you are not able to extract data (keys), we are confident that smart cards can alleviate threats such as stolen mobile devices and insecure communication channels.\mbox{}\\\\  We believe that smart cards can add an extra layer of security for areas that are already solved. In this thesis we described and analyzed a solution where we used smart cards as a basis for policy enforcement. Our comprehension is that this type of solution in conjuction with traditional policy enforcement systems will take security to a new level.
 \end{itemize}
 
-
-
 \section{Experience}
 After working with smart cards for roughly one year we have made quite a few experiences that are worth sharing.
 
@@ -39,5 +37,4 @@ The research we have presented in this thesis are a good starting point for deve
 
 We encountered numerous bugs and limitations when working with smart cards which we did not initially predict, and as a result the Android library and the smart card application is not as polished and refined as we had hoped it would be. This includes adding more pre-implemented functionality, refactoring code to be more readable and optimize code to achieve better performance. Additionally we believe it would be beneficial to look at the possibility of not being dependent on the Gemalto framework for micro SD card communication \cite[\textit{SEEK for Android}]{SEEK}.
 
-
-\section{Closing words}
+Our evaluations of the proposed solutions are based on protocol analysis and proof of concept. It would be beneficial to perform penetration tests on the outlined solutions to confirm that: \textit{a)} We are able to implement all parts of the solution. \textit{b)} We can show that the solution is methodically tested against known attacks in today's society.

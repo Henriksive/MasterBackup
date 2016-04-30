@@ -201,6 +201,7 @@ In early iterations the keys were stored in a software-protected file meaning th
 
 An application can check if the mobile device uses secure hardware for key storage using the Android class \texttt{KeyInfo}. The \texttt{KeyInfo} class containt all available information about a key and a single call to the method \texttt{isInsideSecureHardware()} will determine the storage status. Listing \ref{lst:KeyInfo} provides a sample implementation of this functionality. \texttt{KeyInfo} was added in API 23 and requires Android version 6.0 or newer.
 
+\newpage
 \begin{lstlisting}[caption=Obtaining storage status of keys using KeyInfo., label=lst:KeyInfo,escapechar=å]
 public boolean checkStatus(PrivateKey key){
     KeyFactory factory = KeyFactory.getInstance(

@@ -56,7 +56,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.4.4}Authentication Challenges}{21}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.5}Insecure Applications}{22}
+\contentsline {subsection}{\numberline {2.4.5}Insecure Applications}{21}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Smart card objective}{23}
 \defcounter {refsection}{0}\relax 
@@ -124,7 +124,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.2.1}Problem statement}{42}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.2}Goal}{43}
+\contentsline {subsection}{\numberline {4.2.2}Goal}{42}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.2.3}Key concepts}{43}
 \defcounter {refsection}{0}\relax 
@@ -204,9 +204,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {6.1.2}Limitations}{68}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Data Transfer Speed}{69}
+\contentsline {section}{\numberline {6.2}Data Transfer Speed}{68}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.1}Description and Motivation}{69}
+\contentsline {subsection}{\numberline {6.2.1}Description and Motivation}{68}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {6.2.2}Tests and Results}{69}
 \defcounter {refsection}{0}\relax 
@@ -268,12 +268,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {7.3}Future work}{83}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.4}Closing words}{83}
-\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {A}JavaCard Code}{84}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {B}Android Library}{96}
+\contentsline {chapter}{\numberline {B}Android Library}{94}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {C}Diagrams}{102}
+\contentsline {chapter}{\numberline {C}Diagrams}{99}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{References}{102}
+\contentsline {section}{References}{99}
