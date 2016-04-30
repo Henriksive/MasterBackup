@@ -157,6 +157,15 @@
   \field{year}{2015}
 \endentry
 
+\entry{Giesecke}{online}{}
+  \field{sortinit}{G}
+  \field{note}{Last visited: 29.04.2016}
+  \field{title}{Giesecke and Devrient GmbH}
+  \verb{url}
+  \verb https://www.gi-de.com/en/index.jsp
+  \endverb
+\endentry
+
 \entry{globalplatform}{online}{}
   \field{sortinit}{G}
   \field{note}{Last visited: 18.01.2016}
@@ -217,6 +226,17 @@
   \verb https://www.jetbrains.com/idea/
   \endverb
   \field{year}{2016}
+\endentry
+
+\entry{javacardErrors}{online}{}
+  \field{sortinit}{I}
+  \field{note}{Last visited: 28.04.2016}
+  \field{title}{Interface ISO7816 - JavaCard constants}
+  \verb{url}
+  \verb http://www.win.tue.nl/pinpasjc/docs/apis/jc222/javacard/framework/ISO78
+  \verb 16.html
+  \endverb
+  \field{year}{2005}
 \endentry
 
 \entry{iso7816-4}{online}{}
@@ -347,6 +367,15 @@
   \verb http://www.slb.com/
   \endverb
   \field{year}{2016}
+\endentry
+
+\entry{SEEK}{online}{}
+  \field{sortinit}{S}
+  \field{note}{Last visited: 29.04.2016}
+  \field{title}{Secure Element Evaluation Kit for the Android platform}
+  \verb{url}
+  \verb http://seek-for-android.github.io/
+  \endverb
 \endentry
 
 \entry{javacardCipherFail}{online}{}

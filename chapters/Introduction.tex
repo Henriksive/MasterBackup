@@ -5,27 +5,48 @@ In todays society the standard commercial smartphone is considered secure by the
 
 Handling senstive data in context of smartphones involves storing the data, processing the data and potentially sharing the data. In these areas there exists obstacles that needs to be dealt with in order to handle the sensitive data securely. Two of the biggest obstacles are being able to encrypt and decrypt data effectively and key management/storage.
 
-In a perfect world the smart phone would be able to overcome these obstacles by itself. Many mobile devices lack the capability to store keys securely and run operations in a secure environment and thus cannot execute all steps needed. A smart card can provide a solution to these problems, but we have to investigate if the smart cards introduces new attack vectors and constraints.
+ In a perfect world the smart phone would be able to overcome these obstacles by itself. Many mobile devices lack the capability to store keys securely and run operations in a secure environment and thus cannot execute all steps needed. A smart card cans provide a solution to these problems, but we have to investigate if the smart cards introduces new attack vectors and constraints.
 
 \section{Goals}
 \label{sec:goals}
 The overall goal of this thesis is to explore and evaluate the possibilities of how smart cards and mobile devices can co-operate to achieve a higher level of information security. To better understand what limitations there are, we will need to create a framework for easy communication between a mobile device and smart card. This includes developing test applications for both the mobile device and the smart card. A framework, mobile application and smart card application allows us to test performance and security, with as close to real life use cases as possible.
 
-To achieve the overall goal we will need to look into a set of sub-goals. The sub-goals are as follows:
-\begin{enumerate}
-    \item Determine limitations on the smart card.
-    \item Identify use cases we are able to solve using smart cards.
-    \item Outline standards for solving use cases using smart cards.
-    \item Test the use cases with real-life data.
-\end{enumerate}
+In order to achieve this goal we will attempt to answer the following research questions:
+\begin{itemize}
+  \item ``What are the limitiations of smart cards in the context of hardware?''
+  \item ``What are the limitiations of smart cards in the context of software?''
+  \item ``What are the types of use cases we are able to solve and strengthen the security of using smart cards?''
+\end{itemize}
+
+%To achieve the overall goal we will need to look into a set of sub-goals. The sub-goals are as follows:
+%\begin{enumerate}
+%    \item Determine limitations on the smart card.
+%    \item Identify use cases we are able to solve using smart cards.
+%    \item Outline standards for solving use cases using smart cards.
+%    \item Test the use cases with real-life data.
+%\end{enumerate}
+
+\section{Related work}
+The Secure Element Evaluation Kit (SEEK) for the Android platform is an open source project, maintained by Giesecke \& Devrient GmbH \cite{Giesecke}, which have a vision to make it easier to use secure elements in Android applications. The framework provides access to a variety of secure elements such as SIM cards, micro SD cards and embedded secure elements. Their final goal is to have their library as an integrated part of the Android operating system such that all new mobile devices comes with hardware-backed security support \cite{SEEK}. However, their focus are on the Android platform, while this thesis will focus more on the smart card itself and what a smart card brings to the table security wise.
 
 \section{Chapter introduction}
+\paragraph{Chapter 1 - Introduction}
+Presents a problem statement, motivation and research question for this master thesis.
+
 \paragraph{Chapter 2 - Background}
 Introduces all concepts needed for understanding how smart cards and relevant technology function. Gives a basic understanding for which threats exists for the platform.
 
-\paragraph{Chapter 3 - Challenges}
-Identifies and examines challenges or problems when using smart cards in co-operation with mobile devices. Presents and evaluates a solution for the problems.
+\paragraph{Chapter 3 - Smart card framework}
+Discusses the basis for the smart card communication framework, what goals we have for the framework and describes how we are going to work when developing the framework.
 
-\paragraph{Chapter 4 - Test cases}
+\paragraph{Chapter 4 - Challenges}
+Identifies and examines challenges that have emerged when trying to use smart cards in co-operation with mobile devices. Presents and evaluates a solution for the problems.
 
-%introduce following chapters!
+\paragraph{Chapter 5 - Framework Implementation}
+Gives an overview of how the framework is implemented and structured using code examples and diagrams.
+
+\paragraph{Chapter 6 - Test cases}
+Shows the testing environment for the smart cards and provides detailed testing results for smart card limitations and use cases.
+
+\paragraph{Chapter 7 - Discussion and Conclusion}
+Discusses the research questions that we have established and what experiences we encountered during this master thesis.

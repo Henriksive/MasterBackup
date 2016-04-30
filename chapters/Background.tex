@@ -2,18 +2,6 @@
 \chapter{Background}
 In this chapter we will provide background information necessary to understand how smart cards function and can increase security on mobile devices. The topics covered in this section are smart cards, mobile device operating systems, cryptography and threats in context of mobile devices.
 
-\section{Terminology}
-\paragraph{APDU}
-Application Protocol Data Unit describes the format of how a smart card and other applications should communicate. Refer to section \ref{sec:communicationstandard}.
-
-\paragraph{Extended APDU}
-Extended Application Protocol Data Unit is an extension of an Application Protocol Data Unit where the payload data supports lengths up to 65535 bytes.
-
-\paragraph{SELECT APDU}
-SELECT APDU is a type of APDU that has the sole purpose of activating the correct application on the smart card.
-
-\paragraph{Application Identifier (AID)}
-
 \section{Smart Card}
 \label{sec:smartcard}
 A smart card refers to a pocket sized card with an integrated circuit, usually in the form of a plastic card with an integrated micro processor. In essence a smart card is a miniature computer with limited computing power.
@@ -53,6 +41,8 @@ To better understand when to use the command APDUs and when to use response APDU
     \includegraphics[width=0.95\textwidth]{images/doornfc.png}
 \end{figure}
 
+On most smart cards there is an application manager which listen for a special type of Command APDU: a Select APDU. The Select APDU contains information on what type of smart card application a sender is trying to communicate with and the job of the application manager is to activate the correct application. Before communicating with a smart card the sender should send out a Select APDU, if this step is skipped you run the risk of sending information to the wrong smart card application.
+
 \subsection{JavaCard programming language}
 \label{sec:javacard}
 In section \ref{sec:smartcard} we described that smart cards are able to store data as well as process input and output. All smart cards have their own operating system that allows developers to write applications that run on the smart cards. Smart cards are not limited to one applications per card, but are able to have multiple applications installed. Traditionally it was not feasable to create programs that ran on different smart card manufacturer cards as the micro processors were manufacturer specific \cite{javacardapplet}. This created an environment where smart card issuers and their developers were locked to a specific manufacturer.
@@ -76,12 +66,6 @@ When incorporating the features of a smart card with a mobile device it would be
   \centering
     \includegraphics[width=0.75\textwidth]{images/msd.png}
 \end{figure}
-
-\subsection{Java Card versions}
-\paragraph{Java Card 2.2.2}\mbox{}\\
-In section \ref{sec:javacard} we discussed some of the limitations of java card
-Java card 3.0.5 %TODO FIX ME PLZ
-
 
 
 \subsection{Other smart card programming languages}
@@ -129,24 +113,24 @@ Stream ciphering is fast and relatively simplistic to implement. This along with
 Block cipher is a more complex and requires more overhead. First of data must be divided into equal size blocks. The blocks cannot be too small as then they are prone to dictionary attacks and not too big as it will make the encryption/decryption process too resource intensive. In block cipher the block size must be fixed through the encryption process. This will often result in redundant data. For example, 200-bit plaintext with a 64-bit block size will result in three blocks of 64-bit and a fourth block with only 8 bit of ``real'' data and 56 bit of redundant bits. Since block ciphering uses the previous block to cipher the current block it is possible to detect tampering and faults, but this also results that data may be lost if a block becomes corrupt.
 
 
-\section{Mobile threats}
+\section{Mobile Threats}
 Mobile threats and attack vectors are numerous and before looking into how smart cards can help mitigate an alleviate threats we will need to identify and characterize them.
-\subsection{Infected device}
+\subsection{Infected Device}
 The most obvious threat to mobile devices is when the mobile device itself is infected with virus or malware. The type of virus or malware can vary, some are harmless and serve more as an annoyance or trying to trick the user into visiting bogus websites, but some are more malicious and will access private files and information. From a security stand-point it is a disaster if a virus or malware is able to read and modify data which is otherwise confidential.
 
-Often the user will not know that their mobile device is infected and some viruses or malware are very hard to detect by anti-virus. The "2015 Cheetah Mobile Security Report" \cite{cheetahSec} reports that the number of viruses on Android devices exceeds over 9,5 million and that the problem is growing. Taking into concideration that the mobile device we are operating on may be infected is of the utmost importance when designing and developing applications.
+Often the user will not know that their mobile device is infected and some viruses or malware are very hard to detect by anti-virus. The ``2015 Cheetah Mobile Security Report'' \cite{cheetahSec} reports that the number of viruses on Android devices exceeds over 9,5 million and that the problem is growing. Taking into concideration that the mobile device we are operating on may be infected is of the utmost importance when designing and developing applications.
 
-\subsection{Lost or stolen device}
+\subsection{Lost or Stolen Device}
 An attacker may gain physical access to the users mobile device through theft or simply that the user misplaced the mobile device. With physical access to the device an attacker would be able to retrive data from the device. A common defence against this is encrypting the data on the device, but this requires the keys to be stored somewhere securely. If the keys are not stored securely the result is that the data on the device will fall into the wrong hands.
 
-\subsection{Unsecure communication channel}
+\subsection{Insecure Communication Channel}
 \label{sec:unsecureCommunication}
 Communication is a vital part of modern systems; data is sent between devices and between devices and servers. Sensitive data requires a secure communication channel which cannot be tapped into by a third party. Secure communication on public networks involves agreeing upon encryption keys which the data should be encrypted with before being sent. Encrypting the communication channel will protect against man-in-the-middle attacks, but this requires both parties to authenticate themselves as encrypting the data won't help if you are sending the data directly to the attacker. More on this in section \ref{sec:authenticationChallenges}.
 
-\subsection{Authentication challenges}
+\subsection{Authentication Challenges}
 \label{sec:authenticationChallenges}
 %Are people who they say the are?
 As mentioned in section \ref{sec:unsecureCommunication} a secure communication channel is useless if you are sending the data directly to the attacker. A vital part of security is being able to authenticate the parties in a transaction. If the attacker is able to impersonate another party by installing fake certificates on the mobile device or by tricking the user into communicating with the attacker the consequences can be of significance.
 
-\subsection{Unsecure applications}
+\subsection{Insecure Applications}
 An often overlooked attack vector is badly implemented applications on the mobile device. This may include memory leaks, weak cryptography, open for code injections and plainly exposing private data to third parties. In rare cases an application with flaws may expose other applications for attacks, but there exists countermeasures to this, for instance that all applications run in their own sandbox.

@@ -1,6 +1,6 @@
 % !TEX root = ../Article.tex
 \chapter{Smart card objective}
-As mentioned in section \ref{sec:goals} we want to create a framework for easy communication between a mobile device and a smart card. We want to achieve this not only for testing, but to be able to hand over a ready to use framework for any parties interested so that further development and testing may continue.
+As mentioned in section \ref{sec:goals} we want to create a framework for easy communication between a mobile device and a smart card. We want to achieve this not only for testing, but to be able to hand over a ready to use framework for any parties interested so that further development and testing may continue. In this chapter we will discuss the basis for the framework and the environment we will use for creating it.
 
 The framework should lay the very foundation needed for using the mobile device and smart card in a secure fashion. The basic things we want to cover are:
 \begin{itemize}
@@ -25,7 +25,7 @@ Even though most users of our framework will have a basic understanding of smart
 As we cannot possibly predict all types of uses for the framework we will also include a method for sending custom commands to the smart cards. This ensures that developers don't feel limited in how they can use the framework as well as catering to advanced users. More on the implemented methods in section \ref{sec:androidApp}.
 
 \section{Smart card application}
-The first part of the framework is the application on the smart card.
+The first part of the framework is the application on the smart card. This part of the framework will perform the tasks that we can place on the smart card.
 
 \subsection{Java Card version}
 The cards we have supports java card 2.2.2 and this is the version we will target. A natural question is ``Why don't we target java card 3 and above?''. Smart cards used for banking or handling other highly confidential data needs to be evaluated under the Common Criteria \cite[Ch.~26.3.2]{securityEngineering} standards. Potentionally we may handle confidential data and as a result we want smart cards with a Evaluation Assurance Level (EAL) 4 or above. Achieving EAL4 or above is an expensive and long process and the relatively few products have this certification. The micro SD card we have access to are certified with EAL5, but only supports JavaCard 2.2.2. \cite{gemaltoidgo8030}.
@@ -97,189 +97,28 @@ To test the smart card application that is deployed on the physical cards (witho
 
 PyApduTool does not support extended APDU and this limits us to a high degree when testing our smart card application. Testing through PyApduTool does not test mobile device behaviour such as out of memory, too much traffic or NFC limitations. After the initial basic testing PyApduTool became obsolete and we had to test via an Android application.
 
-\subsection{Application}
-\paragraph{Goal}\mbox{}\\
-The goal of the smart card application was to create an autonomous and easy to extend platform for future tests. This resulted in an application split into three parts.
-
-\paragraph{Initialization}\mbox{}\\
-As described in section \ref{sec:javacard} all javacard applications must implement the method \texttt{Install}. \texttt{Install} invokes the constructor of the smart card and this is where all variables that need initialization are initialized. For instance if the smart card application needs to generate keys or random numbers this is where it is done as the constructor will be invoked only once. All buffers that needs to be used should also be initialized here to avoid allocating memory everytime the application is used.
-
-\paragraph{Data processing}\mbox{}\\
-In the mandatory \texttt{Process} method (refer to section \ref{sec:javacard}) all data processing takes place. First a built in method in the javacard API, \texttt{selectingApplet()}, is invoked. This method checks if the incoming APDU is a SELECT APDU and acts accordingly. If the incoming APDU is not a SELECT APDU the incoming APDU is copied to a new buffer for easier data manipulation. Next we use a switch statement switching over the second byte, INS, to determine which instruction we want to perform. After processing the data and performing the work we want to do (sign data, encrypt, etc.) we copy our response to the outgoing buffer.
-
-\paragraph{Finalization}\mbox{}\\
-At the end of the \texttt{Process} invokation we invoke the \texttt{Send} method which takes the data in the outgoing buffer, package it for sending and send it as a response APDU.
-
-\paragraph{The result}\mbox{}\\
-What we end up with is a test plattform where we are only concerned with declaring variables, initializing variables and writing code for the specific test case. Listing \ref{lst:pseudoCard} shows pseudocode for the java card application with the extendable areas highlighted.
-
-
-\begin{lstlisting}[caption=Pseudo code for javacard test application., label=lst:pseudoCard,escapechar=!]
-public class cardApplication extends Applet implements ExtendedLength{
-
-    !\colorbox{highlight}{//Variable declarations}!
-
-    private cardApplication() {
-    	!\colorbox{highlight}{//Variable initialization}!
-    }
-
-    public void process(APDU apdu) {
-    	//Process incoming APDU
-        if (selectingApplet()) {
-			return;
-		}
-        buff = apdu.getBuffer();
-
-    	switch(buff[ISO7816.OFFSET_INS]){
-            case 0x00:
-            case 0x01:
-            !\colorbox{highlight}{...}!
-            case 0xff:
-            default:
-
-    	}
-    	Send(apdu);
-    }
-
-    private void send(APDU apdu) {
-    	//Package outgoing buffer
-    	//Send response APDU
-    }
-}
-\end{lstlisting}
-
-As seen in \ref{lst:pseudoCard} we allow for 256 cases/uses of the smart card, but if we include the use of P1 and P2 from section \ref{sec:communicationstandard} there are in theory 256\textsuperscript{3} = 16777216 possible cases. This does not include the pre-implemented methods which are explained in section \ref{sec:androidApp}. Their counterparts in the smart card application have the following byte values:
-
-\begin{itemize}
-    \item byte SEND\_U\_PUB\_MOD = (byte) 0x01;
-    \item byte SEND\_U\_PUB\_EXP = (byte) 0x02;
-    \item byte SIGN = (byte) 0x03;
-    \item byte BINDING = (byte) 0x05;
-    \item byte RSACRYPTO = (byte) 0x06;
-    \item byte AESCRYPTO = (byte) 0x09;
-\end{itemize}
-
-\texttt{RSACRYPTO} and \texttt{AESCRYPTO} uses P1 to differentiates between encrypting and decrypting. \texttt{0x01} for encryption and \texttt{0x02} for decryption.
-We will not go into detail on how the individual cases are built up as their functionality should be selv-explanatory. Refer to Appendix A for JavaCard code.
-
-\subsection{Extending the JavaCard application}
-When adding more functionality to the JavaCard there are a few things to keep in mind. First of all one should follow the recipe shown in listing \ref{lst:pseudoCard} to minimize clutter and to follow the principles of JavaCard programming. Secondly it is important to keep in mind that JavaCard does not have standard garbage collection (refer to section \ref{sec:javacard}). A direct consequence is that any extension or extra functionality added to the smart card application may lead to ``Out of Memory'' errors.
-
-Installation time of the smart card application may also be affected by extra functionality. Key generation on the smart card is a relatively expensive process, and one may find that it is not worth adding installation time to the whole application for one function. One approach is to split functionality in multiple applications. We will discuss this approach later in chapter \ref{ch:conclusion}, section \ref{sec:future}.
-
 
 \section{Android application}
 The second part of the framework is an Android library. The library will serve as an intermediate between the Android application and the smart card application.
+
 \subsection{IDE}
-Android Studio \cite{androidIDE} is the official IDE for Android application development. Android Studio is based on IntelliJ IDEA \cite{intelliJIDEA} and provides many automated tools for building, packaging and publishing Android applications.
-\subsection{3rd party libraries}
-As mentioned in section \ref{sec:equipment} Gemalto provides a java library, IDGo800, for using their smart cards.
+Android Studio \cite{androidIDE} is the official IDE for Android application development. Android Studio is based on IntelliJ IDEA \cite{intelliJIDEA} and provides many automated tools for building, deploying and publishing Android applications. Android studio comes built in with Android Debug Bridge (ADB) which is an interface for communicating with virtual Android instances or physical Android devices. ADB gives developers the ability to log output from applications aswell as monitor memory, GPU and CPU usage of the mobile device.
 
-\begin{aquote}{Gemalto.com \cite{GemaltoIDGo800}}
-``IDGo 800 for Mobiles is a cryptographic middleware that supports the Gemalto IDPrime cards and Secure Elements on Mobile platforms: Contact and contactless smart cards, MicroSD cards, UICC-SIM cards, embedded Secure Elements (eSE) and Trusted Execution Environment (TEE).''
-\end{aquote}
-
-The part of IDGo800 SDK we are interested in is very small and enables us to send custom APDUs to micro SD smart cards.
-
-We will be using the ``android.nfc'' package in order to communicate with NFC smart cards. This package is included in the standard Android SDK which in turns means that all Android devices with a NFC reader and minimum API level 9 \cite{androidNFCminSDK} can use our library.
-
-\subsection{Application}
-\label{sec:androidApp}
-
-In section \ref{sec:designAndroidGoals} we described the goals of the framework. The first goal we will describe the implementation of is ``extendable'' or in other words, being able to send custom APDUs. Explaining how this is implemented will give a better understanding of how the framework is built up and makes it easier to understand the pre-implemented methods.
-
-We used the same approach on the Android application as on the smart card application; an autonomous and easy to extend plattform for tests. This resulted in a new library, ``smartcardlibrary'',  which sole purpose is to transmit APDUs as easily as possible along with some basic functionality.
-
-\paragraph{Custom APDUs}\mbox{}\\
-To send custom APDUs to a smart card,\texttt{CommunicationController} must be instantiated and the application must know the application identifier of the smart card application. Further the current activity must implement\\ \texttt{NfCSmartcardControllerInterface} or \texttt{MSDSmartcardControllerInterface} (depending on smart card type) in order to be notified when the transaction is complete. Before continuing one will need to call the methods \texttt{setupNFCController} or \texttt{setupmSDController} depending on the smart card. Listing \ref{lst:NFCLibraryExample} shows an example implementation on how an activity may utilize the library for sending custom commands to a NFC smart card.
-
-\begin{lstlisting}[caption=Java code example showing how to send and receive commands to a NFC smart card., label=lst:NFCLibraryExample,escapechar=å]
-
-public class PayloadActivity extends AppCompatActivity
-    implements NFCSmartcardControllerInterface {
-    CommunicationController cc = new CommunicationController();
-    ...
-
-    private void initNFCCommunication(){
-
-
-        String AID = "0102030405060708090007";
-        String hexMessage = "95404F3FB1";
-        String INS = "06";
-        String p1 = "00";
-        String p2 = "00";
-        cc.setupNFCController(this, this);
-        cc.initNFCCommunication(AID, INS, p1, p2, hexMessage);
-    }
-
-    å@Overrideå
-    public void nfcCallback(final String completionStatus){
-        if(!completionStatus.equals("OK")){
-            return;
-        }
-        StorageHandler stHandler =
-            new StorageHandler(getApplicationContext());
-        String response =
-            stHandler.readFromFileAppDir(
-                FilePaths.tempStorageFileName
-            );
-    }
-}
-
-\end{lstlisting}
-
-In order for the library to perform an asyncronous transaction the library will temporary save the responses from the cards to a file only accessible by the running application. To retrive the data the current activity should use the included \texttt{StorageHandler} class as used in listing \ref{lst:NFCLibraryExample}. The library also provides the class, \texttt{Converter}, for converting between Strings, hex and byte arrays.
-
-\paragraph{Pre-implemented methods}\mbox{}\\
-Recall the areas we want to cover from the beginning of the chapter. The functionality we have implemented so far are:
-
-\begin{itemize}
-    \item Bind smart card to mobile device.
-    \item Encrypt/decrypt data using RSA key on card.
-    \item Encrypt/decrypt data using AES key on card.
-    \item Get public key of the smart card.
-    \item Sign data using the public key of the smart card.
-\end{itemize}
-
-To use these functionalities one would only need to create an Android \texttt{Activity}, invoke either \texttt{setupNFCController(...)} or \texttt{setupmSDController(...)} (depending on smart card), and utilize the desired methods. In figure \ref{fig:instantiateflow} we can see how \texttt{CommunicationController} is designed to be the abstraction layer between Android activities and smart cards.
-
+\subsection{Testing environment}
+To test the application we will be using the built in ADB in Android studio as well as doing empirical tests on the Android device. Figure \ref{fig:ADBMemory} and \ref{fig:ADBCPU} shows runtime examples of the Android device. These monitor tools gives us a clear indication if we are doing an operation the Android device can't handle or if we are trying to perform operations that are too resource intensive.
 
 \begin{figure}[h!]
-  \caption{Abstraction layer between Android activities and smart cards.}
-  \label{fig:instantiateflow}
+  \caption{Android Debug Bridge memory monitor connected to a running Android device.}
+  \label{fig:ADBMemory}
   \centering
-    \includegraphics[width=0.95\textwidth]{images/Instantiate_flow.png}
+    \includegraphics[width=0.95\textwidth]{images/ADBMemory.png}
 \end{figure}
-
-The methods available are:
-
-\begin{itemize}
-    \item public void disableNFC(...)
-    \item public void signData(...)
-    \item public void cryptoRSA(...)
-    \item public void cryptoAES(...)
-    \item public void getCardPubMod(...)
-    \item public void getCardPubExp(...)
-    \item public void bindingStepOne(...)
-    \item public void bindingStepTwo(...)
-    \item public void bindingStepThree(...)
-\end{itemize}
-
-The methods and their functionality should be self-explanatory except for the binding process. The binding process is designed in three steps. First step is to ask the smart card if it requires a PIN-code and how many attempts are left. Second step requires a PIN-code and if this is correct the smart card application will move on to step three. The last step is sending the public key of the mobile device and getting the verification package from section \ref{sec:proposedSolution}. More discussion on this matter in section \ref{sec:bindingcardandphone}.
-
-Figure \ref{fig:classdiagram_simple} provides a simplefied and technical overview of how the Android side of the library is built up. This diagram also shows which parameters are required for the methods available in \texttt{CommunicationController}. The complete class diagram for the Android library can be found in Appendix \ref{app:c}, figure \ref{fig:classdiagram_extended}.
 
 \begin{figure}[h!]
-  \caption{Simplefied class diagram for Android Library.}
-  \label{fig:classdiagram_simple}
+  \caption{Android Debug Bridge CPU monitor connected to a running Android device.}
+  \label{fig:ADBCPU}
   \centering
-    \includegraphics[width=0.95\textwidth]{images/Class_Diagram.png}
+    \includegraphics[width=0.95\textwidth]{images/ADBCPU.png}
 \end{figure}
-The package diagram, figure \ref{fig:package}, shows how  the packages in the library are structured.
 
-\begin{figure}[h!]
-  \caption{Library package diagram.}
-  \label{fig:package}
-  \centering
-    \includegraphics[width=0.95\textwidth]{images/package2.png}
-\end{figure}
+Even though ADB provides us with good resource usage tools we wish to perform more informal tests using timers to get a feel for how long an operation takes. We can use the built in Android class \texttt{System} and the method \texttt{nanoTime()} to get an accurate start and stop time for an operation and calculate elapsed time. This combined with visually inspecting the running application can help us get an indication of how responsive the application is.

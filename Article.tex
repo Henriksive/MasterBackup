@@ -81,6 +81,10 @@
   {\savebox\mybox{#1}\begin{quote}}
   {\signed{\usebox\mybox}\end{quote}}
 
+\newenvironment{nscenter}
+ {\parskip=0pt\par\nopagebreak\centering}
+ {\par\noindent\ignorespacesafterend}
+
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
@@ -151,8 +155,6 @@
   \input{chapters/Implementation.tex}
   \input{chapters/TestCases.tex}
   \input{chapters/Conclusion.tex}
-  %\input{chapters/UseCases.tex}
-  %\input{chapters/Tests.tex}
 
   %\input{chapters/AppendixMain.tex}
 
