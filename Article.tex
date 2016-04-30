@@ -1,6 +1,6 @@
 \documentclass[11pt]{report}
 \usepackage[utf8]{inputenc}
-\usepackage[none]{hyphenat}
+
 \usepackage{floatrow}
 \usepackage{graphicx}
 \usepackage{caption}
@@ -15,6 +15,13 @@
 \usepackage{color}
 
 \usepackage[autostyle]{csquotes}
+
+%\usepackage[none]{hyphenat} %Choose one
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
 
 %START JSON DEF
 \colorlet{punct}{red!60!black}
@@ -110,6 +117,8 @@
   postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}
 }
 
+\lstset{breaklines=true}
+
 \newcommand*{\thead}[1]{\multicolumn{1}{| c |}{\bfseries #1}}
 
 \addbibresource{references/references.bib}
@@ -156,7 +165,7 @@
   \input{chapters/TestCases.tex}
   \input{chapters/Conclusion.tex}
 
-  %\input{chapters/AppendixMain.tex}
+  \input{chapters/AppendixMain.tex}
 
 
   \addcontentsline{toc}{section}{References}

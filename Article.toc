@@ -56,7 +56,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.4.4}Authentication Challenges}{21}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.5}Insecure Applications}{21}
+\contentsline {subsection}{\numberline {2.4.5}Insecure Applications}{22}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Smart card objective}{23}
 \defcounter {refsection}{0}\relax 
@@ -124,13 +124,13 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.2.1}Problem statement}{42}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.2}Goal}{42}
+\contentsline {subsection}{\numberline {4.2.2}Goal}{43}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.2.3}Key concepts}{43}
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{Android Keystore system}{43}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.4}Generate keys on mobile device}{44}
+\contentsline {subsection}{\numberline {4.2.4}Generate keys on mobile device}{45}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.2.5}Generate keys on server //p12-fil etc.}{45}
 \defcounter {refsection}{0}\relax 
@@ -204,9 +204,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {6.1.2}Limitations}{68}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Data Transfer Speed}{68}
+\contentsline {section}{\numberline {6.2}Data Transfer Speed}{69}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.1}Description and Motivation}{68}
+\contentsline {subsection}{\numberline {6.2.1}Description and Motivation}{69}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {6.2.2}Tests and Results}{69}
 \defcounter {refsection}{0}\relax 
@@ -270,4 +270,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {7.4}Closing words}{83}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{References}{83}
+\contentsline {chapter}{\numberline {A}JavaCard Code}{84}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {B}Android Library}{96}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {C}Diagrams}{102}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{References}{102}
