@@ -16,7 +16,7 @@ The design goals for the framework are:
 
 \begin{itemize}
     \item Easy to use.
-    \item Require little to no understanding of JavaCard or smart cards.
+    \item Require little to no understanding of Java Card or smart cards.
     \item Extendable.
 \end{itemize}
 
@@ -28,7 +28,7 @@ As we cannot possibly predict all types of uses for the framework we will also i
 The first part of the framework is the application on the smart card. This part of the framework will perform the tasks that we can place on the smart card.
 
 \subsection{Java Card version}
-The cards we have supports java card 2.2.2 and this is the version we will target. A natural question is ``Why don't we target java card 3 and above?''. Smart cards used for banking or handling other highly confidential data needs to be evaluated under the Common Criteria \cite[Ch.~26.3.2]{securityEngineering} standards. Potentionally we may handle confidential data and as a result we want smart cards with a Evaluation Assurance Level (EAL) 4 or above. Achieving EAL4 or above is an expensive and long process and the relatively few products have this certification. The micro SD card we have access to are certified with EAL5, but only supports JavaCard 2.2.2. \cite{gemaltoidgo8030}.
+The cards we have supports java card 2.2.2 and this is the version we will target. A natural question is ``Why don't we target java card 3 and above?''. Smart cards used for banking or handling other highly confidential data needs to be evaluated under the Common Criteria \cite[Ch.~26.3.2]{securityEngineering} standards. Potentionally we may handle confidential data and as a result we want smart cards with a Evaluation Assurance Level (EAL) 4 or above. Achieving EAL4 or above is an expensive and long process and the relatively few products have this certification. The micro SD card we have access to are certified with EAL5, but only supports Java Card 2.2.2. \cite{gemaltoidgo8030}.
 
 %TODO EAL list
 \begin{table}[h!]
@@ -54,13 +54,13 @@ The cards we have supports java card 2.2.2 and this is the version we will targe
 
 Table \ref{tbl:EAL} shows the difference between EAL levels. Comparing the EAL levels is a rather hard task (other than looking at their name and what they test) as there is no guarantee that what has been tested corresponds to the real world \cite[Ch.~26.3.3]{securityEngineering}.
 
-When we decided on JavaCard 2.2.2. we had to consider if we wanted a newer JavaCard version with more functionality or if we wanted to comply with government directives (EAL requirement). The obvious choice was the latter.
+When we decided on Java Card 2.2.2. we had to consider if we wanted a newer Java Card version with more functionality or if we wanted to comply with government directives (EAL requirement). The obvious choice was the latter.
 
 \subsection{Development environment}
 In order to develop applications for the smart cards we will be using Eclipse 3.2 with java development kit version 1.6.45. In order to develop smart card applications more easily we will use the Eclipse-JCDE plugin \cite{eclipseJCDE} which provides a virtual runtime environment along with build tools. Even though Eclipse 3.2 is severely outdated it provides the tools necessary to do the job.
 
 \begin{figure}[h!]
-  \caption{Screenshot of Eclipse showing JavaCard tools.}
+  \caption{Screenshot of Eclipse showing Java Card tools.}
   \label{fig:eclipse}
   \centering
     \includegraphics[width=0.95\textwidth]{images/eclipse.png}

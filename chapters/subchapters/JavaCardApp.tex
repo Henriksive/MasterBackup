@@ -1,20 +1,20 @@
 % !TEX root = ../../Article.tex
-\section{JavaCard Application}
+\section{Java Card Application}
 \subsection{Application}
 \paragraph{Goal}\mbox{}\\
 The goal of the smart card application was to create an autonomous and easy to extend platform for future tests. This resulted in an application split into three parts.
 
 \paragraph{Initialization}\mbox{}\\
-As described in section \ref{sec:javacard} all JavaCard applications must implement the method \texttt{Install}. \texttt{Install} invokes the constructor of the smart card and this is where all variables that need initialization are initialized. For instance if the smart card application needs to generate keys or random numbers this is where it is done as the constructor will be invoked only once. All buffers that needs to be used should also be initialized here to avoid allocating memory every time the application is activated.
+As described in section \ref{sec:javacard} all Java Card applications must implement the method \texttt{Install}. \texttt{Install} invokes the constructor of the smart card and this is where all variables that need initialization are initialized. For instance if the smart card application needs to generate keys or random numbers this is where it is done as the constructor will be invoked only once. All buffers that needs to be used should also be initialized here to avoid allocating memory every time the application is activated.
 
 \paragraph{Data processing}\mbox{}\\
-In the mandatory \texttt{Process} method (refer to section \ref{sec:javacard}) all data processing takes place. First a built in method in the JavaCard API, \texttt{selectingApplet()}, is invoked. This method checks if the incoming APDU is a SELECT APDU and acts accordingly. If the incoming APDU is not a SELECT APDU the incoming APDU is copied to a new buffer for easier data manipulation. Next, we use a switch statement switching over the second byte, INS, to determine which instruction we want to perform. After processing the data and performing the work we want to do (sign data, encrypt, etc.) we copy our response to the outgoing buffer.
+In the mandatory \texttt{Process} method (refer to section \ref{sec:javacard}) all data processing takes place. First a built in method in the Java Card API, \texttt{selectingApplet()}, is invoked. This method checks if the incoming APDU is a SELECT APDU and acts accordingly. If the incoming APDU is not a SELECT APDU the incoming APDU is copied to a new buffer for easier data manipulation. Next, we use a switch statement switching over the second byte, INS, to determine which instruction we want to perform. After processing the data and performing the work we want to do (sign data, encrypt, etc.) we copy our response to the outgoing buffer.
 
 \paragraph{Finalization}\mbox{}\\
 At the end of the \texttt{Process} invocation we invoke the \texttt{send} method which takes the data in the outgoing buffer, package it for sending and send it as a response APDU.
 
 \paragraph{The result}\mbox{}\\
-What we end up with is a test platform where we are only concerned with declaring variables, initializing variables and writing code for the specific test case. Listing \ref{lst:pseudoCard} shows pseudocode for the JavaCard application with the extendable areas highlighted.
+What we end up with is a test platform where we are only concerned with declaring variables, initializing variables and writing code for the specific test case. Listing \ref{lst:pseudoCard} shows pseudocode for the Java Card application with the extendable areas highlighted.
 
 
 \begin{lstlisting}[caption=Pseudo code for javacard test application., label=lst:pseudoCard,escapechar=!]
@@ -51,7 +51,7 @@ public class cardApplication extends Applet implements !\allowbreak !ExtendedLen
 }
 \end{lstlisting}
 
-As seen in \ref{lst:pseudoCard} we allow for 256 cases/uses of the smart card, but if we include the use of P1 and P2 from section \ref{sec:communicationstandard} there are in theory 256\textsuperscript{3} = 16777216 possible cases. This does not include the pre-implemented methods which are explained in section \ref{sec:androidApp}. Their counterparts in the smart card application have the following byte values:
+As seen in listing \ref{lst:pseudoCard} we allow for 256 cases/uses of the smart card, but if we include the use of P1 and P2 from section \ref{sec:communicationstandard} there are in theory 256\textsuperscript{3} = 16777216 possible cases. This does not include the pre-implemented methods which are explained in section \ref{sec:androidApp}. Their counterparts in the smart card application have the following byte values:
 
 \begin{itemize}
     \item byte SEND\_U\_PUB\_MOD = (byte) 0x01;
@@ -63,9 +63,9 @@ As seen in \ref{lst:pseudoCard} we allow for 256 cases/uses of the smart card, b
 \end{itemize}
 
 \texttt{RSACRYPTO} and \texttt{AESCRYPTO} uses P1 to differentiates between encrypting and decrypting. \texttt{0x01} for encryption and \texttt{0x02} for decryption.
-We will not go into detail on how the individual cases are built up as their functionality should be self-explanatory. Refer to Appendix A for JavaCard code.
+We will not go into detail on how the individual cases are built up as their functionality should be self-explanatory. Refer to Appendix A for Java Card code.
 
-\subsection{Extending the JavaCard application}
-When adding more functionality to the JavaCard there are a few things to keep in mind. First of all one should follow the recipe shown in listing \ref{lst:pseudoCard} to minimize clutter and to follow the principles of JavaCard programming. Secondly it is important to keep in mind that JavaCard does not have standard garbage collection (refer to section \ref{sec:javacard}). A direct consequence is that any extension or extra functionality added to the smart card application may lead to ``Out of Memory'' errors.
+\subsection{Extending the Java Card application}
+When adding more functionality to the Java Card application there are a few things to keep in mind. First of all one should follow the recipe shown in listing \ref{lst:pseudoCard} to minimize clutter and to follow the principles of Java Card programming. Secondly it is important to keep in mind that Java Card does not have standard garbage collection (refer to section \ref{sec:javacard}). A direct consequence is that any extension or extra functionality added to the smart card application may lead to ``Out of Memory'' errors.
 
 Installation time of the smart card application may also be affected by extra functionality. Key generation on the smart card is a relatively expensive process, and one may find that it is not worth adding installation time to the whole application for one function. One approach is to split functionality in multiple applications. We will discuss this approach later in chapter \ref{ch:conclusion}, section \ref{sec:future}.

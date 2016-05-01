@@ -389,7 +389,7 @@ Recall section \ref{sec:communicationstandard} where we described how a Command 
     \item Set boolean variable to true, depending on policy ID and ``enabled'' flag.
     \item Set other variable values.
 \end{enumerate}
-In the body we will use the payload data field to send information on the policy updates. The incoming data will be in byte format. Mapping bytes to variables could normally be solved using \texttt{HashMap} and map entries with \texttt{<byte, Object>}; the first parameter is the incoming byte command and second parameter being the variable we want to manipulate. \texttt{HashMap} is not a part of the JavaCard API and we need to do our own hardcoded manual mapping. The result is a rigid structure for policies.
+In the body we will use the payload data field to send information on the policy updates. The incoming data will be in byte format. Mapping bytes to variables could normally be solved using \texttt{HashMap} and map entries with \texttt{<byte, Object>}; the first parameter is the incoming byte command and second parameter being the variable we want to manipulate. \texttt{HashMap} is not a part of the Java Card API and we need to do our own hardcoded manual mapping. The result is a rigid structure for policies.
 
 The individual policies data structure needs to be carefully crafted and specialized, but we should also focus on making it as dynamic as possible. This is best described using an example. To demonstrate how it can be done, we will use listing \ref{lst:jsonPolicies} as example data. The resulting APDU is figure \ref{fig:policyAPDU} and it clearly shows that we have to hardcode how many fields a policy will need.
 

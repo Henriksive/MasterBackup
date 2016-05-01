@@ -29,7 +29,7 @@ Due to the nature of smart cards we will need to hard code this protocol into th
     \item \texttt{0x03} for step 5,6 and 7.
 \end{itemize}
 
-To manage PIN verification and management we will use \texttt{OwnerPIN} class from the JavaCard framework \cite{ownerpin}. After the PIN is set on the card during installation we can utilize the methods: \texttt{isValidated()} for checking if the right PIN is already provided, \texttt{check(byte[] pin, short offset, byte length)} for checking if the provided PIN is correct and \texttt{getTriesRemaining()} for getting remaining tries.
+To manage PIN verification and management we will use \texttt{OwnerPIN} class from the Java Card framework \cite{ownerpin}. After the PIN is set on the card during installation we can utilize the methods: \texttt{isValidated()} for checking if the right PIN is already provided, \texttt{check(byte[] pin, short offset, byte length)} for checking if the provided PIN is correct and \texttt{getTriesRemaining()} for getting remaining tries.
 
 All public keys are represented as byte arrays when they are transmitted between the mobile device and the smart card. The format for the byte array is \textbar{}ModulusLength\textbar{}Modulus\textbar{}ExponentLength\textbar{}Exponent\textbar{} to allow for extension of key length and dynamic importing. After the APDU is received the public key is stored in a \texttt{RSAPublicKey} object for storage.
 
@@ -106,7 +106,7 @@ At first we suspected that the packet was too big or some mismatch in the parame
     \item No error codes - Hard crash.
 \end{itemize}
 
-After searching the Internet for others with the same problem it became apparent that others have had troubles with signing. Some report that the running time of their smart cards increase drastically when using to 2048-bit keys \cite{signingtrouble2}. We are not able to find any official sources on these issues, but there seems to be an underlying problem or bug in JavaCard.
+After searching the Internet for others with the same problem it became apparent that others have had troubles with signing. Some report that the running time of their smart cards increase drastically when using to 2048-bit keys \cite{signingtrouble2}. We are not able to find any official sources on these issues, but there seems to be an underlying problem or bug in Java Card.
 
 \begin{lstlisting}[caption=Java Card failed signing., label=lst:signing2048, escapechar=!]
 public class cardApplication extends Applet implements !\allowbreak!ExtendedLength{

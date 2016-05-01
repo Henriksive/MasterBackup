@@ -43,7 +43,7 @@ To better understand when to use the command APDUs and when to use response APDU
 
 On most smart cards there is an application manager which listen for a special type of Command APDU: a Select APDU. The Select APDU contains information on what type of smart card application a sender is trying to communicate with and the job of the application manager is to activate the correct application. Before communicating with a smart card the sender should send out a Select APDU, if this step is skipped you run the risk of sending information to the wrong smart card application.
 
-\subsection{JavaCard programming language}
+\subsection{Java Card programming language}
 \label{sec:javacard}
 In section \ref{sec:smartcard} we described that smart cards are able to store data as well as process input and output. All smart cards have their own operating system that allows developers to write applications that run on the smart cards. Smart cards are not limited to one applications per card, but are able to have multiple applications installed. Traditionally it was not feasible to create programs that ran on different smart card manufacturer cards as the micro processors were manufacturer specific \cite{javacardapplet}. This created an environment where smart card issuers and their developers were locked to a specific manufacturer.
 
@@ -69,7 +69,7 @@ When incorporating the features of a smart card with a mobile device it would be
 
 
 \subsection{Other smart card programming languages}
-There exists several other languages for smart card programming. The two most notable are JavaCard (section \ref{sec:javacard}) and MULTOS \cite{multos}. The latter uses the programming language C as the language for writing applications.
+There exists several other languages for smart card programming. The two most notable are Java Card (section \ref{sec:javacard}) and MULTOS \cite{multos}. The latter uses the programming language C as the language for writing applications.
 
 \section{Mobile operating system}
 Mobile operating system refers to the operating system running on a mobile device (smartphones, GPS devices, tablets, etc.). In this thesis we will focus mainly on smartphones and tablets since their capabilities are within our scope and the fact that they often share the same operating system.

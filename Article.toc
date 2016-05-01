@@ -32,7 +32,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.2}Communication standard for smart cards}{5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1.3}JavaCard programming language}{7}
+\contentsline {subsection}{\numberline {2.1.3}Java Card programming language}{7}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.4}Other smart card programming languages}{9}
 \defcounter {refsection}{0}\relax 
@@ -166,7 +166,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {5}Implementation}{50}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}JavaCard Application}{50}
+\contentsline {section}{\numberline {5.1}Java Card Application}{50}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.1.1}Application}{50}
 \defcounter {refsection}{0}\relax 
@@ -180,7 +180,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{The result}{51}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1.2}Extending the JavaCard application}{52}
+\contentsline {subsection}{\numberline {5.1.2}Extending the Java Card application}{52}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5.2}Android Application}{53}
 \defcounter {refsection}{0}\relax 
@@ -262,7 +262,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{Debugging smart card applications}{74}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{JavaCard documentation}{75}
+\contentsline {paragraph}{Java Card documentation}{75}
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{Deploying smart card applications}{75}
 \defcounter {refsection}{0}\relax 
@@ -272,7 +272,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Appendices}{80}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}JavaCard Code}{81}
+\contentsline {chapter}{\numberline {A}Java Card Code}{81}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {B}Android Library}{91}
 \defcounter {refsection}{0}\relax 
