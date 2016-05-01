@@ -95,14 +95,14 @@ To test the smart card application that is deployed on the physical cards (witho
     \includegraphics[width=0.95\textwidth]{images/pyapdutool.png}
 \end{figure}
 
-PyApduTool does not support extended APDU and this limits us to a high degree when testing our smart card application. Testing through PyApduTool does not test mobile device behaviour such as out of memory, too much traffic or NFC limitations. After the initial basic testing PyApduTool became obsolete and we had to test via an Android application.
+PyApduTool does not support extended APDU and this limits us to a high degree when testing our smart card application. Testing through PyApduTool does not test mobile device behavior such as out of memory, too much traffic or NFC limitations. After the initial basic testing PyApduTool became obsolete and we had to test via an Android application.
 
 
 \section{Android application}
 The second part of the framework is an Android library. The library will serve as an intermediate between the Android application and the smart card application.
 
 \subsection{IDE}
-Android Studio \cite{androidIDE} is the official IDE for Android application development. Android Studio is based on IntelliJ IDEA \cite{intelliJIDEA} and provides many automated tools for building, deploying and publishing Android applications. Android studio comes built in with Android Debug Bridge (ADB) which is an interface for communicating with virtual Android instances or physical Android devices. ADB gives developers the ability to log output from applications aswell as monitor memory, GPU and CPU usage of the mobile device.
+Android Studio \cite{androidIDE} is the official IDE for Android application development. Android Studio is based on IntelliJ IDEA \cite{intelliJIDEA} and provides many automated tools for building, deploying and publishing Android applications. Android studio comes built in with Android Debug Bridge (ADB) which is an interface for communicating with virtual Android instances or physical Android devices. ADB gives developers the ability to log output from applications as well as monitor memory, GPU and CPU usage of the mobile device.
 
 \subsection{Testing environment}
 To test the application we will be using the built in ADB in Android studio as well as doing empirical tests on the Android device. Figure \ref{fig:ADBMemory} and \ref{fig:ADBCPU} shows runtime examples of the Android device. These monitor tools gives us a clear indication if we are doing an operation the Android device can't handle or if we are trying to perform operations that are too resource intensive.

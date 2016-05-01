@@ -29,7 +29,7 @@ Due to the nature of smart cards we will need to hard code this protocol into th
     \item \texttt{0x03} for step 5,6 and 7.
 \end{itemize}
 
-To manage PIN verification and management we will use \texttt{OwnerPIN} class from the javacard framework \cite{ownerpin}. After the PIN is set on the card during installation we can utilize the methods: \texttt{isValidated()} for checking if the right PIN is already provided, \texttt{check(byte[] pin, short offset, byte length)} for checking if the provided PIN is correct and \texttt{getTriesRemaining()} for getting remaining tries.
+To manage PIN verification and management we will use \texttt{OwnerPIN} class from the JavaCard framework \cite{ownerpin}. After the PIN is set on the card during installation we can utilize the methods: \texttt{isValidated()} for checking if the right PIN is already provided, \texttt{check(byte[] pin, short offset, byte length)} for checking if the provided PIN is correct and \texttt{getTriesRemaining()} for getting remaining tries.
 
 All public keys are represented as byte arrays when they are transmitted between the mobile device and the smart card. The format for the byte array is \textbar{}ModulusLength\textbar{}Modulus\textbar{}ExponentLength\textbar{}Exponent\textbar{} to allow for extension of key length and dynamic importing. After the APDU is received the public key is stored in a \texttt{RSAPublicKey} object for storage.
 
@@ -97,7 +97,7 @@ In this test we will generate the verification package. We will skip the parts o
 After implementing the solution some limitations and problems became apparent. It is important to consider these when determining the effectiveness of the solution.
 
 \paragraph{Signing not working with 2048-bit key size}\mbox{}\\
-We encountered a bug when switching to "configuration 2". The smart card application started actually crashing, as not in responding with error codes, but actually crashing and losing power. We managed to narrow it down to the exact line of code the application crashes on (see listing \ref{lst:signing2048}).
+We encountered a bug when switching to ``configuration 2''. The smart card application started actually crashing, as not in responding with error codes, but actually crashing and losing power. We managed to narrow it down to the exact line of code the application crashes on (see listing \ref{lst:signing2048}).
 
 At first we suspected that the packet was too big or some mismatch in the parameters. The function still crashed with a smaller packet and all parameters are of the correct length/type/value. It is also worth noting that the 2048-bit key are properly initialized and working. Identifying the problem is hard considering the only clues we have are:
 
@@ -146,14 +146,14 @@ public class cardApplication extends Applet implements !\allowbreak!ExtendedLeng
 \end{lstlisting}
 
 \paragraph{Out of memory}\mbox{}\\
-We are dealing with many different byte arrays in our solution, and due to the design of smart cards we will need to allocate memory for these byte arrays when the smart card is initialized. The size of these byte arrays are dependendent on the key sizes we use. Allocating 5 byte arrays of length 500 (which is plenty for 2048-bit keys) is independently fine, but if the smart card application allocates a lot of resource alongside this solution we need to be careful of running out of memory.
+We are dealing with many different byte arrays in our solution, and due to the design of smart cards we will need to allocate memory for these byte arrays when the smart card is initialized. The size of these byte arrays are dependent on the key sizes we use. Allocating 5 byte arrays of length 500 (which is plenty for 2048-bit keys) is independently fine, but if the smart card application allocates a lot of resource alongside this solution we need to be careful of running out of memory.
 
 It is important to include hidden memory sinks such as the \texttt{RSAPublicKeys} and the encryption done by the \texttt{Cipher} class. We can just as easily run out of memory by changing our key lengths as when allocating byte arrays.
 
 \paragraph{Code rigidity}\mbox{}\\
-Because of the design of smart cards our implementation is heavily hardcoded, and as a results is very rigid to change. For instance if the specification of the verification package change it will require excessive work to reflect the changes. One will have to decide make a desicion wether or not this will happen often enough to counter the potential benefits of using smart cards.
+Because of the design of smart cards our implementation is heavily hardcoded, and as a results is very rigid to change. For instance if the specification of the verification package change it will require excessive work to reflect the changes. One will have to decide make a decision whether or not this will happen often enough to counter the potential benefits of using smart cards.
 
 \subsection{Conclusion}
 We have shown that the smart card area of responsibility in the binding process is possible to perform. Test results show that the installation process can be rather long (ranging from 9 seconds to 95 seconds), but that the verification package generation is effective ({\raise.17ex\hbox{$\scriptstyle\sim$}}1 second).
 
-The installation process is a one time process and the keys we generate during it are needed for other cryptographic operations on the card. We find it safe to assume that this process is a cost we can afford. The verification package generation process has such a low processing time that we can also assume that we can afford it. Our conclusion is that the binding process is feasable and that the reward, that smart card and mobile device is locked to each other, greatly outscales the costs involved.
+The installation process is a one time process and the keys we generate during it are needed for other cryptographic operations on the card. We find it safe to assume that this process is a cost we can afford. The verification package generation process has such a low processing time that we can also assume that we can afford it. Our conclusion is that the binding process is feasible and that the reward, that smart card and mobile device is locked to each other, greatly outscales the costs involved.
