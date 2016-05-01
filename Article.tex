@@ -16,6 +16,8 @@
 
 \usepackage[autostyle]{csquotes}
 
+\usepackage{epstopdf}
+
 \usepackage[none]{hyphenat} %Choose one
 %\tolerance=1
 %\emergencystretch=\maxdimen
@@ -117,6 +119,7 @@
   postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}
 }
 
+\newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
 
 \newcommand*{\thead}[1]{\multicolumn{1}{| c |}{\bfseries #1}}
 
@@ -130,19 +133,40 @@
 
   \begin{titlepage}
     \begin{center}
+      \textsc{\LARGE University of Bergen\\}
+      \textsc{\LARGE Department of Informatics\\[1cm]}
+
+
       \line(1,0){350}
       \\[1cm]
-      \textsc{\LARGE Mobile data security and cloud storage}
-      \\[1cm]
+
+      \textsc{\huge \textbf{Handling Sensitive Data on Mobile Devices Using Smart Cards to Mitigate Security Threats}}
+      \\[0.6cm]
       \line(1,0){350}
     \end{center}
-    Henrik Sivertsgård, HIB: H139734 : UIB: 212779 , henriksive@gmail.com
-    \\[0.2cm]
-    Supervisors: Marcus Bezem, Federico Mancini
-    \\[0.2cm]
-    \today
+    \begin{center}
+      Author: Henrik Sivertsgård
+      \\[0.2cm]
+      Supervisors: Marcus Aloysius Bezem, Federico Mancini
+      \\[0.2cm]
+    \end{center}
+    \begin{bottompar}
+      \begin{figure}[h!]
+        \label{fig:uiblogo}
+        \centering
+          \includegraphics[width=0.50\textwidth]{images/uib-logo.eps}
+      \end{figure}
+      \begin{center}
+        \textit{Master thesis\\}
+        \today
+      \end{center}
+    \end{bottompar}
+
   \end{titlepage}
 \input{chapters/Abstract.tex}
+
+\pagenumbering{Roman}
+
   \newpage
   \tableofcontents
 
@@ -153,8 +177,7 @@
   \lstlistoflistings
 
 
-
-
+\cleardoublepage\pagenumbering{arabic}
   \input{chapters/Introduction.tex}
   \input{chapters/Background.tex}
   \input{chapters/Smartcardgoals.tex}
@@ -164,10 +187,13 @@
   \input{chapters/TestCases.tex}
   \input{chapters/Conclusion.tex}
 
+  \addcontentsline{toc}{chapter}{References}
+  \printbibliography
+  \addcontentsline{toc}{chapter}{Appendices}
+
   \input{chapters/AppendixMain.tex}
 
 
-  \addcontentsline{toc}{section}{References}
-  \printbibliography
+
 
 \end{document}

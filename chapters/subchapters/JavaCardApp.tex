@@ -14,11 +14,11 @@ In the mandatory \texttt{Process} method (refer to section \ref{sec:javacard}) a
 At the end of the \texttt{Process} invokation we invoke the \texttt{Send} method which takes the data in the outgoing buffer, package it for sending and send it as a response APDU.
 
 \paragraph{The result}\mbox{}\\
-What we end up with is a test plattform where we are only concerned with declaring variables, initializing variables and writing code for the specific test case. Listing \ref{lst:pseudoCard} shows pseudocode for the java card application with the extendable areas highlighted.
+What we end up with is a test platform where we are only concerned with declaring variables, initializing variables and writing code for the specific test case. Listing \ref{lst:pseudoCard} shows pseudocode for the java card application with the extendable areas highlighted.
 
 
 \begin{lstlisting}[caption=Pseudo code for javacard test application., label=lst:pseudoCard,escapechar=!]
-public class cardApplication extends Applet implements ExtendedLength{
+public class cardApplication extends Applet implements !\allowbreak !ExtendedLength{
 
     !\colorbox{highlight}{//Variable declarations}!
 

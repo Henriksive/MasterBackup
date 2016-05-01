@@ -23,7 +23,7 @@ This will mitigate threats such as:
 \end{itemize}
 
 \subsection{Key concepts}
-To authenticate the two parties, smart card and mobile device, we will need a third party which they both trust. We introduce a new party, the authority, which acts as the third party. The authority issues the smart cards and employ the users. A direct consequence is that they both trust the authority, otherwise we have no starting point. Since they both trust the authority they can ask the authority to verify the other party as shown in figure \ref{fig:standardAuth}.
+To authenticate the two parties, smart card and mobile device, we will need a third party which they both trust. We introduce a new party, the authority, which acts as a trusted third party. The authority issues the smart cards and employ the users. A direct consequence is that they both trust the authority, otherwise we have no starting point. Since they both trust the authority they can ask the authority to verify the other party as shown in figure \ref{fig:standardAuth}.
 
 \begin{figure}[h!]
   \caption{Trust based on a third party.}
@@ -32,7 +32,7 @@ To authenticate the two parties, smart card and mobile device, we will need a th
     \includegraphics[width=0.95\textwidth]{images/standardAuth2.png}
 \end{figure}
 
-One thing that differentiates our problem from traditional authentication problems is that the smart card is not able to communicate directly with a trusted third party. All communication with off card applications or third parties must go through a mobile device. A technical illustration of this relationship can be seen in figure \ref{fig:smu} where the authority is represented as a server. This drawback introduces a new problem which we have to consider. How do we know if the mobile device relays information between the server and smart card correctly in the authentication process?
+One thing that differentiates our challenge from traditional authentication challenges is that the smart card is not able to communicate directly with a trusted third party. All communication from our smart card to off card applications or third parties must go through a mobile device. A technical illustration of this relationship can be seen in figure \ref{fig:smu} where the authority is represented as a server. This drawback introduces a new problem which we have to consider. How do we know if the mobile device relays information between the server and smart card correctly in the authentication process?
 
 \begin{figure}[h!]
   \caption{Server, mobile device and smart card communication flow.}
@@ -41,13 +41,13 @@ One thing that differentiates our problem from traditional authentication proble
     \includegraphics[width=0.95\textwidth]{images/SMU.png}
 \end{figure}
 
-To combat that all information flowing from the smart card has to go through the mobile device, we can utilize the fact that the authority we are trying to authenticate with is also the the smart card issuer. What this means is that we can pre-install the authority certificate and public key on the smart card as well as retrive the public key of the smart card before handing the smart card to the user/employee. The result is that we have already exchanged the keys and certificates we need for authentication before we introduce the mobile device.
+To combat that all information flowing from the smart card has to go through the mobile device, we can utilize the fact that the authority we are trying to authenticate with is also the the smart card issuer. What this means is that we can pre-install the authority certificate and public key on the smart card as well as retrive the public key of the smart card before handing the smart card to the user/employee. The result is that we have already exchanged the keys and certificates we need for authenticating the server and smart card before we introduce the mobile device.
 
-The mobile device will also need to authenticate with the authority so that the smart card can trust the mobile device. In this process we will need to make some assumptions. The first problem is that we need to  ensure that the mobile device tries to communicate with the right server (authority). By hardcoding the server URL in the mobile device application and making sure that the user installs the right application on his device we can mitigate this threat. To make sure that the user installs the right application we need a secure distribution platform. By using Google Play as distribution platform, we can minimize the risk that the user will download a rogue application with the same name \cite{googlePlaySecureDist}. To further mitigate the risk of installing the wrong application the user can disable the ability to side-load applications and not use a rooted device.
+The mobile device will also need to authenticate with the authority so that the smart card can trust the mobile device. In this process we will need to make some assumptions. The first problem is that we need to  ensure that the mobile device tries to communicate with the right server (authority). By hardcoding the server URL in the mobile device application and making sure that the user installs the right application on his device we can mitigate this threat. To make sure that the user installs the right application we need a secure distribution platform. By using Google Play as distribution platform, we can minimize the risk that the user will download a rogue application with the same name \cite{googlePlaySecureDist}. To further mitigate the risk of installing the wrong application the user can disable the ability to side-load applications and avoid using a rooted device.
 
 The other attack vector on the mobile device and user is man-in-the-middle attacks. If we assume that the user was able to download the correct application we will need to secure the communication channel. To secure the channel we will need to use TLS \cite{rfc793} which also provides us with protection from replay attacks \cite{tlsOWASP}. The only downside by using TLS in our case is that we will need the server certificate to verify the server. Traditionally we will need to either pre-install certificates on the mobile device (makes ``bring your own device'' more difficult) or register with a certificate authority (depend on third party). In our case the the server certificate is already on the smart card and we can install it on the mobile device. An added benefit of this is that if the mobile device is rogue and tries to connect to the wrong server; the data sent to the server will be encrypted by the smart card.
 
-Further we will need the user to authenticate with the authority. We have two options in order to achieve this. First option is that the user use a username and password combination directly with the authority, but considering the binding is normally a one time case a more simplefied process may be to hand out a one time code along with the smart card. One could also look into distributing one time codes through e-mail or a text message (SMS).
+Further we will need the user to authenticate with the authority. We have two options in order to achieve this. First option is that users use a username and password combination directly with the authority, but considering the binding is normally a one time case a more simplefied process may be to hand out a one time code along with the smart card. One could also look into distributing one time codes through e-mail or a text message (SMS).
 
 The second option is that the user inputs a pin code to the smart card and if the pin code is correct the smart card can verify that the user is the user he claims to be. This option requires very little overhead and saves a lot of resources in that regard.
 
@@ -60,7 +60,7 @@ We have described how the parties can authenticate each other, but we will need 
 The authority issues the smart cards and administrates the server. During the setup of the smart card the public key and certificate of the server must be installed on the smart card. The public key of the smart card must also be extracted and stored on the server. This creates a base for all future processes.
 
 \paragraph{Verification package}\mbox{}\\
-A verification package is a package containing all the information a third party server needs to authenticate the smart card and mobile device. Firstly the mobile device public key, the smart card public key and generated AES key is signed by the smart card. Then we encrypt this package with the public key of the third party server. Figure \ref{fig:h0} visualizes this structure.
+A verification package is a package containing all the information a third party server needs to authenticate the smart card and mobile device. First the mobile device public key, the smart card public key and generated AES key is signed by the smart card. Then we encrypt the package with the public key of the third party server. Figure \ref{fig:h0} visualizes this structure.
 
 \newpage
 
@@ -83,8 +83,8 @@ H\textsubscript{0} - Verification package \\
 
 \begin{enumerate}
   \item Install Android application on mobile device (M) and insert smart card (U).
-  \item M generates RSA key-pair and stores.
-  \item M sends M\textsubscript{pub} to U and requests verification package (H\textsubscript{0}) from (U)).
+  \item M generates RSA key-pair and stores it.
+  \item M sends M\textsubscript{pub} to U and requests verification package (H\textsubscript{0}) from (U).
   \item U asks for a PIN code.
   \item M provides PIN code.
   \item U generates H\textsubscript{0} (refer to figure \ref{fig:h0}) and sends it to M.
@@ -156,10 +156,10 @@ The three technical parties involved are the server, the mobile device and the s
 
 Thus the only attack vector on technical parties is where the mobile device is rogue. By rogue in the context of the mobile device we mean compromised as in rooted or malware/spyware. In our solution we have no way of knowing if the user is binding a rogue mobile device. The end result is that we have securely binded the mobile device and smart card, but the mobile device cannot be trusted.
 
-To combat this we need to do two things. Firstly we need to educate the user on mobile security and how they should not install applications from untrusted sources etc. Secondly we can run tests on the mobile device to try and detect if the mobile device is rooted or has malware/spyware. This can prove to be hard as it is very difficult, if not impossible, to detect malware/spyware which operate with root access. Google has been working on a security framework, SafetyNet, which goal is to detect if a device has been tampered with or is infected \cite{googleSafetynet}. In order to decide if this is sufficient we would have to do more research on SafetyNet specifically.
+To combat this we need to do two things. First and foremost we need to educate the user on mobile security and how they should not install applications from untrusted sources etc. Secondly we can run tests on the mobile device to try and detect if the mobile device is rooted or has malware/spyware. This can prove to be hard as it is very difficult, if not impossible, to detect malware/spyware which operate with root access. Google has been working on a security framework, SafetyNet, which goal is to detect if a device has been tampered with or is infected \cite{googleSafetynet}. In order to decide if this is sufficient we would have to do more research on SafetyNet specifically.
 
 \paragraph{Rogue user or administrator}\mbox{}\\
-Potentially we can have a rogue user which deliberately installs malware/spyware on their mobile device to compromise our system. We will disregard this case as if we have a rogue user we have bigger problems than a compromised mobile device. It is also important to note that any information the mobile device receives the user is also likely to know regardless and can thus release this information independent from the mobile device.
+Potentially we can have a rogue user which deliberately installs malware/spyware on their mobile device to compromise our system. We will disregard this case as if we have a rogue user we have bigger problems than a compromised mobile device. It is also important to note that any information the mobile device receives the user is also likely to know regardless, and can thus release this information independently of the mobile device.
 
 The bigger problem would be a rogue administrator. The administrator would have access to the initial setup of the smart cards and may extract the private key of the server. Even though this has more impact than a rogue user we are very limited on what we can to do protect against it. We can make it near impossible to extract private keys, logging and require more than one administrator, but it will still be possible to cause harm. Although the same principle applies here: if you have a rogue administrator you have bigger problems than smart card binding.
 
@@ -199,7 +199,7 @@ In early iterations the keys were stored in a software-protected file meaning th
     \includegraphics[width=0.45\textwidth]{images/hardwareBacked.png}
 \end{figure}
 
-An application can check if the mobile device uses secure hardware for key storage using the Android class \texttt{KeyInfo}. The \texttt{KeyInfo} class containt all available information about a key and a single call to the method \texttt{isInsideSecureHardware()} will determine the storage status. Listing \ref{lst:KeyInfo} provides a sample implementation of this functionality. \texttt{KeyInfo} was added in API 23 and requires Android version 6.0 or newer.
+An application can check if the mobile device uses secure hardware for key storage using the Android class \texttt{KeyInfo}. The \texttt{KeyInfo} class containt all available information about a key and a single call to the method \texttt{\allowbreak isInsideSecureHardware()} will determine the storage status. Listing \ref{lst:KeyInfo} provides a sample implementation of this functionality. \texttt{KeyInfo} was added in API 23 and requires Android version 6.0 or newer.
 
 \newpage
 \begin{lstlisting}[caption=Obtaining storage status of keys using KeyInfo., label=lst:KeyInfo,escapechar=å]
@@ -286,7 +286,7 @@ Optionally we want to achieve the following:
 \end{itemize}
 
 \subsection{Shift responsibility to a trusted party}
-One way of making sure that policies are enforced is to give the responsibility of the action to a trusted party. Imagine that company A have a policy which requires their employees to update their password on their personal computers once a month. If the user profiles only exists locally on the computers company A has no way of checking if the users update their passwords and run the risk of the users saying they have updated the password without doing so. To combat this the user profiles are moved to company A's server and the personal computers now do a lookup for the user profiles on the server. In this case A now have control over the user profiles and can check if the passwords are updated.
+One way of making sure that policies are enforced is to give the responsibility of the action to a trusted party. Imagine that company A have a policy which requires their employees to update their password on their personal computers once a month. If the user profiles only exists locally on the computers, company A has no way of checking if the users update their passwords and run the risk of the users saying they have updated the password without doing so. To combat this the user profiles are moved to company A's server and the personal computers now do a lookup for the user profiles on the server. In this case, A has control over the user profiles and can check if the passwords are updated.
 
 The limiting factor to a solution like this is that the trusted party might not be able to perform the job. A trusted server might not be able to enforce locking doors after 4pm just as a smart card is not able to perform all jobs we want it to do. A big part of the job is to identify which part of a security policy action we can move to the smart card to enforce the security policy.
 
@@ -294,7 +294,7 @@ The limiting factor to a solution like this is that the trusted party might not 
 \label{sec:policySolution}
 
 \paragraph{Relevant policies for a smart card}\mbox{}\\
-The smart card is limited in what kind of policies it is able to enforce. It cannot enforce policies regarding forcing the mobile device into doing things only the mobile device controls. The smart card can provide vital data needed for performing an action, but it is up to the mobile device to actually perform the action. This effectively rules out policies such as, ``The mobile device must encrypt all files stored locally.'', since we can only provide the keys to do so, but the mobile device has to perform the action. We have to assume that the mobile device, more specifically the running application, wishes to perform the action.
+The smart card is limited in what kind of policies it is able to enforce. It cannot enforce policies regarding forcing the mobile device into doing things only the mobile device controls. The smart card can provide vital data needed for performing an action, but it is up to the mobile device to actually perform the action. This effectively rules out policies such as, ``The mobile device must encrypt all files stored locally.'', since we can only provide the keys to do so, but the mobile device has to perform the action. We have to assume that the mobile device, more specifically the running application, wants to perform the action.
 
 The core abilities of a smart card are:
 \begin{itemize}
@@ -362,7 +362,7 @@ First we assume the binding of card and phone from section \ref{sec:bindingcarda
 %The "challenge" consists of a long random hash which is then signed by the smart card and sent to the server via the mobile device (see figure). The server computes the new hash using the AES key the smart card and server agreed upon. The new hash and any policy update is signed by the server and sent to the smart card.
 
 \paragraph{Policy format}\mbox{}\\
-When designing the format of the policy package there are two things to keep in mind. It should be human-readable for easy modification and not deviate too far from a machine-readable format as the smart card will need to interpret it. Another thing to take into consideration is that data being sent to the smart card, must be converted to hex.
+When designing the format of the policy package there are two things to keep in mind. It should be human-readable for easy modification and not deviate too far from a machine-readable format as the smart card will need to interpret it. Another requirement to take into consideration is that data being sent to the smart card, must be converted to hex.
 
 We can utilize JSON to make human-readable policies and as an added bonus JSON is readable for most programming languages. Listing \ref{lst:jsonPolicies} shows how this can be structured.
 \begin{lstlisting}[language=json,firstnumber=1,caption=Human-readable policies in JSON., label=lst:jsonPolicies,]
@@ -389,7 +389,7 @@ Recall section \ref{sec:communicationstandard} where we described how a Command 
     \item Set boolean variable to true, depending on policy ID and ``enabled'' flag.
     \item Set other variable values.
 \end{enumerate}
-In the body we will use the payload data field to send information on the policy updates. The incoming data will be in byte format. Mapping bytes to variables could normally be solved using \texttt{HashMap} and map entries with \texttt{<byte, Object>}; the first parameter is the incoming byte command and second parameter being the variable we want to manipulate. \texttt{HashMap} is not a part of the java smart card API and we need to do our own hardcoded manual mapping. The result is a rigid structure for policies.
+In the body we will use the payload data field to send information on the policy updates. The incoming data will be in byte format. Mapping bytes to variables could normally be solved using \texttt{HashMap} and map entries with \texttt{<byte, Object>}; the first parameter is the incoming byte command and second parameter being the variable we want to manipulate. \texttt{HashMap} is not a part of the JavaCard API and we need to do our own hardcoded manual mapping. The result is a rigid structure for policies.
 
 The individual policies data structure needs to be carefully crafted and specialized, but we should also focus on making it as dynamic as possible. This is best described using an example. To demonstrate how it can be done, we will use listing \ref{lst:jsonPolicies} as example data. The resulting APDU is figure \ref{fig:policyAPDU} and it clearly shows that we have to hardcode how many fields a policy will need.
 
@@ -403,7 +403,7 @@ The individual policies data structure needs to be carefully crafted and special
 When designing the smart card code for interpreting the policy APDU we need a registry of some sort for keeping track of how much of the payload each policy uses. Listing \ref{lst:apduPolicy} uses figure \ref{fig:policyAPDU} as incoming APDU.
 
 \begin{lstlisting}[caption=Pseudo code for interpreting policy APDU with java smart card., label=lst:apduPolicy,escapechar=å]
-public class cardApplication extends Applet implements ExtendedLength{
+public class cardApplication extends Applet implements å\allowbreak åExtendedLength{
     ...
 
     //Policies

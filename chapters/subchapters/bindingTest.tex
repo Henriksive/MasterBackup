@@ -106,10 +106,10 @@ At first we suspected that the packet was too big or some mismatch in the parame
     \item No error codes - Hard crash.
 \end{itemize}
 
-After searching the Internet for others with the same problem it became apparent that others have had troubles with signing. Some report that the running time of their smart cards increase drastically when using to 2048-bit keys \cite{signingtrouble2}. %TODO
+After searching the Internet for others with the same problem it became apparent that others have had troubles with signing. Some report that the running time of their smart cards increase drastically when using to 2048-bit keys \cite{signingtrouble2}. We are not able to find any official sources on these issues, but there seems to be an underlying problem or bug in JavaCard.
 
 \begin{lstlisting}[caption=Java Card failed signing., label=lst:signing2048, escapechar=!]
-public class cardApplication extends Applet implements ExtendedLength{
+public class cardApplication extends Applet implements !\allowbreak!ExtendedLength{
 
     private RSAPublicKey k;
     private Signature sig;
