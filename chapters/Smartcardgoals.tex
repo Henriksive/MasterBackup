@@ -16,11 +16,11 @@ The design goals for the framework are:
 
 \begin{itemize}
     \item Easy to use.
-    \item Require little to no understanding of Java Card or smart cards.
+    \item Require little to no understanding of Java Card and smart cards.
     \item Extendable.
 \end{itemize}
 
-Even though most users of our framework will have a basic understanding of smart cards we believe that abstracting some central concepts will make the framework easier to use. One of the concepts we make abstract is APDU. As a user/developer of the framework you can choose not to work with APDUs and use pre-created methods.
+Even though most users of our framework will have a basic understanding of smart cards we believe that abstracting some central concepts will make the framework easier to use. One of the concepts we abstract is APDU. As a user/developer of the framework you can choose not to work with APDUs and use pre-implemented methods.
 
 As we cannot possibly predict all types of uses for the framework we will also include a method for sending custom commands to the smart cards. This ensures that developers don't feel limited in how they can use the framework as well as catering to advanced users. More on the implemented methods in section \ref{sec:androidApp}.
 
@@ -28,7 +28,7 @@ As we cannot possibly predict all types of uses for the framework we will also i
 The first part of the framework is the application on the smart card. This part of the framework will perform the tasks that we can place on the smart card.
 
 \subsection{Java Card version}
-The cards we have supports java card 2.2.2 and this is the version we will target. A natural question is ``Why don't we target java card 3 and above?''. Smart cards used for banking or handling other highly confidential data needs to be evaluated under the Common Criteria \cite[Ch.~26.3.2]{securityEngineering} standards. Potentionally we may handle confidential data and as a result we want smart cards with a Evaluation Assurance Level (EAL) 4 or above. Achieving EAL4 or above is an expensive and long process and the relatively few products have this certification. The micro SD card we have access to are certified with EAL5, but only supports Java Card 2.2.2. \cite{gemaltoidgo8030}.
+The cards we have supports Java Card 2.2.2 and this is the version we will target. A natural question is ``Why don't we target Java Card 3 and above?''. Smart cards used for banking or handling other highly confidential data needs to be evaluated under the Common Criteria \cite[Ch.~26.3.2]{securityEngineering} standards. Potentially an application may handle confidential data and as a result we want smart cards with a Evaluation Assurance Level (EAL) 4 or above. Achieving EAL4 or above is an expensive and long process and relatively few products have this certification. The micro SD card we have access to are certified with EAL5, but only supports Java Card 2.2.2. \cite{gemaltoidgo8030}.
 
 %TODO EAL list
 \begin{table}[h!]
@@ -54,7 +54,7 @@ The cards we have supports java card 2.2.2 and this is the version we will targe
 
 Table \ref{tbl:EAL} shows the difference between EAL levels. Comparing the EAL levels is a rather hard task (other than looking at their name and what they test) as there is no guarantee that what has been tested corresponds to the real world \cite[Ch.~26.3.3]{securityEngineering}.
 
-When we decided on Java Card 2.2.2. we had to consider if we wanted a newer Java Card version with more functionality or if we wanted to comply with government directives (EAL requirement). The obvious choice was the latter.
+When we decided on Java Card 2.2.2. we had to consider if we wanted a newer Java Card version with more functionality or if we wanted to comply with government directives (EAL requirements). The obvious choice was the latter.
 
 \subsection{Development environment}
 In order to develop applications for the smart cards we will be using Eclipse 3.2 with java development kit version 1.6.45. In order to develop smart card applications more easily we will use the Eclipse-JCDE plugin \cite{eclipseJCDE} which provides a virtual runtime environment along with build tools. Even though Eclipse 3.2 is severely outdated it provides the tools necessary to do the job.
@@ -74,10 +74,10 @@ We will be using GlobalPlatformPro (GP) \cite{globalplatform} to deploy and mana
 \begin{itemize}
     \item Delete the smart card application along with the stored data.
     \item Delete the smart card package.
-    \item Install the new smart card.
+    \item Install the new smart card application.
 \end{itemize}
 
-To do this we will utilize a simple batch script which consisting of three lines of code (listing \ref{lst:batchInstall}). To gain access to the cards we need to provide a key set by the manufacturer. This requirement is added as an added security measure to verify that developers are supposed to have write access to the smart cards. Lastly we supply the AID we wish to use for our application. It is important to note that the AID must be unique and the installation will not succeed if the AID is in use.
+To do this we will utilize a simple batch script which consisting of three lines of code (listing \ref{lst:batchInstall}). To gain access to the cards we need to provide a key, set by the manufacturer. This requirement is an additional security measure to verify that developers are supposed to have write access to the smart cards. Lastly we supply the AID we wish to use for our application. It is important to note that the AID must be unique and the installation will not succeed if the AID is in use.
 
 \begin{lstlisting}[language=batch,caption=Install and deploy script for GlobalPlatformPro., label=lst:batchInstall,escapechar=!]
     gp.exe -visa2 -key !\%!KEY!\%! -delete !\%!AID!\%!
@@ -95,17 +95,17 @@ To test the smart card application that is deployed on the physical cards (witho
     \includegraphics[width=0.95\textwidth]{images/pyapdutool.png}
 \end{figure}
 
-PyApduTool does not support extended APDU and this limits us to a high degree when testing our smart card application. Testing through PyApduTool does not test mobile device behavior such as out of memory, too much traffic or NFC limitations. After the initial basic testing PyApduTool became obsolete and we had to test via an Android application.
+PyApduTool does not support extended APDU and this limits us to a high degree when testing our smart card application. Testing through PyApduTool does not test mobile device behavior such as: out of memory, too much traffic or NFC limitations. After the initial basic testing PyApduTool became obsolete and we had to test via an Android application.
 
 
 \section{Android application}
 The second part of the framework is an Android library. The library will serve as an intermediate between the Android application and the smart card application.
 
 \subsection{IDE}
-Android Studio \cite{androidIDE} is the official IDE for Android application development. Android Studio is based on IntelliJ IDEA \cite{intelliJIDEA} and provides many automated tools for building, deploying and publishing Android applications. Android studio comes built in with Android Debug Bridge (ADB) which is an interface for communicating with virtual Android instances or physical Android devices. ADB gives developers the ability to log output from applications as well as monitor memory, GPU and CPU usage of the mobile device.
+Android Studio \cite{androidIDE} is the official IDE for Android application development. Android Studio is based on IntelliJ IDEA \cite{intelliJIDEA} and provides many automated tools for building, deploying and publishing Android applications. Android Studio ships with Android Debug Bridge (ADB). ADB is an interface for communicating with virtual Android instances or physical Android devices. ADB gives developers the ability to log output from applications as well as monitor memory, GPU and CPU usage of the mobile device.
 
 \subsection{Testing environment}
-To test the application we will be using the built in ADB in Android studio as well as doing empirical tests on the Android device. Figure \ref{fig:ADBMemory} and \ref{fig:ADBCPU} shows runtime examples of the Android device. These monitor tools gives us a clear indication if we are doing an operation the Android device can't handle or if we are trying to perform operations that are too resource intensive.
+To test the application we will be using the built in ADB in Android studio as well as doing empirical tests on the Android device. Figure \ref{fig:ADBMemory} and \ref{fig:ADBCPU} shows runtime examples of the Android device. These monitor tools gives us a clear indication if we are doing an operation the Android device cannot handle or if we are trying to perform operations that are too resource intensive.
 
 \begin{figure}[h!]
   \caption{Android Debug Bridge memory monitor connected to a running Android device.}

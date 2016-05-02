@@ -18,7 +18,11 @@
 
 \usepackage{epstopdf}
 
-\usepackage[none]{hyphenat} %Choose one
+%\usepackage[none]{hyphenat} %Choose one
+
+\hyphenpenalty=4000
+\exhyphenpenalty=4000
+
 %\tolerance=1
 %\emergencystretch=\maxdimen
 %\hyphenpenalty=10000
@@ -121,6 +125,12 @@
 
 \newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
 
+\newenvironment{acknowledgments}
+  {\renewcommand{\abstractname}{Acknowledgments}% Abstract > Acknowledgements
+   \begin{abstract}}
+  {\end{abstract}
+   \clearpage}
+
 \newcommand*{\thead}[1]{\multicolumn{1}{| c |}{\bfseries #1}}
 
 \addbibresource{references/references.bib}
@@ -139,9 +149,9 @@
 
       \line(1,0){350}
       \\[1cm]
+      \textsc{\huge \textbf{Using Smart Cards to Mitigate Security Threats on Mobile Devices}\\[0.6cm]}
 
-      \textsc{\huge \textbf{Handling Sensitive Data on Mobile Devices Using Smart Cards to Mitigate Security Threats}}
-      \\[0.6cm]
+
       \line(1,0){350}
     \end{center}
     \begin{center}
@@ -164,6 +174,8 @@
 
   \end{titlepage}
 \input{chapters/Abstract.tex}
+\input{chapters/Acknowledgement.tex}
+
 
 \pagenumbering{Roman}
 

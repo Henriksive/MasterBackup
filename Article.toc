@@ -56,7 +56,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.4.4}Authentication Challenges}{14}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.5}Insecure Applications}{14}
+\contentsline {subsection}{\numberline {2.4.5}Insecure Applications}{15}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Smart card objective}{16}
 \defcounter {refsection}{0}\relax 
@@ -124,7 +124,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.2.1}Problem statement}{35}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.2}Goal}{35}
+\contentsline {subsection}{\numberline {4.2.2}Goal}{36}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.2.3}Key concepts}{36}
 \defcounter {refsection}{0}\relax 
@@ -274,6 +274,6 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {A}Java Card Code}{81}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {B}Android Library}{91}
+\contentsline {chapter}{\numberline {B}Android Library}{93}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {C}Diagrams}{96}
+\contentsline {chapter}{\numberline {C}Diagrams}{99}
