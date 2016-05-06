@@ -71,10 +71,9 @@ When incorporating the features of a smart card with a mobile device it would be
 \subsection{Other smart card programming languages}
 There exists several other languages for smart card programming. The two most notable are Java Card (section \ref{sec:javacard}) and MULTOS \cite{multos}. The latter uses the programming language C as the language for writing applications.
 
-\section{Mobile operating system}
-Mobile operating system refers to the operating system running on a mobile device (smartphones, GPS devices, tablets, etc.). In this thesis we will focus mainly on smartphones and tablets since their capabilities are within our scope and the fact that they often share the same operating system.
+\section{Android operating system}
+Mobile operating system refers to the operating system running on a mobile device (smartphones, GPS devices, tablets, etc.). In this thesis we will focus mainly on smartphones and tablets since their capabilities are within our scope and the fact that they often share the same operating system. For practical reasons and because of time constraints we have restricted us to one mobile operating system.
 
-\subsection{Android}
 Android is an open source licensed mobile operating system and is based on one of the LTS (long-term support) branches of the Linux kernel. Google Inc. \cite{google} is the current developer of the mobile operating system and their primary focus has been smartphones and tablets. In later years Google has put resources into incorporating Android with TVs, wrist watches and cars. In 2015 Q2 82,8 \% of smartphones worldwide was shipped with a version of the Android mobile operating system \cite{androidMarketShare}.
 
 The Android mobile operating system supports applications that are written in Java, GO and C/C++. The applications run in their own sandbox with their own allocated memory space, but applications can also access shared resources given permission to do so by the user.
@@ -113,8 +112,8 @@ Stream ciphering is fast and relatively simplistic to implement. This along with
 Block cipher is a more complex and requires more overhead. First of data must be divided into equal size blocks. The blocks cannot be too small as then they are prone to dictionary attacks and not too big as it will make the encryption/decryption process too resource intensive. In block cipher the block size must be fixed through the encryption process. This will often result in redundant data. For example, 200-bit plaintext with a 64-bit block size will result in three blocks of 64-bit and a fourth block with only 8 bit of ``real'' data and 56 bit of redundant bits. Since block ciphering uses the previous block to cipher the current block it is possible to detect tampering and faults, but this also results that data may be lost if a block becomes corrupt.
 
 
-\section{Mobile Threats}
-Mobile threats and attack vectors are numerous and before looking into how smart cards can help mitigate an alleviate threats we will need to identify and characterize them.
+\section{Mobile technology vulnerabilities}
+Mobile technology vulnerabilities and attack vectors are numerous and before looking into how smart cards can help mitigate an alleviate threats we will need to identify and characterize them.
 \subsection{Infected Device}
 The most obvious threat to mobile devices is when the mobile device itself is infected with virus or malware. The type of virus or malware can vary, some are harmless and serve more as an annoyance or trying to trick the user into visiting bogus websites, but some are more malicious and will access private files and information. From a security stand-point it is a disaster if a virus or malware is able to read and modify data which is otherwise confidential.
 

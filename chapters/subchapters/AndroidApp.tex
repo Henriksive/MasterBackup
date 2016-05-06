@@ -96,7 +96,7 @@ The methods available are:
 
 The methods and their functionality should be self-explanatory except for the binding process. The binding process is designed in three steps. First step is to ask the smart card if it requires a PIN-code and how many attempts are left. Second step requires a PIN-code and if this is correct the smart card application will move on to step three. The last step is sending the public key of the mobile device and getting the verification package from section \ref{sec:proposedSolution}. More discussion on this matter in section \ref{sec:bindingcardandphone}.
 
-Listing \ref{lst:NFCSigning} shows how an activity can use the \texttt{CommunicationController} to sign a simple message. The \texttt{signData(...)} method takes 3 parameters: CommunicationType, AID and the hex message to be signed. In the method \texttt{nfcCallback(...)} the developer are free to do whatever they want. Typically it is a good idea to check what the completeionStatus string is before trying to fetch the response data. Refer appendix \ref{app:b} for all method signatures.
+Listing \ref{lst:NFCSigning} shows how an activity can use the \texttt{CommunicationController} to sign a simple message. The \texttt{signData(...)} method takes 3 parameters: CommunicationType, AID and the hex message to be signed. In the method \texttt{nfcCallback(...)} the developer are free to do whatever they want. Typically it is a good idea to check what the completeionStatus string is before trying to fetch the response data. Read appendix \ref{app:b} for all method signatures.
 
 \begin{lstlisting}[caption=Java code example showing how to send sign a message using a NFC smart card., label=lst:NFCSigning,escapechar=å]
 
@@ -135,10 +135,10 @@ public class SigningActivity extends AppCompatActivity
 Figure \ref{fig:classdiagram_simple} provides a simplified and technical overview of how the Android side of the library is built up. This diagram also shows which parameters are required for the methods available in \texttt{CommunicationController}. The complete class diagram for the Android library can be found in Appendix \ref{app:c}, figure \ref{fig:classdiagram_extended}.
 
 \begin{figure}[h!]
-  \caption{Simplefied class diagram for Android Library.}
+  \caption{Simplified class diagram for Android Library.}
   \label{fig:classdiagram_simple}
   \centering
-    \includegraphics[width=0.95\textwidth]{images/Class_Diagram.png}
+    \includegraphics[width=1.25\textwidth, angle =90]{images/Class_Diagram.png}
 \end{figure}
 The package diagram, figure \ref{fig:package}, shows how  the packages in the library are structured.
 

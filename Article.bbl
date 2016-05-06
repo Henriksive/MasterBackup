@@ -95,17 +95,6 @@
   \field{year}{2013}
 \endentry
 
-\entry{tlsOWASP}{online}{}
-  \field{sortinit}{B}
-  \field{note}{Last visited: 03.02.2016}
-  \field{title}{Benefits of TLS, OWASP}
-  \verb{url}
-  \verb https://www.owasp.org/index.php/Transport_Layer_Protection_Cheat_Sheet#
-  \verb Benefits
-  \endverb
-  \field{year}{2016}
-\endentry
-
 \entry{cryptoMath}{book}{}
   \name{author}{1}{}{%
     {{}%
@@ -134,6 +123,36 @@
   \verb PIN.html
   \endverb
   \field{year}{2005}
+\endentry
+
+\entry{KeyStorage}{online}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Cooijmans}{C.}%
+     {Tim}{T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ruiter}{R.}%
+     {Joeri}{J.}%
+     {de}{d.}%
+     {}{}}%
+    {{}%
+     {Poll}{P.}%
+     {Erik}{E.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{CTRJdPE1}
+  \strng{fullhash}{CTRJdPE1}
+  \field{sortinit}{C}
+  \field{note}{Last visited: 26.04.2016}
+  \field{title}{Analysis of Secure Key Storage Solutions on Android}
+  \verb{url}
+  \verb https://www.cs.ru.nl/E.Poll/papers/AndroidSecureStorage.pdf
+  \endverb
+  \field{type}{White paper}
+  \field{year}{2014}
 \endentry
 
 \entry{eclipseJCDE}{online}{}
@@ -174,6 +193,30 @@
   \verb https://github.com/martinpaljak/GlobalPlatformPro
   \endverb
   \field{year}{2008}
+\endentry
+
+\entry{msExchangeCookBook}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Horenbeeck}{H.}%
+     {Michael~Van}{M.~V.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Tender}{T.}%
+     {Peter~De}{P.~D.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Packt Publishing}%
+  }
+  \strng{namehash}{HMVTPD1}
+  \strng{fullhash}{HMVTPD1}
+  \field{sortinit}{H}
+  \field{isbn}{978-1-78217-062-4}
+  \field{title}{Microsoft Exchange 2013 Cookbook}
+  \field{year}{2013}
 \endentry
 
 \entry{gemaltoidgo8030}{online}{}
@@ -298,10 +341,29 @@
   \field{year}{2015}
 \endentry
 
+\entry{TLS101}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Oppliger}{O.}%
+     {Rolf}{R.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Artech House}%
+  }
+  \strng{namehash}{OR1}
+  \strng{fullhash}{OR1}
+  \field{sortinit}{O}
+  \field{isbn}{1-59693-447-6}
+  \field{title}{SSL and TLS : Theory and Practice}
+  \field{year}{2009}
+\endentry
+
 \entry{sunMicroSystems}{online}{}
   \field{sortinit}{O}
   \field{note}{Last visited: 05.03.2016}
-  \field{title}{Orgacle and Sun Microsystems}
+  \field{title}{Oracle and Sun Microsystems}
   \verb{url}
   \verb https://www.oracle.com/sun/index.html?PHPSESSID=8fd76773d26875481e097a4
   \verb a27c7a6a1
@@ -420,16 +482,6 @@
   \field{year}{2014}
 \endentry
 
-\entry{knownplaintextattack}{online}{}
-  \field{sortinit}{T}
-  \field{note}{Last visited: 24.02.2016}
-  \field{title}{Tech-FAQ, Known Plaintext Attack}
-  \verb{url}
-  \verb http://www.tech-faq.com/known-plaintext-attack.html
-  \endverb
-  \field{year}{2015}
-\endentry
-
 \entry{drown}{online}{}
   \field{sortinit}{T}
   \field{note}{Last visited: 22.04.2016}
@@ -449,26 +501,6 @@
   \verb enge-faq.htm#WhatIs
   \endverb
   \field{year}{Unknown}
-\endentry
-
-\entry{KeyStorage}{online}{}
-  \name{author}{1}{}{%
-    {{}%
-     {Tim~Cooijmans}{T.~C.}%
-     {Erik~Poll}{E.~P.}%
-     {}{}%
-     {Joeri de~Ruiter}{J.~d.~R.}}%
-  }
-  \strng{namehash}{TCJdREP1}
-  \strng{fullhash}{TCJdREP1}
-  \field{sortinit}{T}
-  \field{note}{Last visited: 26.04.2016}
-  \field{title}{Analysis of Secure Key Storage Solutions on Android}
-  \verb{url}
-  \verb https://www.cs.ru.nl/E.Poll/papers/AndroidSecureStorage.pdf
-  \endverb
-  \field{type}{White paper}
-  \field{year}{2014}
 \endentry
 
 \entry{rfc793}{online}{}

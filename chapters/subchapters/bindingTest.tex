@@ -10,7 +10,7 @@ In section \ref{sec:bindingcardandphone} we describe and motivate a solution whe
 \end{itemize}
 
 \subsection{Implementation}
-In light of the parts of the binding process we want to test the outline of the implementation will be:
+In light of the parts of the binding process we want to test the outline of the implementation are:
 
 \begin{enumerate}
     \item Mobile devices asks smart card if its authenticated with PIN.
@@ -33,7 +33,7 @@ To manage PIN verification and management we will use \texttt{OwnerPIN} class fr
 
 All public keys are represented as byte arrays when they are transmitted between the mobile device and the smart card. The format for the byte array is \textbar{}ModulusLength\textbar{}Modulus\textbar{}ExponentLength\textbar{}Exponent\textbar{} to allow for extension of key length and dynamic importing. After the APDU is received the public key is stored in a \texttt{RSAPublicKey} object for storage.
 
-When we construct the verification package on the smart card we have to convert the public key of the smart card over to the same format as the mobile device's public key. After we have transformed all relevant keys (see figure \ref{fig:h0}) to byte arrays we can finally put them together, sign the package and encrypt it with the public key of the server.
+When we construct the verification package on the smart card we have to convert the all keys on the smart card over to the same format as the mobile device's public key. After we have transformed all relevant keys (see figure \ref{fig:h0}) to byte arrays we can finally put them together, sign the package and encrypt it with the public key of the server.
 
 \subsection{Tests and results}
 \paragraph{Configuration 1}\mbox{}\\
@@ -41,7 +41,7 @@ This configuration uses 512-bit keys as the public key between the mobile device
 \begin{itemize}
     \item NFC card
     \item 512-bit mobile device public key
-    \item 512-bit smart card public key
+    \item 512-bit smart card RSA key pair
     \item 2048-bit server public key
     \item 128-bit AES key
 \end{itemize}
@@ -51,7 +51,7 @@ This configuration uses 2048-bit keys as the public key between the mobile devic
 \begin{itemize}
     \item NFC card
     \item 2048-bit mobile device public key
-    \item 2048-bit smart card public key
+    \item 2048-bit smart card RSA key pair
     \item 2048-bit server public key
     \item 128-bit AES key
 \end{itemize}

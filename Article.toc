@@ -36,9 +36,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.4}Other smart card programming languages}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Mobile operating system}{9}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.1}Android}{9}
+\contentsline {section}{\numberline {2.2}Android operating system}{9}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.3}Cryptography}{10}
 \defcounter {refsection}{0}\relax 
@@ -46,7 +44,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3.2}Symmetric-key cryptography}{11}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}Mobile Threats}{13}
+\contentsline {section}{\numberline {2.4}Mobile technology vulnerabilities}{13}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.4.1}Infected Device}{13}
 \defcounter {refsection}{0}\relax 
@@ -56,9 +54,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.4.4}Authentication Challenges}{14}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.5}Insecure Applications}{15}
+\contentsline {subsection}{\numberline {2.4.5}Insecure Applications}{14}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Smart card objective}{16}
+\contentsline {chapter}{\numberline {3}Smart card framework - Goals and Environment}{16}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.1}Design goals}{16}
 \defcounter {refsection}{0}\relax 
@@ -156,9 +154,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{Challenge transaction}{44}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Policy format}{46}
+\contentsline {paragraph}{Policy format}{45}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.6}Solution evaluation}{49}
+\contentsline {subsection}{\numberline {4.3.6}Solution evaluation}{48}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.3.7}Potential attack vectors}{49}
 \defcounter {refsection}{0}\relax 
@@ -192,7 +190,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{Pre-implemented methods}{55}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Test Cases}{60}
+\contentsline {chapter}{\numberline {6}Testing}{60}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {6.1}Setup}{60}
 \defcounter {refsection}{0}\relax 
@@ -266,14 +264,14 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {paragraph}{Deploying smart card applications}{75}
 \defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Literature}{76}
+\defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {7.3}Future work}{76}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{References}{76}
+\contentsline {chapter}{References}{77}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Appendices}{80}
+\contentsline {chapter}{\numberline {A}Java Card Code}{82}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Java Card Code}{81}
+\contentsline {chapter}{\numberline {B}Android Library}{94}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {B}Android Library}{93}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {C}Diagrams}{99}
+\contentsline {chapter}{\numberline {C}Diagrams}{100}

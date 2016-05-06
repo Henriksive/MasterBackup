@@ -1,7 +1,7 @@
 % !TEX root = ../../Article.tex
 \section{Data Transfer Speed}
 \subsection{Description and Motivation}
-Transfer speed is a very vital for part of the smart card interaction. If the smart card application or the transportation layer are incapable of handling large amounts of the data we will need to take that into account when examining the usability of smart cards. In order to test and eliminate as many variables as possible the smart card is programmed to receive data, copy the incoming data to the buffer and send the exact same data in return. Figure \ref{fig:nfcDataflowTest} describes this process using an NFC card as a platform for the Java Card Applet.
+Transfer speed is a very vital for part of the smart card interaction. If the smart card application or the transportation layer is incapable of handling large amounts of the data we will need to take that into account when examining the usability of smart cards. In order to test and eliminate as many variables as possible the smart card is programmed to receive data, copy the incoming data to the buffer and send the exact same data in return. Figure \ref{fig:nfcDataflowTest} describes this process using an NFC card as a platform for the Java Card Applet.
 
 \begin{figure}[h!]
   \caption{Data flow of data transfer speed test for NFC.}
@@ -22,7 +22,7 @@ Transfer speed is a very vital for part of the smart card interaction. If the sm
 
 \newpage
 \subsection{Conclusion}
-From table \ref{tbl:nfcspeed} and figure \ref{fig:nfcgraph} we can learn that we are able to optimize the data transfer and processing speed between the Android application and the NFC card. It is also clear that when we are transmitting low amounts of data there are virtually no difference between the configurations; T1, T2 and T3. The differences are more prominent when the data amounts increase. Even though we achieved an improvement of approximately 60 \% from T1 to T3 when sending 1 MB of data, the process is still time consuming.
+From table \ref{tbl:nfcspeed} and figure \ref{fig:nfcgraph} we can learn that we are able to optimize the data transfer and processing speed between the Android application and the NFC card. It is also clear that when we are transmitting low amounts of data there is virtually no difference between the configurations; T1, T2 and T3. The differences are more prominent when the data amounts increase. Even though we achieved an improvement of approximately 60 \% from T1 to T3 when sending 1 MB of data, the process is still time consuming.
 
 If we compare the test results for T2 configuration on the NFC card and micro SD card we can clearly see an improvement on the micro SD card. The micro SD card had a ~60 \%  better running time over the NFC card when sending 1 MB of data. Although we were not able to test configuration T3 on the micro SD card, results point in the direction of micro SD cards having better performance than NFC cards. We are not able to confirm this and thus cannot be treated as a fact.
 

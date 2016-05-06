@@ -1,5 +1,5 @@
 % !TEX root = ../Article.tex
-\chapter{Smart card objective}
+\chapter{Smart card framework - Goals and Environment}
 As mentioned in section \ref{sec:goals} we want to create a framework for easy communication between a mobile device and a smart card. We want to achieve this not only for testing, but to be able to hand over a ready to use framework for any parties interested so that further development and testing may continue. In this chapter we will discuss the basis for the framework and the environment we will use for creating it.
 
 The framework should lay the very foundation needed for using the mobile device and smart card in a secure fashion. The basic things we want to cover are:
@@ -16,7 +16,7 @@ The design goals for the framework are:
 
 \begin{itemize}
     \item Easy to use.
-    \item Require little to no understanding of Java Card and smart cards.
+    \item Little to no understanding of Java Card and smart cards required.
     \item Extendable.
 \end{itemize}
 
@@ -28,7 +28,7 @@ As we cannot possibly predict all types of uses for the framework we will also i
 The first part of the framework is the application on the smart card. This part of the framework will perform the tasks that we can place on the smart card.
 
 \subsection{Java Card version}
-The cards we have supports Java Card 2.2.2 and this is the version we will target. A natural question is ``Why don't we target Java Card 3 and above?''. Smart cards used for banking or handling other highly confidential data needs to be evaluated under the Common Criteria \cite[Ch.~26.3.2]{securityEngineering} standards. Potentially an application may handle confidential data and as a result we want smart cards with a Evaluation Assurance Level (EAL) 4 or above. Achieving EAL4 or above is an expensive and long process and relatively few products have this certification. The micro SD card we have access to are certified with EAL5, but only supports Java Card 2.2.2. \cite{gemaltoidgo8030}.
+The cards we have support Java Card 2.2.2 and this is the version we will target. A natural question is ``Why don't we target Java Card 3 and above?''. Smart cards used for banking or handling other highly confidential data needs to be evaluated under the Common Criteria \cite[Ch.~26.3.2]{securityEngineering} standards. Potentially an application may handle confidential data and as a result we want smart cards with a Evaluation Assurance Level (EAL) 4 or above. Achieving EAL4 or above is an expensive and long process and relatively few products have this certification. The micro SD card we have access to are certified with EAL5, but only supports Java Card 2.2.2. \cite{gemaltoidgo8030}.
 
 %TODO EAL list
 \begin{table}[h!]
@@ -57,7 +57,7 @@ Table \ref{tbl:EAL} shows the difference between EAL levels. Comparing the EAL l
 When we decided on Java Card 2.2.2. we had to consider if we wanted a newer Java Card version with more functionality or if we wanted to comply with government directives (EAL requirements). The obvious choice was the latter.
 
 \subsection{Development environment}
-In order to develop applications for the smart cards we will be using Eclipse 3.2 with java development kit version 1.6.45. In order to develop smart card applications more easily we will use the Eclipse-JCDE plugin \cite{eclipseJCDE} which provides a virtual runtime environment along with build tools. Even though Eclipse 3.2 is severely outdated it provides the tools necessary to do the job.
+In order to develop applications for the smart cards we will be using Eclipse 3.2 with Java development kit version 1.6.45. In order to develop smart card applications more easily we will use the Eclipse-JCDE plugin \cite{eclipseJCDE} which provides a virtual runtime environment along with build tools. Even though Eclipse 3.2 is severely outdated it provides the tools necessary to do the job.
 
 \begin{figure}[h!]
   \caption{Screenshot of Eclipse showing Java Card tools.}
@@ -86,7 +86,7 @@ To do this we will utilize a simple batch script which consisting of three lines
 \end{lstlisting}
 
 \subsection{Basic testing environment}
-To test the smart card application that is deployed on the physical cards (without going through an Android application) we will be using pyApduTool \cite{pyapdutool}. pyApduTool is a tool for sending APDUs to a smart card through a card reader or memory card reader and lets us observe how the card behave when receiving and transmitting data.
+To test the smart card application that is deployed on the physical cards (without going through an Android application) we will be using PyApduTool \cite{pyapdutool}. pyApduTool is a tool for sending APDUs to a smart card through a card reader or memory card reader and lets us observe how the card behave when receiving and transmitting data.
 
 \begin{figure}[h!]
   \caption{Select APDU sent to smart card via PyApduTool}

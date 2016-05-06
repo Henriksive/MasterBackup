@@ -1,6 +1,6 @@
 % !TEX root = ../Article.tex
 \chapter{Challenges and use cases}
-In this chapter we will examine what challenges there are with regards to mobile devices and smart cards co-operating. The challenges must be viewed from a use case perspective where the benefits does not come from solving the challenges, but rather what we are able to achieve afterwards. For each challenge we will provide problem description, motivation, key concepts, possible solution and describe possible attack vectors.
+In this chapter we will examine what challenges there are with regards to mobile devices and smart cards co-operating. The challenges must be viewed from a use case perspective where the benefits do not come from solving the challenges, but rather what we are able to achieve afterwards. For each challenge we will provide problem description, motivation, key concepts, possible solution and describe possible attack vectors.
 \section{Binding card and phone}
 \label{sec:bindingcardandphone}
 \subsection{Problem Description}
@@ -15,7 +15,7 @@ By binding the smart card and phone together we wish to ensure that a smart card
   \item If the binding is successful we may be able to detect if the mobile device becomes compromised on a later point and react to it (delete keys on card, block communication, etc.).
 \end{itemize}
 
-This will mitigate threats such as:
+This will mitigate vulnerabilities such as:
 \begin{itemize}
   \item Lost or stolen device.
   \item Unsecure communication channels.
@@ -45,7 +45,7 @@ To combat that all information flowing from the smart card has to go through the
 
 The mobile device will also need to authenticate with the authority so that the smart card can trust the mobile device. In this process we will need to make some assumptions. The first problem is that we need to  ensure that the mobile device tries to communicate with the right server (authority). By hardcoding the server URL in the mobile device application and making sure that the user installs the right application on his device we can mitigate this threat. To make sure that the user installs the right application we need a secure distribution platform. By using Google Play as distribution platform, we can minimize the risk that the user will download a rogue application with the same name \cite{googlePlaySecureDist}. To further mitigate the risk of installing the wrong application the user can disable the ability to side-load applications and avoid using a rooted device.
 
-The other attack vector on the mobile device and user is man-in-the-middle attacks. If we assume that the user was able to download the correct application we will need to secure the communication channel. To secure the channel we will need to use TLS \cite{rfc793} which also provides us with protection from replay attacks \cite{tlsOWASP}. The only downside by using TLS in our case is that we will need the server certificate to verify the server. Traditionally we will need to either pre-install certificates on the mobile device (makes ``bring your own device'' more difficult) or register with a certificate authority (depend on third party). In our case the server certificate is already on the smart card and we can install it on the mobile device. An added benefit of this is that if the mobile device is rogue and tries to connect to the wrong server; the data sent to the server will be encrypted by the smart card.
+The other attack vector on the mobile device and user is man-in-the-middle attacks. If we assume that the user was able to download the correct application we will need to secure the communication channel. To secure the channel we will need to use Transport Layer Security (TLS) \cite{rfc793} which also provides us with protection from replay attacks \cite[~Ch. 9.2.2]{TLS101}. The only downside by using TLS in our case is that we will need the server certificate to verify the server. Traditionally we will need to either pre-install certificates on the mobile device (makes ``bring your own device'' more difficult) or register with a certificate authority (depend on third party). In our case the server certificate is already on the smart card and we can install it on the mobile device. An added benefit of this is that if the mobile device is rogue and tries to connect to the wrong server; the data sent to the server will be encrypted by the smart card.
 
 Further we will need the user to authenticate with the authority. We have two options in order to achieve this. First option is that users use a username and password combination directly with the authority, but considering the binding is normally a one time case a more simplified process may be to hand out a one time code along with the smart card. One could also look into distributing one time codes through e-mail or a text message (SMS).
 
@@ -60,7 +60,7 @@ We have described how the parties can authenticate each other, but we will need 
 The authority issues the smart cards and administrates the server. During the setup of the smart card the public key and certificate of the server must be installed on the smart card. The public key of the smart card must also be extracted and stored on the server. This creates a base for all future processes.
 
 \paragraph{Verification package}\mbox{}\\
-A verification package is a package containing all the information a third party server needs to authenticate the smart card and mobile device. First the mobile device public key, the smart card public key and generated AES key is signed by the smart card. Then we encrypt the package with the public key of the third party server. Figure \ref{fig:h0} visualizes this structure.
+A verification package is a package containing all the information a third party server needs to authenticate the smart card and mobile device. First the mobile device public key and the generated AES key is signed by the smart card. Then we encrypt the package with the public key of the third party server. Figure \ref{fig:h0} visualizes this structure.
 
 \newpage
 
@@ -70,6 +70,8 @@ A verification package is a package containing all the information a third party
   \centering
     \includegraphics[width=0.95\textwidth]{images/H0.png}
 \end{figure}
+
+We propose the following protocol for binding mobile devices and smart cards:
 
 \paragraph{Abbreviations}\mbox{}\\
 U - Users smart card \\
@@ -130,21 +132,21 @@ The smart card is a secure environment and should be in charge of generating the
 The verification package is encrypted with the server's public key. The direct result is that even if the package is lost or leaked no third party would be able to read the content. We will use TLS for the connection regardless as it may be necessary to add additional functionality such as username-password login to verify the user. TLS will also serve as a counter to replay-attacks and man-in-the-middle attacks.
 
 \paragraph{The server signs the public key of M.}\mbox{}\\
-The server signs the public key of the mobile device. This is done because of the need to confirm that the verification package was indeed sent to the server. By letting the server sign it we ensure that the public key that is sent back to the smart card is infact the public key that was in the verification package.
+The server signs the public key of the mobile device. This is done because of the need to confirm that the verification package was indeed sent to the server. By letting the server sign it we ensure that the public key that is sent back to the smart card is in fact the public key that was in the verification package.
 
 \paragraph{U verifies that M\textsubscript{pub} was signed by S and if successful U sends U\textsubscript{pub} to M.}\mbox{}\\
-Even though public keys usually are publicly known we choose to keep the public key of the smart card semi-public or on a ``need to know basis''. Using this technique does not inherently make the solution secure, but it does add another hurdle a potential attack will need to overcome. In theory, the more steps an attacker will need to do; the higher the chance for detecting him. By rotating the keys the effectiveness of this measure increases substantially.
+Even though public keys usually are publicly known we choose to keep the public key of the smart card semi-public or on a ``need to know basis''. Using this technique F not inherently make the solution secure, but it does add another hurdle a potential attack will need to overcome. In theory, the more steps an attacker will need to do; the higher the chance for detecting him. By rotating the keys the effectiveness of this measure increases substantially.
 
 
 \subsection{Cryptography evaluation}
 This solution relies heavily on correct use of protocols such as TLS (communication), cryptography such as RSA and AES, and correct key generation.
 
-One of the most common public-key cryptosystems (refer to section \ref{sec:publicKeyCrypto}) are RSA, which is widely used for secure communication. RSA builds on the principle of factorization of the product of two prime numbers, or rather the difficulty of factorize the product. It is not impossible to factorize the product of two prime numbers and there was a challenge by the RSA Laboratories where one could win prizes for factorized RSA-keys \cite{rsaChallenge}, but the most complex RSA that were cracked was 768-bit. Proving that RSA is secure is out of the time scope for this thesis. Other source conclude that with long enough keys and correct protocol implementation, the math behind RSA can be considered secure \cite[~p. 194]{cryptoMath}. Information on the inner workings of RSA can be found in the book ``Understanding Cryptography'' by Christof Paar and Jan Pelzl, chapter 7 ``The RSA Cryptosystem'' \cite{cryptoMath}.
+One of the most common public-key cryptosystems (refer to section \ref{sec:publicKeyCrypto}) is RSA, which is widely used for secure communication. RSA builds on the principle of factorization of the product of two prime numbers, or rather the difficulty of factorize the product. It is not impossible to factorize the product of two prime numbers and there was a challenge by the RSA Laboratories where one could win prizes for factorized RSA-keys \cite{rsaChallenge}, but the most complex RSA that were cracked was 768-bit. Proving that RSA is secure is out of the time scope for this thesis. Other source conclude that with long enough keys and correct protocol implementation, the math behind RSA can be considered secure \cite[~p. 194]{cryptoMath}. Information on the inner workings of RSA can be found in the book ``Understanding Cryptography'' by Christof Paar and Jan Pelzl, chapter 7 ``The RSA Cryptosystem'' \cite{cryptoMath}.
 
 We are not directly utilizing the symmetric-key cryptography system AES, but it is an important aspect of the solution none the less. AES does not rely on number factorization, but rather substitution and permutation using a key. It can be seen as hashing data and being able to reverse the hashing using the same key. There are currently no known analytic attacks against AES which are less complex than brute-force attacks and we can thus conclude that using long keys are to be considered secure \cite[~p. 116-117]{cryptoMath}.
 
-In the solution we mitigate man-in-the-middle attacks using TLS for secure communication. TLS can utilize both RSA and AES and if we use strong keys we deem it secure (assuming TLS 1.2) from a mathematical perspective. If TLS is implemented correctly and does not allow for common attacks (DROWN \cite{drown}, , etc.) it is classified as ``probably secure'' or ``secure until proven otherwise''.
-
+In the solution we mitigate man-in-the-middle attacks using TLS for secure communication. TLS can utilize both RSA and AES and if we use strong keys we deem it secure (assuming TLS 1.2) from a mathematical perspective. If TLS is implemented correctly and does not allow for common attacks (Heartbleed, DROWN \cite{drown}, , etc.) it is classified as ``probably secure'' or ``secure until proven otherwise''.
+%TODO
 
 
 \subsection{Potential attack vectors}
@@ -188,7 +190,7 @@ Our primary goals for mobile device keys are:
 \paragraph{Android Keystore system}\mbox{}\\
 The Android Keystore system is a system that lets users and developers store and access cryptographic keys and certificates on the mobile device. The main goal of the system is to protect the keys against unauthorized use and extraction. This is done by defining which applications that should have access to the keys stored. E.g. application A generates and stores a key and defines that the key is available to application A and B. If application C tries to access the key the Android Keystore system blocks the action.
 
-The applications does not have direct access to the keys. If an application wants to perform a cryptographic operation it feeds the data to the operating system which performs the cryptographic operation. If an application is compromised an attacker gains access to the keys via the application, but the attacker is not able to extract the keys as the keys are never present in the application.
+The applications do not have direct access to the keys. If an application wants to perform a cryptographic operation it feeds the data to the operating system which performs the cryptographic operation. If an application is compromised an attacker gains access to the keys via the application, but the attacker is not able to extract the keys as the keys are never present in the application.
 
 In early iterations the keys were stored in a software-protected file meaning that only the Android Keystore had access to the data. This system had a flaw in which any users or applications with root access could access the Keystore file. The solution to this is using secure hardware such as ``Secure Element'' (more or less a smart card) and ``Trusted Execution Environment (TTE)'' \cite{TEE}. If hardware-backed storage is enabled (as seen in figure \ref{fig:hardwareBacked}), it is not possible to extract keys even if the operating system is compromised.
 
@@ -269,7 +271,7 @@ A security policy defines what measures a system needs to follow in order for th
 \end{itemize}
 
 \subsection{Problem description}
-Enforcing security policies via a mobile device is not a new concept and there exists multiple third party solutions for enforcing them. One example is Microsoft Exchange ActiveSync which enforces policies such as minimum password length, disable camera and application blocking \cite{exchangePolicies}. ActiveSync utilizes the fact that a user must connect through Microsoft Exchange Server in order to access company resources and verifies if the mobile device has enforced the policies through the established connection \cite{exchangePoliciesTech}.
+Enforcing security policies via a mobile device is not a new concept and there exists multiple third party solutions for enforcing them. One example is Microsoft Exchange ActiveSync which enforces policies such as minimum password length, disable camera and application blocking \cite{exchangePolicies, msExchangeCookBook}. ActiveSync utilizes the fact that a user must connect through Microsoft Exchange Server in order to access company resources and verifies if the mobile device has enforced the policies through the established connection \cite{exchangePoliciesTech}.
 
 The problem in these types of solutions lies in the fact that you cannot trust the mobile device to actually enforce the policies. How does the server know if the mobile device is telling the truth about policy enforcement? What if the mobile device says it requires the user to enter a password, but does not do it?
 
@@ -296,16 +298,7 @@ The limiting factor to a solution like this is that the trusted party might not 
 \paragraph{Relevant policies for a smart card}\mbox{}\\
 The smart card is limited in what kind of policies it is able to enforce. It cannot enforce policies regarding forcing the mobile device into doing things only the mobile device controls. The smart card can provide vital data needed for performing an action, but it is up to the mobile device to actually perform the action. This effectively rules out policies such as, ``The mobile device must encrypt all files stored locally.'', since we can only provide the keys to do so, but the mobile device has to perform the action. We have to assume that the mobile device, more specifically the running application, wants to perform the action.
 
-The core abilities of a smart card are:
-\begin{itemize}
-    \item Generate keys.
-    \item Store keys.
-    \item Sign data.
-    \item Encrypt \& decrypt small amounts of data.
-    \item Store and handle variables.
-\end{itemize}
-
-We can make the application rely on the keys generated and stored in the smart card and as a result we have full control over the keys. The smart card can as a result enforce policies such as key rotation, key size and key availability (unlock key with PIN).
+The core abilities of a smart card are: generate keys, store keys, encrypt and decrypt small amounts of data, sign data and store variables. We can make the application rely on the keys generated and stored in the smart card and as a result we have full control over the keys. The smart card can as a result enforce policies such as key rotation, key size and key availability (unlock key with PIN).
 
 \paragraph{Installing policies}\mbox{}\\
 One disadvantage of using smart cards is that once an applet has been installed it is a static application. It is not possible to add new code to a running applet. What we can do is to program all policies we may wish to utilize and disable them. With this technique we can dynamically turn on and off policies, given that we are able to communicate with the card. The first premise is to install all possible security policies we may need on the smart card before shipping the smart card to the user.
@@ -402,7 +395,7 @@ The individual policies data structure needs to be carefully crafted and special
 
 When designing the smart card code for interpreting the policy APDU we need a registry of some sort for keeping track of how much of the payload each policy uses. Listing \ref{lst:apduPolicy} uses figure \ref{fig:policyAPDU} as incoming APDU.
 
-\begin{lstlisting}[caption=Pseudo code for interpreting policy APDU with java smart card., label=lst:apduPolicy,escapechar=å]
+\begin{lstlisting}[caption=Pseudo code for interpreting policy APDU with Java Card., label=lst:apduPolicy,escapechar=å]
 public class cardApplication extends Applet implements å\allowbreak åExtendedLength{
     ...
 
@@ -460,7 +453,7 @@ Section \ref{sec:policySolution} described how a smart card can enforce policies
 
 \subsection{Potential attack vectors}
 \paragraph{Known-plaintext attack}\mbox{}\\
-The challenge we use is simply two parties creating the same ciphertext from a hash and then comparing them. We then use digital signing to ensure that the challenge-response cannot be intercepted and spoofed. Since we do not encrypt the challenge-response in any way we have to vary of ``known-plaintext attacks'' \cite{knownplaintextattack}. To protect against this type of attack the smart card and server must use keys that are long and algorithms that cannot be brute-forced. The final solution should use at least 256-bit long AES keys and as an added measure rotate keys.
+The challenge we use is simply two parties creating the same ciphertext from a hash and then comparing them. We then use digital signing to ensure that the challenge-response cannot be intercepted and spoofed. Since we do not encrypt the challenge-response in any way we have to vary of ``known-plaintext attacks'' \cite[~Ch. 2.3.2]{cryptoMath}. To protect against this type of attack the smart card and server must use keys that are long and algorithms that cannot be brute-forced. The final solution should use at least 256-bit long AES keys and as an added measure rotate keys.
 
 
 

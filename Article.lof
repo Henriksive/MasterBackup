@@ -36,7 +36,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Screenshot of Android settings showing hardware-backed storage ``enabled''.\relax }}{37}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Smart card policy challenge.\relax }}{44}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Smart card policy challenge.\relax }}{43}
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Smart card policy challenge response.\relax }}{44}
 \defcounter {refsection}{0}\relax 
@@ -48,7 +48,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Abstraction layer between Android activities and smart cards.\relax }}{56}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Simplefied class diagram for Android Library.\relax }}{58}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Simplified class diagram for Android Library.\relax }}{58}
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Library package diagram.\relax }}{59}
 \defcounter {refsection}{0}\relax 
@@ -68,4 +68,4 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {C.1}{\ignorespaces Class diagram for Android Library.\relax }}{99}
+\contentsline {figure}{\numberline {C.1}{\ignorespaces Class diagram for Android Library.\relax }}{100}
