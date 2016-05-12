@@ -6,11 +6,11 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {table}{\numberline {2.1}{\ignorespaces Command APDU layout.\relax }}{6}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {2.2}{\ignorespaces Response APDU layout.\relax }}{6}
+\contentsline {table}{\numberline {2.2}{\ignorespaces Response APDU layout.\relax }}{7}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {3.1}{\ignorespaces Evaluation Assurance Level\relax }}{18}
+\contentsline {table}{\numberline {3.1}{\ignorespaces Evaluation Assurance Level\relax }}{20}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
@@ -18,15 +18,17 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {6.1}{\ignorespaces Table of NFC transfer speed test.\relax }}{63}
+\contentsline {table}{\numberline {6.1}{\ignorespaces Table of NFC transfer speed test.\relax }}{67}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {6.2}{\ignorespaces Table of micro SD transfer speed test.\relax }}{64}
+\contentsline {table}{\numberline {6.2}{\ignorespaces Table of micro SD transfer speed test.\relax }}{68}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {6.3}{\ignorespaces Table of AES encryption speed test.\relax }}{66}
+\contentsline {table}{\numberline {6.3}{\ignorespaces Table of AES encryption speed test.\relax }}{70}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {6.4}{\ignorespaces Time required to install the application on the smart card.\relax }}{70}
+\contentsline {table}{\numberline {6.4}{\ignorespaces Time required to install the application on the smart card.\relax }}{74}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {6.5}{\ignorespaces Time required to generate the verification package on the smart card application.\relax }}{70}
+\contentsline {table}{\numberline {6.5}{\ignorespaces Time required to generate the verification package on the smart card application.\relax }}{74}
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 

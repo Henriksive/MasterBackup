@@ -74,6 +74,16 @@
   \field{year}{2015}
 \endentry
 
+\entry{AndroidAPIDistributions}{online}{}
+  \field{sortinit}{A}
+  \field{note}{Last visited: 08.05.2016}
+  \field{title}{Android Platform Versions - developer.android.com}
+  \verb{url}
+  \verb http://developer.android.com/about/dashboards/index.html#Platform
+  \endverb
+  \field{year}{2016}
+\endentry
+
 \entry{androidIDE}{online}{}
   \field{sortinit}{A}
   \field{note}{Last visited: 21.01.2016}
@@ -240,27 +250,6 @@
   \field{year}{2016}
 \endentry
 
-\entry{TEE}{online}{}
-  \name{author}{1}{}{%
-    {{}%
-     {inc.}{i.}%
-     {GlobalPlatform}{G.}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{iG1}
-  \strng{fullhash}{iG1}
-  \field{sortinit}{I}
-  \field{note}{Last visited: 24.04.2016}
-  \field{title}{The Trusted Execution Environment}
-  \verb{url}
-  \verb http://www.globalplatform.org/documents/GlobalPlatform_TEE_White_Paper_
-  \verb Feb2011.pdf
-  \endverb
-  \field{type}{White paper}
-  \field{year}{2011}
-\endentry
-
 \entry{intelliJIDEA}{online}{}
   \field{sortinit}{I}
   \field{note}{Last visited: 21.01.2016}
@@ -381,6 +370,17 @@
   \field{year}{2014}
 \endentry
 
+\entry{OWASPTopTenMobile}{online}{}
+  \field{sortinit}{P}
+  \field{note}{Last visited: 12.05.2016}
+  \field{title}{Projects/OWASP Mobile Security Project - Top Ten Mobile Risks}
+  \verb{url}
+  \verb https://www.owasp.org/index.php/Projects/OWASP_Mobile_Security_Project_
+  \verb -_Top_Ten_Mobile_Risks
+  \endverb
+  \field{year}{2014}
+\endentry
+
 \entry{googlePlaySecureDist}{online}{}
   \field{sortinit}{P}
   \field{note}{Last visited: 08.02.2016}
@@ -399,6 +399,25 @@
   \verb http://javacardos.com/javacardforum/viewtopic.php?t=38
   \endverb
   \field{year}{2015}
+\endentry
+
+\entry{smartcardHandbook}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Rankl}{R.}%
+     {Wolfgang}{W.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Wiley}%
+  }
+  \strng{namehash}{RW1}
+  \strng{fullhash}{RW1}
+  \field{sortinit}{R}
+  \field{isbn}{0-470-74367-0}
+  \field{title}{Smart Card Handbook 4th Edition}
+  \field{year}{2010}
 \endentry
 
 \entry{shaRFC}{online}{}
@@ -511,6 +530,25 @@
   \verb http://tools.ietf.org/html/rfc793
   \endverb
   \field{year}{1981}
+\endentry
+
+\entry{TEE}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Vasudevan}{V.}%
+     {Amit}{A.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{VA1}
+  \strng{fullhash}{VA1}
+  \field{sortinit}{V}
+  \field{isbn}{9781461481898}
+  \field{title}{Trustworthy Execution on Mobile Devices}
+  \field{year}{2013}
 \endentry
 
 \entry{javacardapplet}{online}{}

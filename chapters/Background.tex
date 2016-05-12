@@ -2,12 +2,12 @@
 \chapter{Background}
 In this chapter we will provide background information necessary to understand how smart cards function and can increase security on mobile devices. The topics covered in this section are smart cards, mobile device operating systems, cryptography and threats in context of mobile devices.
 
-\section{Smart Card}
+\section{Smart card}
 \label{sec:smartcard}
 A smart card refers to a credit card sized card with an integrated circuit, usually in the form of a plastic card with an integrated micro processor. In essence a smart card is a miniature computer with limited computing power.
 
 \subsection{Smart card architecture}
-The micro processor is able to perform tasks that involve processing input, give ouput and storing small amounts of data. Smart cards vary in sizes defined by the standards ISO/IEC 7810 \cite{iso7810} and ISO/IEC 7816 \cite{iso7816}. The processing power of smart cards are between 25-32 MHz and sport anywhere from 8Kbit to 128Kbit memory (EEPROM) \cite{cardProcessing}.
+The micro processor is able to perform tasks that involve processing input, give ouput and storing small amounts of data. Smart cards vary in sizes defined by the standards ISO/IEC 7810 \cite{iso7810} and ISO/IEC 7816 \cite{iso7816}. The most common card dimensions are approximately 85x54 mm \cite[~Ch. 3.1]{smartcardHandbook}. The processing power of smart cards are between 25-32 MHz and sport anywhere from 8Kbit to 128Kbit memory (EEPROM) \cite{cardProcessing}.
 
 The micro processor can be powered and communicate in two ways. Contact smart cards have integrated contact pads. When the smart card is inserted into a card reader the contact pads of the card reader provides power to the micro processor via the contact pads of the smart card. The contact pads also functions as a medium for transferring data. Contactless smart cards uses radio-frequency induction to power the micro processor and to transmit data between an antenna and the card. Most modern smart cards supports both technologies (hybrid cards). Figure \ref{fig:nfccard} is a blank hybrid card.
 
@@ -22,17 +22,25 @@ An everyday example of a smart card is the modern credit and debit card. Most of
 
 \subsection{Communication standard for smart cards}
 \label{sec:communicationstandard}
-Application Protocol Data Unit (APDU) is a standard that describes how a smart card application should communicate with other applications (off-card) and is defined by ISO7816-4 \cite{iso7816-4}. There are two types of APDU messages: Command APDU and Response APDU.
+Application Protocol Data Unit (APDU) is a standard that describes how a smart card application should communicate with other applications (off-card) and is defined by ISO7816-4 \cite{iso7816-4}. There are two types of APDU messages: Command APDU and Response APDU \cite[~Ch. 8.3, Message Structure: APDUS]{smartcardHandbook}.
 
-Command APDU is split into header and body. Refer to table \ref{tbl:cmdAPDU} for instruction explanation and summary. The header is mandatory for all transactions and consists of 4 bytes that is split into CLA, INS, P1 and P2. The body of a command APDU is split into 3 parts; LC, Payload and LE. LC is 1 byte, payload is maximum 255 bytes and LE is 1 byte.
+Command APDU is split into header and body. Refer to table \ref{tbl:cmdAPDU} for instruction explanation and summary. The header is mandatory for all transactions and consists of 4 bytes that is split into CLA, INS, P1 and P2. The body of a Command APDU is split into 3 parts; LC, Payload and LE. LC is 1 byte, payload is maximum 255 bytes and LE is 1 byte.
 
 Newer smart cards supports Extended APDU which allows the payload to be up to a maximum of 65535 bytes. If the payload data is greater than 255 bytes LC must be 3 bytes where the first byte is 0x00 to denote that the APDU is extended and the remaining 2 bytes denotes the length. If extended APDU is used then LE consists of 2 bytes to account for longer responses.
 \input{tables/commandapdu.tex}
 
-Response APDU is split into body and response trailer. The body consist of the response data and is at maximum 255 bytes or 65535 bytes depending on if extended APDU is used. All response APDUs must contain a response trailer of two bytes which denotes the processing status (error, success, wrong format, etc.) of the command APDU. Refer to table \ref{tbl:rspAPDU} for definitions and summary.
+Most Command APDUs falls into three abstract categories. The first category is retrieving something stored on the smart card. Often this command does not need any extra data (payload) and is characterized by INS, P1 and P2 deciding what data that is desired, and LE deciding what length the response is. For example we can send \texttt{80\textbar01\textbar01\textbar00\textbar00\textbar00\textbar08} where INS and P1 identifies the variable and we expect an 8 byte response.
+
+The second category is storing variables on the smart card. The characteristics of the Command APDU differ from the first category by having a LC and payload, but rarely needs any response apart from ``success'' or ``failure''. A Command APDU storing 3 bytes on the smart card can be defined as: \texttt{80\textbar01\textbar01\textbar00\textbar03\textbar04\textbar04\textbar04\textbar00}.
+
+The third category is sending data to the smart card and have the smart card process the data. In context of security the best example of this category is cryptographic functions. This category will use all variables of a Command APDU (INS, P1 and P2 usage depends on application complexity). A Command APDU that request the ciphertext of a clear text with a super simple encoder can be defined as: \texttt{80\textbar01\textbar01\textbar00\textbar03\textbar68\textbar65\textbar69\textbar06}.
+
+Response APDU is split into body and response trailer. The body consist of the response data and is at maximum 255 bytes or 65535 bytes depending on if extended APDU is used. All Response APDUs must contain a response trailer of two bytes which denotes the processing status (error, success, wrong format, etc.) of the Command APDU. Refer to table \ref{tbl:rspAPDU} for definitions and summary.
 \input{tables/responseapdu.tex}
 
-To better understand when to use the command APDUs and when to use response APDUs can use the following example: A locked door has a card reader connected to it. A person walks up to the door and presents his contactless smart card to the reader. The card reader sends a command APDU to the card asking for the ID. The smart card processes the command APDU and sends a response APDU back to the card reader containing the ID of the person. This example is visualized in figure \ref{fig:doornfc}.
+If everything is successful when processing the Command APDU the Response APDU may look like: \texttt{Response-data\textbar90\textbar00}. Response-data may be empty in which case the Response APDU is defined as \texttt{90\textbar00}. If a process on the smart card is un-successful or the smart card crashes the Response APDU will only contain the corresponding error code: \texttt{6F\textbar00}.
+
+To better understand when to use the Command APDUs and when to use Response APDUs can use the following example: A locked door has a card reader connected to it. A person walks up to the door and presents his contactless smart card to the reader. The card reader sends a Command APDU to the card asking for the ID. The smart card processes the Command APDU and sends a Response APDU back to the card reader containing the ID of the person. This example is visualized in figure \ref{fig:doornfc} and in figure \ref{fig:doornfcapdu} we have the same example, but with actual APDU commands.
 
 \begin{figure}[h!]
   \caption{Door lock using smart card to unlock.}
@@ -41,7 +49,15 @@ To better understand when to use the command APDUs and when to use response APDU
     \includegraphics[width=0.95\textwidth]{images/doornfc.png}
 \end{figure}
 
-On most smart cards there is an application manager which listen for a special type of Command APDU: a Select APDU. The Select APDU contains information on what type of smart card application a sender is trying to communicate with and the job of the application manager is to activate the correct application. Before communicating with a smart card the sender should send out a Select APDU, if this step is skipped you run the risk of sending information to the wrong smart card application.
+
+\begin{figure}[h!]
+  \caption{Door lock using smart card to unlock with corresponding APDU commands}
+  \label{fig:doornfcapdu}
+  \centering
+    \includegraphics[width=0.95\textwidth]{images/doornfc_apdu.png}
+\end{figure}
+
+On most smart cards there is an application manager which listen for a special type of Command APDU: a Select APDU. The Select APDU contains information on what type of smart card application a sender is trying to communicate with and the job of the application manager is to activate the correct application. Before communicating with a smart card the sender should send out a Select APDU, if this step is skipped you run the risk of sending information to the wrong smart card application. A Select APDU sent to a smart card with application ID ``0102030405060708090007'' is defined as \texttt{00\textbar A4\textbar04\textbar00\textbar0B\textbar01\textbar02\textbar03\textbar04\textbar05\textbar06\textbar07\textbar08\textbar09\textbar00\textbar07}.
 
 \subsection{Java Card programming language}
 \label{sec:javacard}
@@ -49,7 +65,7 @@ In section \ref{sec:smartcard} we described that smart cards are able to store d
 
 The company Schlumberger \cite{schlumberger}, later joined by Sun Microsystems \cite{sunMicroSystems}, outlined Java Card 1.0. Java Card were to alleviate the problem of manufacturer specific code and to let developers write generic applications. Newer Java Card version includes a development kit that provides a test environment and a converter tool that prepares the Java Card applet/program for installation onto a smart card. The newest Java Card version is currently 3.0.5 \cite{javacard305}.
 
-The Java Card language behaves very similar to standard Java, but there are some substantial differences. Many Java classes and features are not present, e.g., int, double, long, java.lang.SecurityManager, threading and object cloning \cite{javacardlimits}. The structure of the applets differ from standard Java applets. All Java Card applets must implement:
+The Java Card language behaves very similar to standard Java, but there are some substantial differences. Many Java classes and features are not present. For example: int, double, long, java.lang.SecurityManager, threading and object cloning \cite{javacardlimits}. The structure of the applets differ from standard Java applets. All Java Card applets must implement:
 \begin{itemize}
     \item \texttt{void install (byte [] barray, short bOffset, byte bLength)}
     \item \texttt{void process(APDU apdu)}.
@@ -78,6 +94,19 @@ Android is an open source licensed mobile operating system and is based on one o
 
 The Android mobile operating system supports applications that are written in Java, GO and C/C++. The applications run in their own sandbox with their own allocated memory space, but applications can also access shared resources given permission to do so by the user.
 
+\section{Smart card support in Android}
+In Android version 2.3 (API level 9) NFC support was added which enabled a mobile device to read NFC Data Exchange Format (NDEF) from NFC devices/tags. In Android 2.3.3 (API level 10) the class \texttt{IsoDep} was added which enabled mobile devices to send byte data via NFC to devices with NFC support. This means that any device supporting API level 10 or higher and with a NFC adapter can communicate with smart cards via NFC.
+
+As mentioned in section \ref{sec:javacard} smart card applications can run on micro SD cards. Mobile devices with a micro SD card slot can in theory communicate with these types of smart cards, but sometimes it is disabled in the operating system or not the mobile device is missing drivers. One way to enable it (given that the micro SD card reader supports it) is using third party frameworks or drivers.
+
+There exists proprietary drivers and frameworks which can handle communication with smart cards. Gemalto produces a Java library, IDGo800, which is a cryptographic and communication middleware for their smart cards (more on this in section \ref{sec:gemaltoApp}). Installing/using third-party drivers/libraries to communicate with smart cards may not always be the best option, as you make yourself dependent on a third-party. Security wise you cannot blindly trust a third-party and you may not have access to the software if you wish to evaluate it.
+
+The Secure Element Evaluation Kit (SEEK) for the Android platform is an open source project, maintained by Giesecke \& Devrient GmbH \cite{Giesecke}, which have a vision to make it easier to use secure elements in Android applications. The framework provides access to a variety of secure elements such as SIM cards, micro SD cards and embedded secure elements. Their final goal is to have their library as an integrated part of the Android operating system such that all new mobile devices comes with hardware-backed security support \cite{SEEK}.
+
+Since SEEK for Android is open source and we can look into how the software works (although this require resources), but if the pre-installed operating system does not have it installed we will need to build our own version and flash the device. Running a custom version of an operating system requires the organization to maintain and support it. From a security standpoint this is not viable as you will not automatically get security updates and will be running an unofficial version of an operating system. Running a custom operating system may also cause issues for the users as some services may block the user if they detect it (banking applications, proprietary applications, etc.).
+
+In Android 4.4 Host Card Emulation (HCE) was introduced. HCE
+
 \section{Cryptography}
 %What is cryptography?
 Cryptography is a method for protecting confidential data using complex mathematics and computer science. Most cryptographic functions/algorithms relies heavily on the fact that the mathematics are so complex that they are ``uncrackable'' without knowledge of the encryption/decryption key.
@@ -94,6 +123,8 @@ Public-key cryptography refers to a set of methods for asymmetric cryptography. 
     \includegraphics[width=1\textwidth]{images/encrypt_basic.png}
 \end{figure}
 
+One of the most common public-key cryptosystems is RSA, which is widely used for secure communication. RSA builds on the principle of factorization of the product of two prime numbers, or rather the difficulty of factorize the product. It is not impossible to factorize the product of two prime numbers and there was a challenge by the RSA Laboratories where one could win prizes for factorized RSA-keys \cite{rsaChallenge}, but the most complex RSA that were cracked was 768-bit. Proving that RSA is secure is out of the time scope for this thesis. Other source conclude that with long enough keys and correct protocol implementation, the math behind RSA can be considered secure \cite[~p. 194]{cryptoMath}. Information on the inner workings of RSA can be found in the book ``Understanding Cryptography'' by Christof Paar and Jan Pelzl, chapter 7 ``The RSA Cryptosystem'' \cite{cryptoMath}.
+
 Message authentication can also be done by public-key cryptography. First the message is hashed using a secure hash function, for instance SHA-2 \cite{shaRFC}, which creates a digest. The digest is then encrypted with the private key and the ``digital signature'' is then sent with the original message. The receiver can then verify the integrity of the message by computing the hash of the message using the same secure hash function and decrypt the ``digital signature'' using the senders public key. If they are a match the receiver can with certainty conclude that the message has not been tampered with and originates from the sender.
 
 \begin{figure}[h!]
@@ -105,32 +136,33 @@ Message authentication can also be done by public-key cryptography. First the me
 \end{figure}
 
 \subsection{Symmetric-key cryptography}
+\label{sec:symmetricCrypto}
 Symmetric-key cryptography uses the same cryptographic key for both encryption and decryption. There are two main areas of application for symmetric-key cryptography; secure storage of data and secure communication. Secure storage of data is the most straight forward of the two. An entity (user, server, etc.) generates a key, encrypts the data using the key, stores the key for future use and decrypts the data using the key whenever the entity require the data. As long as the key is stored securely and the encryption algorithm is secure the data can be stored in an unsecured environment. Secure communication using symmetric-key is similar, but instead of the same entity decrypting the data, the encrypted data is transmitted to a new entity which decrypts it using the same key. This requires the key or key generation to be known by both parties, also known as a ``shared secret''. There are two methods for symmetric-key encryption/decryption. Stream ciphering takes one byte at the time and encrypts/decrypts it whereas block ciphering takes bigger chunks of data and encrypts/decrypts the data. Both methods have their own weaknesses and strengths \cite[~Ch. 2.1.1]{cryptoMath}.
 
 Stream ciphering is fast and relatively simplistic to implement. This along with the fact that it can encrypt byte by byte makes it very suitable for use when plaintext data comes in  unknown length and over time (streams). Areas of application includes voice chat, video feed and http communication. Disadvantages of stream ciphering is that if the algorithm is cracked then it is susceptible to insertions and modifications as well as the fact that a single plaintext symbol is represented as a single ciphertext symbol (limited alteration).
 
 Block cipher is a more complex and requires more overhead. First of data must be divided into equal size blocks. The blocks cannot be too small as then they are prone to dictionary attacks and not too big as it will make the encryption/decryption process too resource intensive. In block cipher the block size must be fixed through the encryption process. This will often result in redundant data. For example, 200-bit plaintext with a 64-bit block size will result in three blocks of 64-bit and a fourth block with only 8 bit of ``real'' data and 56 bit of redundant bits. Since block ciphering uses the previous block to cipher the current block it is possible to detect tampering and faults, but this also results that data may be lost if a block becomes corrupt.
 
+Advanced Encryption Standard (AES) is one of the most common symmetric-key cryptography methods. AES does not rely on number factorization (opposed to RSA), but rather substitution and permutation using a key. It can be seen as hashing data and being able to reverse the hashing using the same key. There are currently no known analytic attacks against AES which are less complex than brute-force attacks and consensus is that using long keys are considered secure.
 
 \section{Mobile technology vulnerabilities}
 Mobile technology vulnerabilities and attack vectors are numerous and before looking into how smart cards can help mitigate an alleviate threats we will need to identify and characterize them.
-\subsection{Infected Device}
+\subsection{Infected device}
 The most obvious threat to mobile devices is when the mobile device itself is infected with virus or malware. The type of virus or malware can vary, some are harmless and serve more as an annoyance or trying to trick the user into visiting bogus websites, but some are more malicious and will access private files and information. From a security stand-point it is a disaster if a virus or malware is able to read and modify data which is otherwise confidential.
 
 Often the user will not know that their mobile device is infected and some viruses or malware are very hard to detect by anti-virus. The ``2015 Cheetah Mobile Security Report'' \cite{cheetahSec} reports that the number of viruses on Android devices exceeds over 9,5 million and that the problem is growing. When designing and developing applications one should take into consideration that the mobile device may be infected or compromised.
 
-
-\subsection{Lost or Stolen Device}
+\subsection{Lost or stolen device}
 An attacker may gain physical access to the users mobile device through theft or simply that the user misplaced the mobile device. With physical access to the device an attacker would be able to retrieve data from the device. A common defense against this is encrypting the data on the device, but this requires the keys to be stored somewhere securely. If the keys are not stored securely the result is that the data on the device may fall into the wrong hands.
 
-\subsection{Insecure Communication Channel}
+\subsection{Insecure communication channel}
 \label{sec:unsecureCommunication}
 Communication is a vital part of modern systems; data is sent between devices and between devices and servers. Sensitive data requires a secure communication channel which cannot be tapped into by a third party. Secure communication on public networks involves agreeing upon encryption keys which the data should be encrypted with before being sent. Encrypting the communication channel will protect against man-in-the-middle attacks, but this requires both parties to authenticate themselves as encrypting the data won't help if you are sending the data directly to the attacker. More on this in section \ref{sec:authenticationChallenges}.
 
-\subsection{Authentication Challenges}
+\subsection{Authentication challenges}
 \label{sec:authenticationChallenges}
 %Are people who they say the are?
 As mentioned in section \ref{sec:unsecureCommunication} a secure communication channel is useless if you are sending the data directly to the attacker. A vital part of communication security is being able to authenticate the parties in a communication transaction. If the attacker is able to impersonate another party by installing fake certificates on the mobile device or by tricking the user into communicating with the attacker the consequences can be of significance.
 
-\subsection{Insecure Applications}
-An often overlooked attack vector is badly implemented applications on the mobile device. This may include memory leaks, weak cryptography, open for code injections or openly exposing private data to third parties. In rare cases an application with flaws may expose other applications for attacks, but there exists countermeasures to this, for instance that all applications run in their own sandbox.
+\subsection{Insecure applications}
+An often overlooked attack vector is badly implemented applications on the mobile device. Inherently a lot of functionality is secure, but due to negligence or bad planning are implemented in a bad way. This can include memory leaks, weak cryptography, open for code injections or openly exposing private data to third parties. In rare cases an application with flaws may expose other applications for attacks, but there exists countermeasures to this, for instance that all applications run in their own sandbox. In the ``Top 10 Mobile Risks 2014'' from OWASP \cite{OWASPTopTenMobile} most of the bullets falls under this category.

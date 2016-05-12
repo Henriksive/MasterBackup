@@ -1,5 +1,5 @@
 % !TEX root = ../Article.tex
-\chapter{Smart card framework - Goals and Environment}
+\chapter{Smart Card Framework - Goals and Environment}
 As mentioned in section \ref{sec:goals} we want to create a framework for easy communication between a mobile device and a smart card. We want to achieve this not only for testing, but to be able to hand over a ready to use framework for any parties interested so that further development and testing may continue. In this chapter we will discuss the basis for the framework and the environment we will use for creating it.
 
 The framework should lay the very foundation needed for using the mobile device and smart card in a secure fashion. The basic things we want to cover are:
@@ -60,7 +60,7 @@ When we decided on Java Card 2.2.2. we had to consider if we wanted a newer Java
 In order to develop applications for the smart cards we will be using Eclipse 3.2 with Java development kit version 1.6.45. In order to develop smart card applications more easily we will use the Eclipse-JCDE plugin \cite{eclipseJCDE} which provides a virtual runtime environment along with build tools. Even though Eclipse 3.2 is severely outdated it provides the tools necessary to do the job.
 
 \begin{figure}[h!]
-  \caption{Screenshot of Eclipse showing Java Card tools.}
+  \caption{Screenshot of Eclipse Java Card tools.}
   \label{fig:eclipse}
   \centering
     \includegraphics[width=0.95\textwidth]{images/eclipse.png}
@@ -85,7 +85,7 @@ To do this we will utilize a simple batch script which consisting of three lines
     gp.exe -visa2 -key !\%!KEY!\%! -install !\%!PATH!\%! -d
 \end{lstlisting}
 
-\subsection{Basic testing environment}
+\subsection{Basic test environment}
 To test the smart card application that is deployed on the physical cards (without going through an Android application) we will be using PyApduTool \cite{pyapdutool}. pyApduTool is a tool for sending APDUs to a smart card through a card reader or memory card reader and lets us observe how the card behave when receiving and transmitting data.
 
 \begin{figure}[h!]
@@ -101,10 +101,13 @@ PyApduTool does not support extended APDU and this limits us to a high degree wh
 \section{Android application}
 The second part of the framework is an Android library. The library will serve as an intermediate between the Android application and the smart card application.
 
+\subsection{Android version}
+When we started working on the Android library, our mobile devices were running Android 4.4 (API level 19). By the end of this thesis Android 6.0 became more popular and we were able to migrate our framework to Android 6.0. The minimum SDK required for the library is API level 19 (Android 4.4) and the target SDK is API level 23 (Android 6.0). Google frequently provides data on what Android versions their user base uses. As of May 2, 2016, Android version 4.4 to 6.0 covered \~78\% of the users \cite{AndroidAPIDistributions}. Our opinion is that covering \~78\% of the user base is a realistic and sufficient goal.
+
 \subsection{IDE}
 Android Studio \cite{androidIDE} is the official IDE for Android application development. Android Studio is based on IntelliJ IDEA \cite{intelliJIDEA} and provides many automated tools for building, deploying and publishing Android applications. Android Studio ships with Android Debug Bridge (ADB). ADB is an interface for communicating with virtual Android instances or physical Android devices. ADB gives developers the ability to log output from applications as well as monitor memory, GPU and CPU usage of the mobile device.
 
-\subsection{Testing environment}
+\subsection{Test environment}
 To test the application we will be using the built in ADB in Android studio as well as doing empirical tests on the Android device. Figure \ref{fig:ADBMemory} and \ref{fig:ADBCPU} shows runtime examples of the Android device. These monitor tools gives us a clear indication if we are doing an operation the Android device cannot handle or if we are trying to perform operations that are too resource intensive.
 
 \begin{figure}[h!]
@@ -121,4 +124,4 @@ To test the application we will be using the built in ADB in Android studio as w
     \includegraphics[width=0.95\textwidth]{images/ADBCPU.png}
 \end{figure}
 
-Even though ADB provides us with good resource usage tools we wish to perform more informal tests using timers to get a feel for how long an operation takes. We can use the built in Android class \texttt{System} and the method \texttt{nanoTime()} to get an accurate start and stop time for an operation and calculate elapsed time. This combined with visually inspecting the running application can help us get an indication of how responsive the application is.
+Even though ADB provides us with good resource usage tools we wish to perform more informal tests using timers to get a feel for how long an operation takes. We can use the built in Android class \texttt{System} and the method \texttt{nanoTime()} to get an accurate start and stop time for an operation and calculate elapsed time. This combined with visually inspecting the running application can help us get an indication of how responsive the application is when executing tasks.
