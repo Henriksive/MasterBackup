@@ -299,6 +299,31 @@
   \field{year}{2011}
 \endentry
 
+\entry{plugntrust}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Jacob~Sorber}{J.~S.}%
+     {Ron~Peterson}{R.~P.}%
+     {}{}%
+     {MinhoShin}{M.}}%
+    {{}%
+     {Kotz}{K.}%
+     {Davic}{D.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {ACM}%
+  }
+  \strng{namehash}{JSMRPKD1}
+  \strng{fullhash}{JSMRPKD1}
+  \field{sortinit}{J}
+  \field{isbn}{978-1-4503-1301-8}
+  \field{note}{Pages 309-322}
+  \field{title}{Plug-n-Trust: Practical Trusted Sensing for mHealth}
+  \field{year}{2012}
+\endentry
+
 \entry{javacard305}{online}{}
   \field{sortinit}{J}
   \field{note}{Last visited: 19.11.2015}
@@ -318,6 +343,32 @@
   \verb html
   \endverb
   \field{year}{2005}
+\endentry
+
+\entry{practicalAttacksSE}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Michael~Roland}{M.~R.}%
+     {Josef~Langer}{J.~L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Scharinger}{S.}%
+     {Josef}{J.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{MRJLSJ1}
+  \strng{fullhash}{MRJLSJ1}
+  \field{sortinit}{M}
+  \field{isbn}{978-1-4673-1209-7}
+  \field{note}{Pages 19-24}
+  \field{title}{Practical Attack Scenarios on Secure Element-enabled Mobile
+  Devices}
+  \field{year}{2012}
 \endentry
 
 \entry{multos}{online}{}

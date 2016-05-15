@@ -29,16 +29,94 @@ Command APDU is split into header and body. Refer to table \ref{tbl:cmdAPDU} for
 Newer smart cards supports Extended APDU which allows the payload to be up to a maximum of 65535 bytes. If the payload data is greater than 255 bytes LC must be 3 bytes where the first byte is 0x00 to denote that the APDU is extended and the remaining 2 bytes denotes the length. If extended APDU is used then LE consists of 2 bytes to account for longer responses.
 \input{tables/commandapdu.tex}
 
-Most Command APDUs falls into three abstract categories. The first category is retrieving something stored on the smart card. Often this command does not need any extra data (payload) and is characterized by INS, P1 and P2 deciding what data that is desired, and LE deciding what length the response is. For example we can send \texttt{80\textbar01\textbar01\textbar00\textbar00\textbar00\textbar08} where INS and P1 identifies the variable and we expect an 8 byte response.
+Most Command APDUs falls into three abstract categories. The first category is retrieving something stored on the smart card. Often this command does not need any extra data (payload) and is characterized by INS, P1 and P2 deciding what data that is desired, and LE deciding what length the response is. For example: we have a smart card applet and in the instruction 01 01 00 we have stored a 8 byte variable that we want to retrieve (LE is 08). In this case the payload is empty since our theoretical method does not need any payload, but we will need to explicitly state that in the command APDU (LC is 00). The Command APDU would then look like:
 
-The second category is storing variables on the smart card. The characteristics of the Command APDU differ from the first category by having a LC and payload, but rarely needs any response apart from ``success'' or ``failure''. A Command APDU storing 3 bytes on the smart card can be defined as: \texttt{80\textbar01\textbar01\textbar00\textbar03\textbar04\textbar04\textbar04\textbar00}.
+\begin{table}[h!]
+\centering
+    \begin{tabular}{ | c | c | c | c | c | c | c |}
+        \hline
+        \thead{CA}
+        & \thead{INS}
+        & \thead{P1}
+        & \thead{P2}
+        & \thead{LC}
+        & \thead{Payload}
+        & \thead{LE} \\ \hline
 
-The third category is sending data to the smart card and have the smart card process the data. In context of security the best example of this category is cryptographic functions. This category will use all variables of a Command APDU (INS, P1 and P2 usage depends on application complexity). A Command APDU that request the ciphertext of a clear text with a super simple encoder can be defined as: \texttt{80\textbar01\textbar01\textbar00\textbar03\textbar68\textbar65\textbar69\textbar06}.
+        80 & 01 & 01 & 00 & 00 &  & 00 \\ \hline
+
+    \end{tabular}
+
+\end{table}
+
+The second category is storing variables on the smart card. The characteristics of the Command APDU differ from the first category by having a LC and payload, but rarely needs any response apart from ``success'' or ``failure''. For example our smart card applet let's us store 8 byte in the instruction 01 02 00. LC would then be 08 and the payload would contain the 8 bytes we want to store. We set LE to 02 as we define 9000 as success and 0999 as failure. The Command APDU would then look like:
+
+\begin{table}[h!]
+\centering
+    \begin{tabular}{ | c | c | c | c | c | c | c |}
+        \hline
+        \thead{CA}
+        & \thead{INS}
+        & \thead{P1}
+        & \thead{P2}
+        & \thead{LC}
+        & \thead{Payload}
+        & \thead{LE} \\ \hline
+
+        80 & 01 & 02 & 00 & 08 & 5964574e704a593d & 02 \\ \hline
+
+    \end{tabular}
+
+\end{table}
+
+The third category is sending data to the smart card and have the smart card process the data. In context of security the best example of this category is cryptographic functions. This category will use all variables of a Command APDU (INS, P1 and P2 usage depends on application complexity). As an example let us say that we want to send a Command APDU that request the ciphertext of a clear text. The instruction is 01 03 00 and our cipher algorithm in this case is very basic and ``increments'' byte values. LC and LE is 8 byte. The Command APDU would then look like:
+
+\begin{table}[h!]
+\centering
+    \begin{tabular}{ | c | c | c | c | c | c | c |}
+        \hline
+        \thead{CA}
+        & \thead{INS}
+        & \thead{P1}
+        & \thead{P2}
+        & \thead{LC}
+        & \thead{Payload}
+        & \thead{LE} \\ \hline
+
+        80 & 01 & 03 & 00 & 08 & 5964574e704a593d & 08 \\ \hline
+
+    \end{tabular}
+
+\end{table}
 
 Response APDU is split into body and response trailer. The body consist of the response data and is at maximum 255 bytes or 65535 bytes depending on if extended APDU is used. All Response APDUs must contain a response trailer of two bytes which denotes the processing status (error, success, wrong format, etc.) of the Command APDU. Refer to table \ref{tbl:rspAPDU} for definitions and summary.
 \input{tables/responseapdu.tex}
 
-If everything is successful when processing the Command APDU the Response APDU may look like: \texttt{Response-data\textbar90\textbar00}. Response-data may be empty in which case the Response APDU is defined as \texttt{90\textbar00}. If a process on the smart card is un-successful or the smart card crashes the Response APDU will only contain the corresponding error code: \texttt{6F\textbar00}.
+If everything is successful when processing a Command APDU with no expected response data the Response APDU may look like:
+
+\begin{table}[h!]
+\centering
+    \begin{tabular}{ | c | c | c |}
+        \hline
+        \thead{Response data}
+        & \thead{SW1}
+        & \thead{SW2} \\ \hline
+
+         & 90 & 00 \\ \hline
+    \end{tabular}
+\end{table}
+If we use the example from the third category of Command APDUs that used ciphering as an example the Response APDU would look like:
+\begin{table}[h!]
+\centering
+    \begin{tabular}{ | c | c | c |}
+        \hline
+        \thead{Response data}
+        & \thead{SW1}
+        & \thead{SW2} \\ \hline
+
+        6065584f714b603e & 90 & 00 \\ \hline
+    \end{tabular}
+\end{table}
 
 To better understand when to use the Command APDUs and when to use Response APDUs can use the following example: A locked door has a card reader connected to it. A person walks up to the door and presents his contactless smart card to the reader. The card reader sends a Command APDU to the card asking for the ID. The smart card processes the Command APDU and sends a Response APDU back to the card reader containing the ID of the person. This example is visualized in figure \ref{fig:doornfc} and in figure \ref{fig:doornfcapdu} we have the same example, but with actual APDU commands.
 
@@ -57,7 +135,25 @@ To better understand when to use the Command APDUs and when to use Response APDU
     \includegraphics[width=0.95\textwidth]{images/doornfc_apdu.png}
 \end{figure}
 
-On most smart cards there is an application manager which listen for a special type of Command APDU: a Select APDU. The Select APDU contains information on what type of smart card application a sender is trying to communicate with and the job of the application manager is to activate the correct application. Before communicating with a smart card the sender should send out a Select APDU, if this step is skipped you run the risk of sending information to the wrong smart card application. A Select APDU sent to a smart card with application ID ``0102030405060708090007'' is defined as \texttt{00\textbar A4\textbar04\textbar00\textbar0B\textbar01\textbar02\textbar03\textbar04\textbar05\textbar06\textbar07\textbar08\textbar09\textbar00\textbar07}.
+On most smart cards there is an application manager which listen for a special type of Command APDU: a Select APDU. The Select APDU contains information on what type of smart card application a sender is trying to communicate with and the job of the application manager is to activate the correct application. Before communicating with a smart card the sender should send out a Select APDU, if this step is skipped you run the risk of sending information to the wrong smart card application. A Select APDU sent to a smart card with application ID ``0102030405060708090007'' is defined as:
+
+\begin{table}[h!]
+\centering
+    \begin{tabular}{ | c | c | c | c | c | c | c |}
+        \hline
+        \thead{CA}
+        & \thead{INS}
+        & \thead{P1}
+        & \thead{P2}
+        & \thead{LC}
+        & \thead{Payload}
+        & \thead{LE} \\ \hline
+
+        00 & A4 & 04 & 00 & 0B & 0102030405060708090007 &  \\ \hline
+
+    \end{tabular}
+
+\end{table}
 
 \subsection{Java Card programming language}
 \label{sec:javacard}
@@ -85,9 +181,10 @@ When incorporating the features of a smart card with a mobile device it would be
 
 
 \subsection{Other smart card programming languages}
-There exists several other languages for smart card programming. The two most notable are Java Card (section \ref{sec:javacard}) and MULTOS \cite{multos}. The latter uses the programming language C as the language for writing applications.
+There exists several other languages for smart card programming. The two most notable are Java Card (section \ref{sec:javacard}) and MULTOS \cite{multos}. The latter uses the programming language C as the language for writing applications. We will use Java Card in this thesis as it is supported by our smart cards and is similar to standard Java which is used in our mobile devices (refer to section \ref{sec:androidOS}).
 
 \section{Android operating system}
+\label{sec:androidOS}
 Mobile operating system refers to the operating system running on a mobile device (smartphones, GPS devices, tablets, etc.). In this thesis we will focus mainly on smartphones and tablets since their capabilities are within our scope and the fact that they often share the same operating system. For practical reasons and because of time constraints we have restricted us to one mobile operating system.
 
 Android is an open source licensed mobile operating system and is based on one of the LTS (long-term support) branches of the Linux kernel. Google Inc. \cite{google} is the current developer of the mobile operating system and their primary focus has been smartphones and tablets. In later years Google has put resources into incorporating Android with TVs, wrist watches and cars. In 2015 Q2 82,8 \% of smartphones worldwide was shipped with a version of the Android mobile operating system \cite{androidMarketShare}.
@@ -97,13 +194,17 @@ The Android mobile operating system supports applications that are written in Ja
 \section{Smart card support in Android}
 In Android version 2.3 (API level 9) NFC support was added which enabled a mobile device to read NFC Data Exchange Format (NDEF) from NFC devices/tags. In Android 2.3.3 (API level 10) the class \texttt{IsoDep} was added which enabled mobile devices to send byte data via NFC to devices with NFC support. This means that any device supporting API level 10 or higher and with a NFC adapter can communicate with smart cards via NFC.
 
-As mentioned in section \ref{sec:javacard} smart card applications can run on micro SD cards. Mobile devices with a micro SD card slot can in theory communicate with these types of smart cards, but sometimes it is disabled in the operating system or not the mobile device is missing drivers. One way to enable it (given that the micro SD card reader supports it) is using third party frameworks or drivers.
+As mentioned in section \ref{sec:javacard} smart card applications can run on micro SD cards. Mobile devices with a micro SD card slot can in theory communicate with these types of smart cards, but Android has no native support for communicating with them. This essentially means that the hardware is there on some mobile devices, but developers lack the bridge between their application to the hardware.
 
-There exists proprietary drivers and frameworks which can handle communication with smart cards. Gemalto produces a Java library, IDGo800, which is a cryptographic and communication middleware for their smart cards (more on this in section \ref{sec:gemaltoApp}). Installing/using third-party drivers/libraries to communicate with smart cards may not always be the best option, as you make yourself dependent on a third-party. Security wise you cannot blindly trust a third-party and you may not have access to the software if you wish to evaluate it.
-
-The Secure Element Evaluation Kit (SEEK) for the Android platform is an open source project, maintained by Giesecke \& Devrient GmbH \cite{Giesecke}, which have a vision to make it easier to use secure elements in Android applications. The framework provides access to a variety of secure elements such as SIM cards, micro SD cards and embedded secure elements. Their final goal is to have their library as an integrated part of the Android operating system such that all new mobile devices comes with hardware-backed security support \cite{SEEK}.
+The Secure Element Evaluation Kit (SEEK) for the Android platform is an open source project, maintained by Giesecke \& Devrient GmbH \cite{Giesecke}, which have a vision to make it easier to use secure elements in Android applications. The framework enables access to a variety of secure elements such as SIM cards, micro SD cards and embedded secure elements. Their final goal is to have their library as an integrated part of the Android operating system such that all new mobile devices comes with hardware-backed security support \cite{SEEK}. Some mobile device manufactures have included this framework, but there exists no documentation stating which devices have it, what channels are open and how to access the secure elements. Often the case is that only the channel to the mobile device SIM card is open meaning you cannot access custom secure elements.
 
 Since SEEK for Android is open source and we can look into how the software works (although this require resources), but if the pre-installed operating system does not have it installed we will need to build our own version and flash the device. Running a custom version of an operating system requires the organization to maintain and support it. From a security standpoint this is not viable as you will not automatically get security updates and will be running an unofficial version of an operating system. Running a custom operating system may also cause issues for the users as some services may block the user if they detect it (banking applications, proprietary applications, etc.).
+
+As an alternative to flashing the operating system one can use proprietary drivers from smart card manufacturers. Gemalto produces a Java library, IDGo800, which is a cryptographic and communication middleware for their smart cards (more on this in section \ref{sec:gemaltoApp}). Installing/using third-party applications/libraries to communicate with smart cards may not always be the best option, as you make yourself dependent on a third-party. In essence, opting for this solution results in a vendor lock. Security wise you should not blindly trust a third-party and you may not have access to the software if you wish to evaluate it.
+
+%The Secure Element Evaluation Kit (SEEK) for the Android platform is an open source project, maintained by Giesecke \& Devrient GmbH \cite{Giesecke}, which have a vision to make it easier to use secure elements in Android applications. The framework provides access to a variety of secure elements such as SIM cards, micro SD cards and embedded secure elements. Their final goal is to have their library as an integrated part of the Android operating system such that all new mobile devices comes with hardware-backed security support \cite{SEEK}.
+
+%Since SEEK for Android is open source and we can look into how the software works (although this require resources), but if the pre-installed operating system does not have it installed we will need to build our own version and flash the device. Running a custom version of an operating system requires the organization to maintain and support it. From a security standpoint this is not viable as you will not automatically get security updates and will be running an unofficial version of an operating system. Running a custom operating system may also cause issues for the users as some services may block the user if they detect it (banking applications, proprietary applications, etc.).
 
 \section{Cryptography}
 %What is cryptography?
