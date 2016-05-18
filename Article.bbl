@@ -105,6 +105,17 @@
   \field{year}{2013}
 \endentry
 
+\entry{blackberryPriv}{online}{}
+  \field{sortinit}{B}
+  \field{note}{Last visited: 16.05.2016}
+  \field{title}{Blackberry Priv}
+  \verb{url}
+  \verb http://global.blackberry.com/en/smartphones/priv-by-blackberry/overview
+  \verb .html
+  \endverb
+  \field{year}{2015}
+\endentry
+
 \entry{cryptoMath}{book}{}
   \name{author}{1}{}{%
     {{}%
