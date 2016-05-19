@@ -116,6 +116,26 @@
   \field{year}{2015}
 \endentry
 
+\entry{smartcardThesis}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Calafato}{C.}%
+     {Andrew}{A.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Wiley}%
+  }
+  \strng{namehash}{CA1}
+  \strng{fullhash}{CA1}
+  \field{sortinit}{C}
+  \field{isbn}{0-470-74367-0}
+  \field{title}{An analysis of the vulnerabilities introduced with Java Card 3
+  Connected Edition}
+  \field{year}{2010}
+\endentry
+
 \entry{cryptoMath}{book}{}
   \name{author}{1}{}{%
     {{}%
@@ -195,6 +215,17 @@
   \verb overview
   \endverb
   \field{year}{2015}
+\endentry
+
+\entry{iphoneHack}{online}{}
+  \field{sortinit}{F}
+  \field{note}{Last visited: 18.05.2016}
+  \field{title}{FBI paid under 1 million dollars to unlock San Bernardino
+  iPhone: sources}
+  \verb{url}
+  \verb http://www.reuters.com/article/us-apple-encryption-idUSKCN0XQ032
+  \endverb
+  \field{year}{2016}
 \endentry
 
 \entry{Giesecke}{online}{}
@@ -382,16 +413,6 @@
   \field{year}{2012}
 \endentry
 
-\entry{multos}{online}{}
-  \field{sortinit}{M}
-  \field{note}{Last visited: 24.02.2016}
-  \field{title}{MULTOS Smart Card Operating System, cardwerk.com}
-  \verb{url}
-  \verb http://www.cardwerk.com/smartcards/MULTOS/
-  \endverb
-  \field{year}{2015}
-\endentry
-
 \entry{TLS101}{book}{}
   \name{author}{1}{}{%
     {{}%
@@ -472,14 +493,13 @@
      {}{}}%
   }
   \list{publisher}{1}{%
-    {Wiley}%
+    {Royal Holloway, University of London}%
   }
   \strng{namehash}{RW1}
   \strng{fullhash}{RW1}
   \field{sortinit}{R}
-  \field{isbn}{0-470-74367-0}
   \field{title}{Smart Card Handbook 4th Edition}
-  \field{year}{2010}
+  \field{year}{2013}
 \endentry
 
 \entry{shaRFC}{online}{}
@@ -531,6 +551,16 @@
   \verb ml#IDAN1V3C
   \endverb
   \field{year}{2005}
+\endentry
+
+\entry{multos}{online}{}
+  \field{sortinit}{S}
+  \field{note}{Last visited: 18.05.2016}
+  \field{title}{Smart Card Operating System}
+  \verb{url}
+  \verb http://www.cardwerk.com/smartcards/smartcard_operatingsystems.aspx
+  \endverb
+  \field{year}{2015}
 \endentry
 
 \entry{cardProcessing}{online}{}

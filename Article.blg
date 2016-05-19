@@ -2,4 +2,10 @@ This is BibTeX, Version 0.99dThe top-level auxiliary file: Article.aux
 The style file: biblatex.bst
 Database file #1: Article-blx.bib
 Database file #2: references/references.bib
+Repeated entry---line 76 of file references/references.bib
+ : @online{multos
+ :               ,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "hmultosVSjavacard"
 Biblatex version: 2.9
+(There was 1 error message)

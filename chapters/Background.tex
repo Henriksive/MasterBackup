@@ -1,23 +1,27 @@
 % !TEX root = ../Article.tex
 \chapter{Background}
-In this chapter we will provide background information necessary to understand how smart cards function and can increase security on mobile devices. The topics covered in this section are smart cards, mobile device operating systems, cryptography and threats in context of mobile devices.
+In this chapter we will provide the background information necessary to understand how smart cards function and how they increase security on mobile devices. In particular, we will cover smart card technology, relevant mobile device technology (in our case Android OS), basic concepts of cryptography and typical threats in the context of mobile devices.
+%The topics covered in this section are smart cards, mobile device operating systems, cryptography and threats in context of mobile devices.
 
 \section{Smart card}
 \label{sec:smartcard}
-A smart card refers to a credit card sized card with an integrated circuit, usually in the form of a plastic card with an integrated micro processor. In essence a smart card is a miniature computer with limited computing power.
+The term smart card refers to a card with an integrated circuit. In essence a smart card is a miniature computer with limited computing power. In practice, it is a miniature computer with limited computing power, which can process information in a secure isolated environment and exchange data with the device that usually also provides it with the necessary power to operate.
 
 \subsection{Smart card architecture}
 The micro processor is able to perform tasks that involve processing input, give ouput and storing small amounts of data. Smart cards vary in sizes defined by the standards ISO/IEC 7810 \cite{iso7810} and ISO/IEC 7816 \cite{iso7816}. The most common card dimensions are approximately 85x54 mm \cite[~Ch. 3.1]{smartcardHandbook}. The processing power of smart cards are between 25-32 MHz and sport anywhere from 8Kbit to 128Kbit memory (EEPROM) \cite{cardProcessing}.
 
-The micro processor can be powered and communicate in two ways. Contact smart cards have integrated contact pads. When the smart card is inserted into a card reader the contact pads of the card reader provides power to the micro processor via the contact pads of the smart card. The contact pads also functions as a medium for transferring data. Contactless smart cards uses radio-frequency induction to power the micro processor and to transmit data between an antenna and the card. Most modern smart cards supports both technologies (hybrid cards). Figure \ref{fig:nfccard} is a blank hybrid card.
+The micro processor can be powered and communicate in two ways. Contact smart cards have integrated contact pads. When the smart card is inserted into a card reader the contact pads of the card reader provides power to the micro processor via the contact pads of the smart card. The contact pads also functions as a medium for transferring data. Contactless smart cards uses radio-frequency induction to power the micro processor and to transmit data between an antenna and the card. Most modern smart cards supports both technologies (hybrid cards). Figure \ref{fig:nfccard} shows a contact smart card and reader.
 
 An everyday example of a smart card is the modern credit and debit card. Most of these cards are contact cards that require the user to insert the card into a card reader, but newer cards are of the hybrid type, and have the ability to communicate over radio frequencies. Credit and debit cards utilizes the input/output capabilities of the smart card, but they also store information on the card authenticating the users bank information.
 
 \begin{figure}[h!]
-  \caption{Hybrid Smart card.}
   \label{fig:nfccard}
   \centering
-    \includegraphics[width=0.75\textwidth]{images/nfccard2.png}
+  \includegraphics[width=0.95\textwidth]{images/chipdrive.jpg}
+  \begin{flushright}
+  \hspace*{15pt}\hbox{\scriptsize Credit:\thinspace{\small\itshape Thiemo Schuff (CC BY 3.0 DE)}}
+\end{flushright}
+  \captionof{figure}{Contact smart card and reader.}
 \end{figure}
 
 \subsection{Communication standard for smart cards}
@@ -155,22 +159,33 @@ On most smart cards there is an application manager which listen for a special t
 
 \end{table}
 
-\subsection{Java Card programming language}
+\subsection{Java Card}
 \label{sec:javacard}
-In section \ref{sec:smartcard} we described that smart cards are able to store data as well as process input and output. All smart cards have their own operating system that allows developers to write applications that run on the smart cards. Smart cards are not limited to one applications per card, but are able to have multiple applications installed. Traditionally it was not feasible to create programs that ran on different smart card manufacturer cards as the micro processors were manufacturer specific \cite{javacardapplet}. This created an environment where smart card issuers and their developers were locked to a specific manufacturer.
+In section \ref{sec:smartcard} we described that smart cards are able to store data as well as process input and output. All smart cards have their own operating system that allows developers to write applications that run on the smart cards. Smart cards are not limited to one applications per card, but are able to have multiple applications installed. Traditionally it was not feasible to create programs that ran on different smart cards as the micro processors were manufacturer specific \cite{javacardapplet}. This created an environment where smart card issuers and their developers were locked to a specific manufacturer.
+
+In figure \ref{fig:smartcardArchitecture} we can see how the architecture of a smart card is built up. In the bottom we have the hardware of the smart card which includes the ROM, EPROM, RAM and in the case of NFC cards the NFC receiver. On top of the hardware is the operating system of the smart card. The operating system has drivers installed along with API which it provides to the virtual machine. On top of the virtual machine multiple applets are able to run as mentioned above.
+\begin{figure}[h!]
+  \caption{Smart card architecture}
+  \label{fig:smartcardArchitecture}
+  \centering
+    \includegraphics[width=0.95\textwidth]{images/javacardArchitecture.png}
+\end{figure}
 
 The company Schlumberger \cite{schlumberger}, later joined by Sun Microsystems \cite{sunMicroSystems}, outlined Java Card 1.0. Java Card were to alleviate the problem of manufacturer specific code and to let developers write generic applications. Newer Java Card version includes a development kit that provides a test environment and a converter tool that prepares the Java Card applet/program for installation onto a smart card. The newest Java Card version is currently 3.0.5 \cite{javacard305}.
 
-The Java Card language behaves very similar to standard Java, but there are some substantial differences. Many Java classes and features are not present. For example: int, double, long, java.lang.SecurityManager, threading and object cloning \cite{javacardlimits}. The structure of the applets differ from standard Java applets. All Java Card applets must implement:
+The Java Card language is in practice a very basic version of the standard Java language. Many Java classes and features are not present. For example: int, double, long, java.lang.SecurityManager, threading and object cloning \cite{javacardlimits}. The structure of the applets differs from standard Java applets. All Java Card applets must implement:
 \begin{itemize}
     \item \texttt{void install (byte [] barray, short bOffset, byte bLength)}
     \item \texttt{void process(APDU apdu)}.
 \end{itemize}
 \texttt{Install} is invoked when the applet is downloaded onto the smart card and should register and initialize the applet \cite{javacardinstall}. \texttt{Process} is the entry point for all requests to the application and where the applet specific logic is done \cite{javacardprocess}.
 
-Garbage collection in the Java Card language differs from standard Java. In standard Java garbage collection is performed by the Java Virtual Machine (JVM) and runs independently of the application. In Java Card objects are stored in the persistent memory (EEPROM) and writing to this memory is very time-consuming. As a result it was decided that there is no automatic garbage collection in Java Card and that garbage collection must be invoked by the application itself. Deciding when to perform garbage collection is very difficult as on one side you don't want to do it often, and on the other side if you run out of memory you are out of luck.
+Garbage collection in the Java Card language differs from standard Java. In standard Java garbage collection is performed by the Java Virtual Machine (JVM) and runs independently of the application. In Java Card objects are stored in the persistent memory (EEPROM) and writing to this memory is very time-consuming. As a result it was decided that there would be no automatic garbage collection in Java Card and that garbage collection should be invoked by the application itself. Deciding when to perform garbage collection is very difficult as on one side it is resource intensive, while on the other side you may risk running out of memory.
 
-When incorporating the features of a smart card with a mobile device it would be beneficial to not rely on an external contact card or contactless card. One of the key features of the Java Card language is that the software is able to run on technological different smart cards. As such it is possible to deploy the Java Card applet to special micro SD memory cards. This essentially enables the smart card to be integrated with the mobile device, but at the same time be an external runtime environment. Figure \ref{fig:msdcard} is a micro SD memory card produced by Gemalto.
+%When incorporating the features of a smart card with a mobile device it would be beneficial to not rely on an external contact card or contactless card.
+%One of the key features of the Java Card language is that the software is able to run on technological different smart cards. As such it is possible to deploy the Java Card applet to special micro SD memory cards. This essentially enables the smart card to be integrated with the mobile device, but at the same time be an external runtime environment. Figure \ref{fig:msdcard} is a micro SD memory card produced by Gemalto.
+The fact that there is now a standardized smart card platform based on Java Card technology, means that once an applet as been written, it can be easily installed on different types of smart cards. For instance cards in micro SD format as shown in Figure \ref{fig:msdcard} and cards as shown in figure \ref{fig:nfccard} would be able to run the same application (given that both support Java Card).
+
 
 \begin{figure}[h!]
   \caption{Micro SD card from Gemalto.}
@@ -181,17 +196,23 @@ When incorporating the features of a smart card with a mobile device it would be
 
 
 \subsection{Other smart card programming languages}
-There exists several other languages for smart card programming. The two most notable are Java Card (section \ref{sec:javacard}) and MULTOS \cite{multos}. The latter uses the programming language C as the language for writing applications. We will use Java Card in this thesis as it is supported by our smart cards and is similar to standard Java which is used in our mobile devices (refer to section \ref{sec:androidOS}).
+Besides Java Card, another widespread smart card operative system is MULTOS \cite{multos}. MULTOS was the first open high security operating system that supported multiple applets and supports the programming languages native assembly (MEL), C and Java. Java Card and MULTOS differs from how they handle applets shared space/memory on the smart cards. MULTOS security targets are: Applets can only be loaded by the card issuer, applets are segregated and secure package deployment. Java Card uses a secure channel to distribute applications whereas MULTOS uses secure packaging. The essence is that third parties can deploy new applets to the smart card containing sensitive data. This is possible as the package is encrypted with the public key of MULTOS (card unique) and thus you do not need a secure channel \cite{smartcardThesis, hmultosVSjavacard}.
+
+There exists a .NET version of a smart card OS started by Microsoft which led to other versions developed by Gemalto and CardWerk. We will use Java Card in this thesis as this is supported by our smart cards and is similar to standard Java which is used in our mobile devices (refer to section \ref{sec:androidOS}).
 
 \section{Android operating system}
 \label{sec:androidOS}
-Mobile operating system refers to the operating system running on a mobile device (smartphones, GPS devices, tablets, etc.). In this thesis we will focus mainly on smartphones and tablets since their capabilities are within our scope and the fact that they often share the same operating system. For practical reasons and because of time constraints we have restricted us to one mobile operating system.
+Mobile operating system refers to the operating system running on a mobile device (smartphones, GPS devices, tablets, etc.). In this thesis we will focus mainly on smartphones and tablets since their capabilities are within our scope and the fact that they often share the same operating system.
 
 Android is an open source licensed mobile operating system and is based on one of the LTS (long-term support) branches of the Linux kernel. Google Inc. \cite{google} is the current developer of the mobile operating system and their primary focus has been smartphones and tablets. In later years Google has put resources into incorporating Android with TVs, wrist watches and cars. In 2015 Q2 82,8 \% of smartphones worldwide was shipped with a version of the Android mobile operating system \cite{androidMarketShare}.
 
 The Android mobile operating system supports applications that are written in Java, GO and C/C++. The applications run in their own sandbox with their own allocated memory space, but applications can also access shared resources given permission to do so by the user.
 
-\section{Smart card support in Android}
+For practical reasons and because of time constraints we have restricted us to one mobile operating system. The mobile operating system of choice is Android. The reason for picking Android as our mobile platform is the flexibility of the Android system and devices when it comes to secure element support. iOS devices have no support for micro SD smart cards and Windows Phones does not seem to have any libraries support smart card communication. Blackberry is an alternative, especially their latest iterations which is a custom Android version, but due to their low market share they are not representative in a ``bring your own device'' situation. We discuss the Blackberry Priv more in depth in section \ref{sec:blackberry.}
+
+% devices as iPhone OS does not support micro SD cards and Windows Phone devices does not seem to support secure elements at all.
+
+\subsection{Smart card support in Android}
 \label{sec:supportAndroid}
 In Android version 2.3 (API level 9) NFC support was added which enabled a mobile device to read NFC Data Exchange Format (NDEF) from NFC devices/tags. In Android 2.3.3 (API level 10) the class \texttt{IsoDep} was added which enabled mobile devices to send byte data via NFC to devices with NFC support. This means that any device supporting API level 10 or higher and with a NFC adapter can communicate with smart cards via NFC.
 
@@ -203,7 +224,8 @@ Since SEEK for Android is open source and we can look into how the software work
 
 As an alternative to flashing the operating system one can use proprietary drivers from smart card manufacturers. Gemalto produces a Java library, IDGo800, which is a cryptographic and communication middleware for their smart cards (more on this in section \ref{sec:gemaltoApp}). Installing/using third-party applications/libraries to communicate with smart cards may not always be the best option, as you make yourself dependent on a third-party. In essence, opting for this solution results in a vendor lock. Security wise you should not blindly trust a third-party and you may not have access to the software if you wish to evaluate it.
 
-\section{Blackberry Priv}
+\subsection{Blackberry Priv}
+\label{sec:blackberry}
 The Blackberry Priv by Blackberry is branded as a ``secure smartphone'' \cite{blackberryPriv}. Blackberry's states that all data on the device is hardware-encrypted, the operating system performs a integrity check every time it boots, and that Blackberry's hardware suppliers are to be trusted. Blackberry Priv runs a modified Android version and comes with native secure element support. What this entails is that the Blackberry Priv may be the ``off-the-shelf'' solution we seek for both hardware and software (operating system) as we do not need to run and maintain custom frameworks or flash the operating system to communicate with secure elements as discussed in section \ref{sec:supportAndroid}.
 
 The downside of opting for the Blackberry Priv is that we lock ourselves to a specific vendor which defeats the ``bring your own device'' concept. Another thing to keep in mind is that this is one single device, meaning it would need to be reviewed as to whether it fits the organization needs in terms of functionality and other characteristics (size, weight, battery, etc.). The device is also rather expensive compared to devices with similar specifications.
@@ -216,11 +238,11 @@ In this thesis we will not seek further investigation on the Blackberry Priv and
 
 \section{Cryptography}
 %What is cryptography?
-Cryptography is a method for protecting confidential data using complex mathematics and computer science. Most cryptographic functions/algorithms relies heavily on the fact that the mathematics are so complex that they are ``uncrackable'' without knowledge of the encryption/decryption key.
+Cryptography is a method for protecting confidential data using complex mathematics and computer science. Most cryptographic functions/algorithms relies heavily on the fact that the mathematics are so complex that they are ``unbreakable'' without knowledge of the encryption/decryption key.
 
 \subsection{Public-key cryptography}
 \label{sec:publicKeyCrypto}
-Public-key cryptography refers to a set of methods for asymmetric cryptography. It is based around the concept that one entity (user, server, etc.) generates a key pair consisting of one public key and one private key. Data encrypted using the public key can only be decrypted by the private key and due to the complexity of the keys it is improbable that the private key can be generated from the public key. The public key, as the name suggests, is publicly available for other entities. This combination allows entities to communicate securely given that they have each others public key and their private key is stored securely. Figure \ref{fig:encrypt_basic} shows how a sender can send a message that only the receiver can read. Although it is important to note that this operation is more resource intensive and time consuming compared to symmetric key encryption/decryption.
+Public-key cryptography refers to a set of methods for asymmetric cryptography. It is based on the concept that one entity (user, server, etc.) generates a key pair consisting of one public key and one private key. Data encrypted using the public key can only be decrypted by the private key and due to the complexity of the keys it is improbable that the private key can be generated from the public key. The public key, as the name suggests, is publicly available for other entities. This combination allows entities to communicate securely given that they have each others public key and their private key is stored securely. Figure \ref{fig:encrypt_basic} shows how a sender can send a message that only the receiver can read. Although it is important to note that this operation is more resource intensive and time consuming compared to symmetric key encryption/decryption.
 
 \begin{figure}[h!]
   \captionsetup{justification=centering,margin=1.5cm}
@@ -230,7 +252,7 @@ Public-key cryptography refers to a set of methods for asymmetric cryptography. 
     \includegraphics[width=1\textwidth]{images/encrypt_basic.png}
 \end{figure}
 
-One of the most common public-key cryptosystems is RSA, which is widely used for secure communication. RSA builds on the principle of factorization of the product of two prime numbers, or rather the difficulty of factorize the product. It is not impossible to factorize the product of two prime numbers and there was a challenge by the RSA Laboratories where one could win prizes for factorized RSA-keys \cite{rsaChallenge}, but the most complex RSA that were cracked was 768-bit. Proving that RSA is secure is out of the time scope for this thesis. Other source conclude that with long enough keys and correct protocol implementation, the math behind RSA can be considered secure \cite[~p. 194]{cryptoMath}. Information on the inner workings of RSA can be found in the book ``Understanding Cryptography'' by Christof Paar and Jan Pelzl, chapter 7 ``The RSA Cryptosystem'' \cite{cryptoMath}.
+One of the most common public-key cryptosystems is RSA, which is widely used for secure communication. RSA builds on the principle of factorization of the product of two prime numbers, or rather the difficulty of factorize the product. It is not impossible to factorize the product of two prime numbers and there was a challenge by the RSA Laboratories where one could win prizes for factorized RSA-keys \cite{rsaChallenge}, but the most complex RSA that were cracked was 768-bit. Proving that RSA is secure is out of the time scope for this thesis. Other sources conclude that with long enough keys and correct protocol implementation, the math behind RSA can be considered secure \cite[~p. 194]{cryptoMath}. Information on the inner workings of RSA can be found in the book ``Understanding Cryptography'' by Christof Paar and Jan Pelzl, chapter 7 ``The RSA Cryptosystem'' \cite{cryptoMath}.
 
 Message authentication can also be done by public-key cryptography. First the message is hashed using a secure hash function, for instance SHA-2 \cite{shaRFC}, which creates a digest. The digest is then encrypted with the private key and the ``digital signature'' is then sent with the original message. The receiver can then verify the integrity of the message by computing the hash of the message using the same secure hash function and decrypt the ``digital signature'' using the senders public key. If they are a match the receiver can with certainty conclude that the message has not been tampered with and originates from the sender.
 
@@ -242,22 +264,53 @@ Message authentication can also be done by public-key cryptography. First the me
     \includegraphics[width=1\textwidth]{images/signing_basic.png}
 \end{figure}
 
+One of the key issues with public-key cryptography is verifying the identity of the public key owner. Authentication is not a trivial matter and is solved by using certificates to prove that the holder of the key is who they claim to be. The certificates needs to be signed by a trusted third party whom both the sender and receiver of the message trust. The mutual trust relationship is a complex matter and is not a topic we will investigate further in this thesis, but we will assume that it is possible to achieve.
+
 \subsection{Symmetric-key cryptography}
 \label{sec:symmetricCrypto}
-Symmetric-key cryptography uses the same cryptographic key for both encryption and decryption. There are two main areas of application for symmetric-key cryptography; secure storage of data and secure communication. Secure storage of data is the most straight forward of the two. An entity (user, server, etc.) generates a key, encrypts the data using the key, stores the key for future use and decrypts the data using the key whenever the entity require the data. As long as the key is stored securely and the encryption algorithm is secure the data can be stored in an unsecured environment. Secure communication using symmetric-key is similar, but instead of the same entity decrypting the data, the encrypted data is transmitted to a new entity which decrypts it using the same key. This requires the key or key generation to be known by both parties, also known as a ``shared secret''. There are two methods for symmetric-key encryption/decryption. Stream ciphering takes one byte at the time and encrypts/decrypts it whereas block ciphering takes bigger chunks of data and encrypts/decrypts the data. Both methods have their own weaknesses and strengths \cite[~Ch. 2.1.1]{cryptoMath}.
+Symmetric-key cryptography uses the same cryptographic key for both encryption and decryption. There are two main areas of application for symmetric-key cryptography; secure storage of data and secure communication. Secure storage of data is the most straight forward of the two. An entity (user, server, etc.) generates a key, encrypts the data using the key, stores the key for future use and decrypts the data using the key whenever the entity require the data. As long as the key is stored securely and the encryption algorithm is secure the data can be stored in an unsecured environment. Secure communication using symmetric-key is similar, but instead of the same entity decrypting the data, the encrypted data is transmitted to a new entity which decrypts it using the same key. This requires the key (known in this case as shared secret) or key generation process to be known by both parties. There are two methods for symmetric-key encryption/decryption. Stream ciphering takes one byte at the time and encrypts/decrypts it whereas block ciphering takes bigger chunks of data and encrypts/decrypts the data. Both methods have their own weaknesses and strengths \cite[~Ch. 2.1.1]{cryptoMath}.
 
 Stream ciphering is fast and relatively simplistic to implement. This along with the fact that it can encrypt byte by byte makes it very suitable for use when plaintext data comes in  unknown length and over time (streams). Areas of application includes voice chat, video feed and http communication. Disadvantages of stream ciphering is that if the algorithm is cracked then it is susceptible to insertions and modifications as well as the fact that a single plaintext symbol is represented as a single ciphertext symbol (limited alteration).
 
-Block cipher is a more complex and requires more overhead. First of data must be divided into equal size blocks. The blocks cannot be too small as then they are prone to dictionary attacks and not too big as it will make the encryption/decryption process too resource intensive. In block cipher the block size must be fixed through the encryption process. This will often result in redundant data. For example, 200-bit plaintext with a 64-bit block size will result in three blocks of 64-bit and a fourth block with only 8 bit of ``real'' data and 56 bit of redundant bits. Since block ciphering uses the previous block to cipher the current block it is possible to detect tampering and faults, but this also results that data may be lost if a block becomes corrupt.
+Block cipher is a more complex and requires more overhead. First of all, data must be divided into equal size blocks. The blocks cannot be too small as they would be prone to dictionary attacks and not too big as this would make the encryption/decryption process too resource intensive. In block ciphers the block size must be fixed through the encryption process. This will often result in redundant data. For example, 200-bit plaintext with a 64-bit block size will result in three blocks of 64-bit and a fourth block with only 8 bit of ``real'' data and 56 bit of redundant bits. Since block ciphering uses the previous block to cipher the current block it is possible to detect tampering and faults, but this also results that data may be lost if a block becomes corrupt.
 
-Advanced Encryption Standard (AES) is one of the most common symmetric-key cryptography methods. AES does not rely on number factorization (opposed to RSA), but rather substitution and permutation using a key. It can be seen as hashing data and being able to reverse the hashing using the same key. There are currently no known analytic attacks against AES which are less complex than brute-force attacks and consensus is that using long keys are considered secure.
+Advanced Encryption Standard (AES) is one of the most common symmetric-key cryptography methods. AES does not rely on number factorization (opposed to RSA), but rather substitution and permutation using a key. It can be seen as hashing data and being able to reverse the hashing using the same key. There are currently no known analytic attacks against AES which are less complex than brute-force attacks and consensus is that it is secure as long as long enough keys are used.
 
 \section{Mobile technology vulnerabilities}
 Mobile technology vulnerabilities and attack vectors are numerous and before looking into how smart cards can help mitigate an alleviate threats we will need to identify and characterize them.
+
+\subsection{Physical access}
+An attacker may gain physical access to the users mobile device through theft or simply that the user misplaced the mobile device. With physical access to the device an attacker would be able to retrieve data from the device. A common defense against this is encrypting the data on the device, but this requires the keys to be stored somewhere securely. If the keys are not stored securely the result is that the data on the device may fall into the wrong hands.
+
+Apart from encrypting the device a more basic form of protection against physical access is using screen locks along with disabling USB debugging etc. What is important to remember is that if an attacker or organization has enough time and resources they may at some point become successful in breaking these security measures. This was recently proven correct by the Federal Bureau of Investigation when they were able to hack into the iPhone 5C used by one of the ``San Bernardino shooters'' after Apple refused to help bypass the security measures \cite{iphoneHack}.
+
+\subsection{Remote access}
+An often overlooked attack vector is badly implemented applications on the mobile device. Inherently a lot of functionality is secure, but due to negligence or bad planning functionality is implemented in a bad way. This can include memory leaks, weak cryptography, open for code injections or openly exposing private data to third parties. We classify these vulnerabilities as ``remote'' vulnerabilities as an attacker rarely needs physical access to exploit them. In the ``Top 10 Mobile Risks 2014'' from OWASP \cite{OWASPTopTenMobile} most of the bullets fall under this category. For instance, client side injection allows attackers to remotely execute code on a user device by abusing poor validation of resources.
+
+In rare cases an application with flaws may expose other applications for attacks, but there exists countermeasures to this, for instance that all applications run in their own sandbox. In Android, all applications run in their own environment and applications can only access their own resources and shared resources. The vulnerabilities mentioned above can potentially enable sharing resources that was meant to be private.
+
+\subsection{External vulnerabilities}
+External vulnerabilities differs from remote access by that external vulnerabilities are not tied to the device, they focuses on data or information in transit.
+
+Communication is a vital part of modern systems; data is sent between devices and between devices and servers. Sensitive data requires a secure communication channel which cannot be tapped into by a third party. Secure communication on public networks involves agreeing upon encryption keys which the data should be encrypted with before being sent. Encrypting the communication channel will protect against man-in-the-middle attacks, but this requires both parties to authenticate themselves as encrypting the data won't help if you are sending the data directly to the attacker.
+
+As mentioned above, a secure communication channel is useless if you are sending the data directly to the attacker. A vital part of communication security is being able to authenticate the parties in a communication transaction. If the attacker is able to impersonate another party by installing fake certificates on the mobile device or by tricking the user into communicating with the attacker the consequences can be of great significance. All external parties should be treated as hostile or untrusted parties until proven otherwise.
+
+\subsection{The result of infected or compromised devices}
+The type of virus or malware on an infected device can vary, some are harmless and serve more as an annoyance or trying to trick the user into visiting bogus websites, but some are more malicious and will access private files and information. From a security stand-point it is a disaster if a virus or malware is able to read and modify data which is otherwise confidential.
+
+Often the user will not know that their mobile device is infected and some viruses or malware are very hard to detect by anti-virus. The ``2015 Cheetah Mobile Security Report'' \cite{cheetahSec} reports that the number of viruses on Android devices exceeds over 9,5 million and that the problem is growing. That there exists over 9,5 million viruses for Android shows that Android is a sought after platform to compromise.
+
+When designing and developing applications one should take into consideration that the mobile device may be infected or compromised as well as the possibility for the device to at some point become infected or compromised.
+
+
+\iffalse %COMMENT
+
+
 \subsection{Infected device}
 The most obvious threat to mobile devices is when the mobile device itself is infected with virus or malware. The type of virus or malware can vary, some are harmless and serve more as an annoyance or trying to trick the user into visiting bogus websites, but some are more malicious and will access private files and information. From a security stand-point it is a disaster if a virus or malware is able to read and modify data which is otherwise confidential.
 
-Often the user will not know that their mobile device is infected and some viruses or malware are very hard to detect by anti-virus. The ``2015 Cheetah Mobile Security Report'' \cite{cheetahSec} reports that the number of viruses on Android devices exceeds over 9,5 million and that the problem is growing. When designing and developing applications one should take into consideration that the mobile device may be infected or compromised.
+Often the user will not know that their mobile device is infected and some viruses or malware are very hard to detect by anti-virus. The ``2015 Cheetah Mobile Security Report'' \cite{cheetahSec} reports that the number of viruses on Android devices exceeds over 9,5 million and that the problem is growing. That there exists over 9,5 million viruses for Android shows that Android is a sought after platform to compromise. When designing and developing applications one should take into consideration that the mobile device may be infected or compromised.
 
 \subsection{Lost or stolen device}
 An attacker may gain physical access to the users mobile device through theft or simply that the user misplaced the mobile device. With physical access to the device an attacker would be able to retrieve data from the device. A common defense against this is encrypting the data on the device, but this requires the keys to be stored somewhere securely. If the keys are not stored securely the result is that the data on the device may fall into the wrong hands.
@@ -273,3 +326,4 @@ As mentioned in section \ref{sec:unsecureCommunication} a secure communication c
 
 \subsection{Insecure applications}
 An often overlooked attack vector is badly implemented applications on the mobile device. Inherently a lot of functionality is secure, but due to negligence or bad planning are implemented in a bad way. This can include memory leaks, weak cryptography, open for code injections or openly exposing private data to third parties. In rare cases an application with flaws may expose other applications for attacks, but there exists countermeasures to this, for instance that all applications run in their own sandbox. In the ``Top 10 Mobile Risks 2014'' from OWASP \cite{OWASPTopTenMobile} most of the bullets fall under this category.
+\fi %UNCOMMENT
