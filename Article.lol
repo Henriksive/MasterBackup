@@ -1,22 +1,22 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {lstlisting}{\numberline {3.1}Install and deploy script for GlobalPlatformPro.}{27}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {4.1}Obtaining storage status of keys using KeyInfo.}{44}
+\contentsline {lstlisting}{\numberline {4.1}Obtaining storage status of keys using KeyInfo.}{45}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {4.2}Generating RSA key-pair on Android device using KeyPairGenerator}{45}
+\contentsline {lstlisting}{\numberline {4.2}Generating RSA key-pair on Android device using KeyPairGenerator}{46}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {4.3}Human-readable policies in JSON.}{53}
+\contentsline {lstlisting}{\numberline {4.3}Human-readable policies in JSON.}{54}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {4.4}Pseudo code for interpreting policy APDU with Java Card.}{54}
+\contentsline {lstlisting}{\numberline {4.4}Pseudo code for interpreting policy APDU with Java Card.}{55}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.1}Pseudo code for javacard test application.}{58}
+\contentsline {lstlisting}{\numberline {5.1}Pseudo code for javacard test application.}{59}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.2}Java code example showing how to send and receive commands to a NFC smart card.}{61}
+\contentsline {lstlisting}{\numberline {5.2}Java code example showing how to send and receive commands to a NFC smart card.}{62}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.3}Java code example showing how to send sign a message using a NFC smart card.}{63}
+\contentsline {lstlisting}{\numberline {5.3}Java code example showing how to send sign a message using a NFC smart card.}{64}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {6.1}Java Card failed signing.}{80}
+\contentsline {lstlisting}{\numberline {6.1}Java Card failed signing.}{81}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {A.1}SecureCard.java.}{91}
+\contentsline {lstlisting}{\numberline {A.1}SecureCard.java.}{92}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {B.1}CommunicationController.java.}{103}
+\contentsline {lstlisting}{\numberline {B.1}CommunicationController.java.}{104}
