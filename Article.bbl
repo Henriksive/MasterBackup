@@ -271,9 +271,20 @@
   \field{year}{2013}
 \endentry
 
+\entry{gemaltoidgo3010}{online}{}
+  \field{sortinit}{I}
+  \field{note}{Last visited: 20.05.2016}
+  \field{title}{IDCore 3010 – Rev B}
+  \verb{url}
+  \verb http://www.gemalto.com/products/top_javacard/download/IDCore3010_RevB_P
+  \verb roduct_Datasheet_July14.pdf
+  \endverb
+  \field{year}{2015}
+\endentry
+
 \entry{gemaltoidgo8030}{online}{}
   \field{sortinit}{I}
-  \field{note}{Last visited: 16.02.2016}
+  \field{note}{Last visited: 20.05.2016}
   \field{title}{IDCore 8030 MicroSD card, Datasheet}
   \verb{url}
   \verb http://www.gemalto.com/products/top_javacard/download/IDCore8030_Datash

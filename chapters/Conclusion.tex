@@ -13,6 +13,7 @@
 \end{itemize}
 
 \section{Experience}
+\label{sec:experience}
 %After working with smart cards for roughly one year, we have gained quite a few experiences that we believe are worth sharing.
 During this thesis we have gained insight and experience when working with smart cards. We believe sharing these experiences will increase the efficiency for others working on the field in the future.
 
@@ -30,7 +31,7 @@ The documentation available is very technical. This is not by any means a bad th
 The gap between software and hardware is very apparent in the Java Card documentation. We often encountered functionality that was supposed to work, but did not work on our smart cards. The result of this was that when we encountered bugs, we did not know if it was a programming mistake or simply not supported by our smart cards. The best example of this was when we tried to use the \texttt{Cipher} class with algorithms that proved to not work on our smart cards (section \ref{sec:symmetricTest}).
 
 \paragraph{Deploying smart card applications}\mbox{}\\
-Deploying smart card applications to a smart card is a time consuming task. This became very apparent when working with micro SD smart cards. Deploying a new version to micro SD required us to: remove mSD from mobile device, insert mSD into computer, run install script, wait on install script to finish, insert mSD into mobile device. Following this procedure once in a while is not a big inconvenience, but in context of debugging it become very tedious to spend 1,5 minutes switching around the mSD card and waiting for the install script.
+Deploying smart card applications to a smart card is a time consuming task. This became very apparent when working with micro SD smart cards. Deploying a new version to micro SD required us to: remove mSD from mobile device, insert mSD into the computer card reader, run install script, wait on install script to finish, insert mSD into mobile device. Following this procedure once in a while is not a big inconvenience, but in context of debugging it become very tedious to spend 1,5 minutes switching around the mSD card and waiting for the install script.
 
 \paragraph{Literature}\mbox{}\\
 A lot of the existing literature on smart cards focuses on the two areas banking and identification. Even though we share some use cases and challenges with these areas we cannot directly apply their solutions to our research. There are two reasons for this. The first reason is that smart cards in banking and identification have a very narrow objective with what the smart card's responsibility is, whereas our smart cards have many different responsibilities (authenticate, authorize, encrypt, key management, etc.). The second reason is that in both banking and identification the smart cards can rely on a third party (server) to verify every interaction, e.g., when paying with debit card (smart card) a server verifies the money transaction. After the initial binding of smart card and mobile device our solution's goal is that the smart card is independent.
