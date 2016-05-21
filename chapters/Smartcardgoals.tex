@@ -96,7 +96,7 @@ In order to develop applications for the smart cards we will be using Eclipse 3.
 In figure \ref{fig:eclipse} we can see the tools for generating the deployable smart card application package (.cap file). The screenshot also shows how the editor looks like any other Eclipse version. Even though this version of Eclipse includes tools for sending and receiving APDUs to the application (testing), we have decided not to use these tools as they proved themselves to be unstable and not representative of real world use. This is mostly due to the fact that the application is deployed to an emulator and does not have \textit{any} hardware limitations of a physical smart card.
 
 \paragraph{Deployment}\mbox{}\\
-We will be using GlobalPlatformPro (GP) \cite{globalplatform} to deploy and manage applets on the physical smart cards. GP is a command line tool and is compatible with our hybrid Gemalto card with reader as well as the micro SD card. In figure \ref{fig:deployFlow} we can see which part of the assembly line GP is responsible for.
+We will be using GlobalPlatformPro (GP) \cite{globalplatform} to deploy and manage applets on the physical smart cards. GP is a command line tool and is compatible with our hybrid Gemalto card with reader as well as the micro SD card. In figure \ref{fig:deployFlow} we can see which part of the assembly line GP is responsible for. GP takes the generated .cap file and deploys it to the smart card via the card reader using the computer drivers.
 
 \begin{figure}[h!]
   \caption{Deployment line using GlobalPlatformPro.}
@@ -164,9 +164,11 @@ To test the application we will be using the built in ADB in Android studio as w
 \end{figure}
 
 Even though ADB provides us with good resource usage tools we wish to perform more informal tests using timers to get a feel for how long an operation takes. We can use the built in Android class \texttt{System} and the method \texttt{nanoTime()} to get an accurate start and stop time for an operation and calculate elapsed time. This combined with visually inspecting the running application can help us get an indication of how responsive the application is when executing tasks.
-\clearpage
+
 \section{Development flow}
 Recall the tools and technologies from the previous sections. Figure \ref{fig:devFlow} shows the development process. The process is linear from top to bottom, but it is important to note that we will need to develop for both the Android application and smart card applet in parallel. By parallel we mean that in order to test some new functionality we will need to implement functionality on both platforms.
+
+The figure clearly shows that everything concerning the Android side of the framework is handled by Android Studio along with the Android SDK except for the Gemalto library for micro SD support. Google has put a lot of resources into streamlining the Android development process whereas we are dependent on independent or proprietary software for smart card applet development.
 
 One important thing to note is that the figure shows that we cannot observe any test results of the smart card. Observation of the smart card's test results must be done via the Android application (refer to section \ref{sec:experience}).
 
