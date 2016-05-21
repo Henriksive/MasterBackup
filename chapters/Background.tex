@@ -126,6 +126,7 @@ If we use the example from the third category of Command APDUs that used cipheri
 To better understand when to use the Command APDUs and when to use Response APDUs can use the following example: A locked door has a card reader connected to it. A person walks up to the door and presents his contactless smart card to the reader. The card reader sends a Command APDU to the card asking for the ID. The smart card processes the Command APDU and sends a Response APDU back to the card reader containing the ID of the person. This example is visualized in figure \ref{fig:doornfc} and in figure \ref{fig:doornfcapdu} we have the same example, but with actual APDU commands.
 
 \begin{figure}[h!]
+  \captionsetup{justification=centering,margin=1.5cm}
   \caption{Door lock using smart card to unlock.}
   \label{fig:doornfc}
   \centering
@@ -134,6 +135,7 @@ To better understand when to use the Command APDUs and when to use Response APDU
 
 
 \begin{figure}[h!]
+  \captionsetup{justification=centering,margin=1.5cm}
   \caption{Door lock using smart card to unlock with corresponding APDU commands}
   \label{fig:doornfcapdu}
   \centering
@@ -197,7 +199,7 @@ The fact that there is now a standardized smart card platform based on Java Card
 
 
 \subsection{Other smart card programming languages}
-Besides Java Card, another widespread smart card operative system is MULTOS \cite{multos}. MULTOS was the first open high security operating system that supported multiple applets and supports the programming languages native assembly (MEL), C and Java. Java Card and MULTOS differs from how they handle applets shared space/memory on the smart cards. MULTOS security targets are: Applets can only be loaded by the card issuer, applets are segregated and secure package deployment. Java Card uses a secure channel to distribute applications whereas MULTOS uses secure packaging. The essence is that third parties can deploy new applets to the smart card containing sensitive data. This is possible as the package is encrypted with the public key of MULTOS (card unique) and thus you do not need a secure channel \cite{smartcardThesis, hmultosVSjavacard}.
+Besides Java Card, another widespread smart card operative system is MULTOS \cite{multos}. MULTOS was the first open high security operating system that supported multiple applets and supports the programming languages native assembly (MEL), C and Java. Java Card and MULTOS differs from how they handle applets shared space/memory on the smart cards. MULTOS security targets are: Applets can only be loaded by the card issuer, applets are segregated and secure package deployment. Java Card uses a secure channel to distribute applications whereas MULTOS uses secure packaging. The essence is that third parties can deploy new applets to the smart card containing sensitive data. This is possible as the package is encrypted with the public key of MULTOS (card unique) and thus you do not need a secure channel \cite{smartcardThesis, multosVSjavacard}.
 
 There exists a .NET version of a smart card OS started by Microsoft which led to other versions developed by Gemalto and CardWerk. We will use Java Card in this thesis as this is supported by our smart cards and is similar to standard Java which is used in our mobile devices (refer to section \ref{sec:androidOS}).
 

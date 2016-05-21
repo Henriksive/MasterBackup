@@ -86,212 +86,216 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}Challenges and use cases}{34}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Binding card and phone}{34}
+\contentsline {section}{\numberline {4.1}Binding card and mobile device}{35}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}Problem description}{34}
+\contentsline {subsection}{\numberline {4.1.1}Problem description}{35}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}Goal}{35}
+\contentsline {subsection}{\numberline {4.1.2}Goals}{36}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.3}Key concepts}{35}
+\contentsline {subsection}{\numberline {4.1.3}Key concepts}{36}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.4}Proposed solution}{38}
+\contentsline {subsection}{\numberline {4.1.4}Proposed solution}{39}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Pre-conditions}{38}
+\contentsline {paragraph}{Pre-conditions}{39}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Verification package}{38}
+\contentsline {paragraph}{Verification package}{40}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Abbreviations}{39}
+\contentsline {paragraph}{Abbreviations}{41}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.5}Architecture evaluation}{42}
+\contentsline {subsection}{\numberline {4.1.5}Protocol analysis}{44}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{M generates RSA key-pair and stores it.}{42}
+\contentsline {paragraph}{1. Install the (correct) Android application the on mobile device (M) andinsert smart card (U).}{44}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{U asks for PIN code.}{42}
+\contentsline {paragraph}{2. M generates RSA key-pair and stores it securely on the device}{45}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{U generates the verification package.}{43}
+\contentsline {paragraph}{4. U asks for PIN/OTP}{45}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{M connects to the server (S) and sends the verification package to S.}{43}
+\contentsline {paragraph}{5. M provides PIN/OTP}{45}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{The server signs the public key of M.}{43}
+\contentsline {paragraph}{6. U generates the verification package.}{45}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{U verifies that M\textsubscript {pub} was signed by S and if successful U sends U\textsubscript {pub} to M.}{44}
+\contentsline {paragraph}{7. M connects to the server (S) and sends the verification package to S.}{46}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.6}Cryptography evaluation}{44}
+\contentsline {paragraph}{9. The server signs the public key of M.}{46}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.7}Potential attack vectors}{44}
+\contentsline {paragraph}{11. U verifies that M\textsubscript {pub} was signed by S and if successful U sends U\textsubscript {pub} to M.}{46}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Rogue technical party}{44}
+\contentsline {subsection}{\numberline {4.1.6}Cryptography evaluation}{47}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Rogue user or administrator}{45}
+\contentsline {subsection}{\numberline {4.1.7}Potential attack vectors}{47}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.8}Additions}{46}
+\contentsline {paragraph}{Rogue technical party}{47}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Mobile device keys}{46}
+\contentsline {paragraph}{Rogue user or administrator}{48}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.1}Problem statement}{46}
+\contentsline {subsection}{\numberline {4.1.8}Additions}{48}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.2}Goal}{46}
+\contentsline {section}{\numberline {4.2}Mobile device keys}{49}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.3}Key concepts}{46}
+\contentsline {subsection}{\numberline {4.2.1}Problem description}{49}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Android Keystore system}{46}
+\contentsline {subsection}{\numberline {4.2.2}Goals}{49}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.4}Generate keys on mobile device}{49}
+\contentsline {subsection}{\numberline {4.2.3}Key concepts}{49}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.5}Generate keys on server //p12-fil etc.}{49}
+\contentsline {paragraph}{Android Keystore system}{49}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.6}Evaluation and comparison}{50}
+\contentsline {subsection}{\numberline {4.2.4}Generate keys on mobile device}{51}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Security policy enforcement}{52}
+\contentsline {subsection}{\numberline {4.2.5}Generate keys on server //p12-fil etc.}{52}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.1}Definition}{52}
+\contentsline {subsection}{\numberline {4.2.6}Evaluation and comparison}{53}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.2}Problem description}{52}
+\contentsline {section}{\numberline {4.3}Security policy enforcement}{54}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.3}Goals}{52}
+\contentsline {subsection}{\numberline {4.3.1}Definition}{54}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.4}Shift responsibility to a trusted party}{53}
+\contentsline {subsection}{\numberline {4.3.2}Problem description}{54}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.5}Proposed solution}{53}
+\contentsline {subsection}{\numberline {4.3.3}Goals}{55}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Relevant policies for a smart card}{53}
+\contentsline {subsection}{\numberline {4.3.4}Shift responsibility to a trusted party}{55}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Installing policies}{54}
+\contentsline {subsection}{\numberline {4.3.5}Proposed solution}{56}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Enable and update policies}{54}
+\contentsline {paragraph}{Relevant policies for a smart card}{56}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Challenge transaction}{55}
+\contentsline {paragraph}{Installing policies}{56}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Policy format}{56}
+\contentsline {paragraph}{Enable and update policies}{56}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.6}Solution evaluation}{59}
+\contentsline {paragraph}{Challenge transaction}{58}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.7}Potential attack vectors}{60}
+\contentsline {paragraph}{Policy format}{59}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Known-plaintext attack}{60}
+\contentsline {subsection}{\numberline {4.3.6}Solution evaluation}{62}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Implementation}{61}
+\contentsline {subsection}{\numberline {4.3.7}Potential attack vectors}{63}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Java Card Application}{61}
+\contentsline {paragraph}{Known-plaintext attack}{63}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1.1}Application}{61}
+\contentsline {chapter}{\numberline {5}Implementation}{64}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Goal}{61}
+\contentsline {section}{\numberline {5.1}Java Card Application}{64}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Initialization}{61}
+\contentsline {subsection}{\numberline {5.1.1}Application}{64}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Data processing}{62}
+\contentsline {paragraph}{Goal}{64}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Finalization}{62}
+\contentsline {paragraph}{Initialization}{64}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{The result}{62}
+\contentsline {paragraph}{Data processing}{65}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1.2}Extending the Java Card application}{63}
+\contentsline {paragraph}{Finalization}{65}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Android Application}{64}
+\contentsline {paragraph}{The result}{65}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.1}3rd party libraries}{64}
+\contentsline {subsection}{\numberline {5.1.2}Extending the Java Card application}{66}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.2}Application}{64}
+\contentsline {section}{\numberline {5.2}Android Application}{67}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Custom APDUs}{65}
+\contentsline {subsection}{\numberline {5.2.1}3rd party libraries}{67}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Pre-implemented methods}{66}
+\contentsline {subsection}{\numberline {5.2.2}Application}{67}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.3}Responsibility areas}{71}
+\contentsline {paragraph}{Custom APDUs}{68}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Testing}{73}
+\contentsline {paragraph}{Pre-implemented methods}{69}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Setup}{73}
+\contentsline {subsection}{\numberline {5.2.3}Responsibility areas}{74}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.1}Equipment}{73}
+\contentsline {chapter}{\numberline {6}Testing}{76}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Test device}{73}
+\contentsline {section}{\numberline {6.1}Setup}{76}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Java smart card}{74}
+\contentsline {subsection}{\numberline {6.1.1}Equipment}{76}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.2}Limitations}{74}
+\contentsline {paragraph}{Test device}{76}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Data Transfer Speed}{74}
+\contentsline {paragraph}{Java smart card}{77}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.1}Description and Motivation}{74}
+\contentsline {subsection}{\numberline {6.1.2}Limitations}{77}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.2}Tests and Results}{75}
+\contentsline {section}{\numberline {6.2}Data Transfer Speed}{77}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{NFC}{75}
+\contentsline {subsection}{\numberline {6.2.1}Description and Motivation}{77}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Micro SD}{77}
+\contentsline {subsection}{\numberline {6.2.2}Tests and Results}{78}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.3}Conclusion}{78}
+\contentsline {paragraph}{NFC}{78}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Symmetric-key Cryptography}{78}
+\contentsline {paragraph}{Micro SD}{80}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.1}Description and Motivation}{78}
+\contentsline {subsection}{\numberline {6.2.3}Conclusion}{81}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.2}Test setup}{78}
+\contentsline {section}{\numberline {6.3}Symmetric-key Cryptography}{81}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.3}Results}{79}
+\contentsline {subsection}{\numberline {6.3.1}Description and Motivation}{81}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.4}Conclusion}{79}
+\contentsline {subsection}{\numberline {6.3.2}Test setup}{81}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Binding card and mobile device}{80}
+\contentsline {subsection}{\numberline {6.3.3}Results}{82}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4.1}Motivation}{80}
+\contentsline {subsection}{\numberline {6.3.4}Conclusion}{82}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4.2}Implementation}{81}
+\contentsline {section}{\numberline {6.4}Binding card and mobile device}{83}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4.3}Tests and results}{82}
+\contentsline {subsection}{\numberline {6.4.1}Motivation}{83}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Configuration 1}{82}
+\contentsline {subsection}{\numberline {6.4.2}Implementation}{84}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Configuration 2}{82}
+\contentsline {subsection}{\numberline {6.4.3}Tests and results}{85}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Installation test}{82}
+\contentsline {paragraph}{Configuration 1}{85}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Run test}{83}
+\contentsline {paragraph}{Configuration 2}{85}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4.4}Limitations}{83}
+\contentsline {paragraph}{Installation test}{85}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Signing not working with 2048-bit key size}{83}
+\contentsline {paragraph}{Run test}{86}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Out of memory}{85}
+\contentsline {subsection}{\numberline {6.4.4}Limitations}{86}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Code rigidity}{85}
+\contentsline {paragraph}{Signing not working with 2048-bit key size}{86}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4.5}Conclusion}{85}
+\contentsline {paragraph}{Out of memory}{88}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Conclusion}{86}
+\contentsline {paragraph}{Code rigidity}{88}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.1}Research questions}{86}
+\contentsline {subsection}{\numberline {6.4.5}Conclusion}{88}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.2}Experience}{87}
+\contentsline {chapter}{\numberline {7}Conclusion}{89}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Getting started with smart card programming}{87}
+\contentsline {section}{\numberline {7.1}Research questions}{89}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Debugging smart card applications}{87}
+\contentsline {section}{\numberline {7.2}Experience}{90}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Java Card documentation}{88}
+\contentsline {paragraph}{Getting started with smart card programming}{90}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Deploying smart card applications}{88}
+\contentsline {paragraph}{Debugging smart card applications}{90}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Literature}{89}
+\contentsline {paragraph}{Java Card documentation}{91}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.3}Future work}{89}
+\contentsline {paragraph}{Deploying smart card applications}{91}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{References}{90}
+\contentsline {paragraph}{Literature}{92}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Java Card code}{96}
+\contentsline {section}{\numberline {7.3}Future work}{92}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {B}Android library}{108}
+\contentsline {chapter}{References}{93}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {C}Diagrams}{114}
+\contentsline {chapter}{\numberline {A}Java Card code}{99}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {D}Framework installation}{115}
+\contentsline {chapter}{\numberline {B}Android library}{111}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {D.1}Smart card development environment}{115}
+\contentsline {chapter}{\numberline {C}Diagrams}{117}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {D.2}Smart card deployment}{116}
+\contentsline {chapter}{\numberline {D}Framework installation}{118}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {D.3}Smart card testing}{116}
+\contentsline {section}{\numberline {D.1}Smart card development environment}{118}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {D.4}Android development environment}{117}
+\contentsline {section}{\numberline {D.2}Smart card deployment}{119}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {D.3}Smart card testing}{119}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {D.4}Android development environment}{120}

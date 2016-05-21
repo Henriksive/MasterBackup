@@ -564,6 +564,26 @@
   \field{year}{2005}
 \endentry
 
+\entry{multosVSjavacard}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {SERVICES}{S.}%
+     {JAN KREMER~CONSULTING}{J.~K.~C.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{SJKC1}
+  \strng{fullhash}{SJKC1}
+  \field{sortinit}{S}
+  \field{note}{Last visited: 18.05.2016}
+  \field{title}{MULTOS and JAVACARD, white paper}
+  \verb{url}
+  \verb https://www.cs.ru.nl/E.Poll/papers/AndroidSecureStorage.pdf
+  \endverb
+  \field{type}{White paper}
+  \field{year}{unknown}
+\endentry
+
 \entry{multos}{online}{}
   \field{sortinit}{S}
   \field{note}{Last visited: 18.05.2016}

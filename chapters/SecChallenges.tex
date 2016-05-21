@@ -1,15 +1,31 @@
 % !TEX root = ../Article.tex
 \chapter{Challenges and use cases}
 \label{ch:challenges}
-In this chapter we will examine what challenges there are with regards to mobile devices and smart cards co-operating. The challenges must be viewed from a use case perspective where the benefits do not come from solving the challenges, but rather what we are able to achieve afterwards. For each challenge we will provide problem description, motivation, key concepts, possible solution and describe possible attack vectors.
-\section{Binding card and phone}
+In this chapter we will analyze some of the challenges one will face when trying to use smart cards to enhance the security of Android mobile devices. In chapter 2 we covered the attack vectors and vulnerabilities that exists on the mobile device platform and we believe that smart cards can help mitigate them. We have established that smart cards are able to run critical operations in a secure and closed execution environment along with the fact that they are tamper resistant. As a result they are perfectly suited to generate and store cryptographic keys, perform cryptographic operations such as verifying signature or encrypt sensitive data, or enforce strong access control through PIN codes.
+
+On the other hand, smart cards have limited computational power and memory, they are passive elements meaning that they cannot initiate an operation and rely on external commands, as well as the fact that they are not ``aware of the outside world'' except for pre-installed information or the information they receive.
+
+Based on these characteristics we have identified two main areas of use where smart cards can be used to mitigate threats on the mobile device platform:
+\begin{enumerate}
+  \item Generate and store cryptographic keys to mitigate the threat of a stolen or lost device. Mobile devices that stores cryptographic keys without using smart cards or secure elements are prone to key theft via operating system exploits or weak user passwords.
+  \item Use the smart card as a separate trusted operating system that can securely handle the communication with off-card and off-device services and enforce simple security policies. As it is a separate execution environment, this can be achieved even if the mobile device operating system is compromised.
+\end{enumerate}
+
+However, in order to ensure that these proposed areas of use function as intended, we will need to overcome some obstacles. First off we will need to establish a trust relationship between the mobile device and smart card in order to verify that they are meant to cooperate and lock/bind them to each other. In section \ref{sec:bindingcardandphone} we elaborate and investigate this challenge. Secondly we will need to define how smart cards and mobile devices handle the encryption keys needed for a secure solution. With this challenge the best we can do is to have a ``best effort approach'', meaning that we have to trust that the solutions provided by the mobile platform are properly implemented. Section \ref{sec:mobileDeviceKeys} investigates this problem. Lastly, we describe how policy enforcement might function using smart cards in section \ref{sec:policies}.
+
+In the next chapter we will perform tests related to the proposed solutions. Even though we were not able to fully implement and test all aspects, we still chose to outline how they can be solved.
+
+%In this chapter we will examine what challenges there are with regards to mobile devices and smart cards co-operating. The challenges must be viewed from a use case perspective where the benefits do not come from solving the challenges, but rather what we are able to achieve afterwards. For each challenge we will provide problem description, motivation, key concepts, possible solution and describe possible attack vectors.
+\section{Binding card and mobile device}
 \label{sec:bindingcardandphone}
 \subsection{Problem description}
 %One of the key challenges when utilizing smart cards with mobile devices is establishing an initial trust relationship. How can the mobile device know that it communicates with a certified smart card (company/department issued) and how can the smart card know that it is interracting with a trusted user on a mobile device? To initialize this trust relationship we need to perform a handshake where we verify that all concerning parties can authenticate and authorize each other.
 One of the key challenges when utilizing smart cards with mobile devices is establishing an initial trust relationship. How can the mobile device know that it communicates with a certified smart card (company/department issued) and how can the smart card know that it is interacting with a trusted user on a mobile device? The biggest problem of the binding process is that the smart card must trust the mobile device, as we have no way of knowing if we are binding to a compromised mobile device.  If the mobile device is not initially compromised and we are able to use the smart card as a bootstrap for trust, then the direct result is that we can use smart cards as a policy enforcement point (PEP) and secure key storage/generation. To initialize this trust relationship we need to perform a handshake where we verify that all concerning parties can authenticate and authorize each other.
 
-\subsection{Goal}
-By binding the smart card and phone together we wish to ensure that a smart card can only be paired with one mobile device and that we are in full control during the process. If we achieve this the direct consequences are:
+Binding the mobile device and smart card mainly protects against offline attacks where the attacker tries to access resources on the mobile device or smart card independently of each other. For instance if the attacker tries to use the smart card and it's stored keys with another device.
+
+\subsection{Goals}
+By binding the smart card and phone together we wish to ensure that a smart card can only be paired with one mobile device and that we are in full control during the process. If we achieve this, then:
 \begin{itemize}
   \item The keys stored on the smart card cannot be retrieved or be used on a different mobile device.
   \item Our application on the mobile device cannot be used without the smart card that was paired with our mobile device.
@@ -27,7 +43,8 @@ This will mitigate vulnerabilities such as:
 To authenticate the two parties, smart card and mobile device, we will need a third party which they both trust. We introduce a new party, the authority, which acts as a trusted third party. The authority issues the smart cards and employ the users. A direct consequence is that they both trust the authority, otherwise we have no starting point. Since they both trust the authority they can ask the authority to verify the other party as shown in figure \ref{fig:standardAuth}.
 
 \begin{figure}[h!]
-  \caption{Trust based on a third party.}
+  \captionsetup{justification=centering,margin=1.5cm}
+  \caption{Using a third party (Authority) to establish a trust relationship between two parties (Application and smart card) lacking trust.}
   \label{fig:standardAuth}
   \centering
     \includegraphics[width=0.95\textwidth]{images/standardAuth2.png}
@@ -36,21 +53,25 @@ To authenticate the two parties, smart card and mobile device, we will need a th
 One thing that differentiates our challenge from traditional authentication challenges is that the smart card is not able to communicate directly with a trusted third party. All communication from our smart card to off card applications or third parties must go through a mobile device. A technical illustration of this relationship can be seen in figure \ref{fig:smu} where the authority is represented as a server. This drawback introduces a new problem which we have to consider. How do we know if the mobile device relays information between the server and smart card correctly in the authentication process?
 
 \begin{figure}[h!]
+  \captionsetup{justification=centering,margin=1.5cm}
   \caption{Server, mobile device and smart card communication flow.}
   \label{fig:smu}
   \centering
     \includegraphics[width=0.95\textwidth]{images/SMU.png}
 \end{figure}
 
-To combat that all information flowing from the smart card has to go through the mobile device, we can utilize the fact that the authority we are trying to authenticate with is also the the smart card issuer. What this means is that we can pre-install the authority certificate and public key on the smart card as well as retrieve the public key of the smart card before handing the smart card to the user/employee. The result is that we have already exchanged the keys and certificates we need for authenticating the server and smart card before we introduce the mobile device.
+To combat that all information flowing from the smart card has to go through a possibly compromised mobile device, we can utilize the fact that the authority we are trying to communicate with is also the smart card issuer. What this means is that we can pre-install the authority certificate and public key on the smart card as well as retrieve the public key of the smart card before handing the smart card to the user/employee. In other words, the authority and the smart card have already exchanged all necessary information to securely authenticate each other before deployment.
 
-The mobile device will also need to authenticate with the authority so that the smart card can trust the mobile device. In this process we will need to make some assumptions. The first problem is that we need to  ensure that the mobile device tries to communicate with the right server (authority). By hardcoding the server URL in the mobile device application and making sure that the user installs the right application on his device we can mitigate this threat. To make sure that the user installs the right application we need a secure distribution platform. By using Google Play as distribution platform, we can minimize the risk that the user will download a rogue application with the same name \cite{googlePlaySecureDist}. To further mitigate the risk of installing the wrong application the user can disable the ability to side-load applications and avoid using a rooted device.
+The mobile device will also need to authenticate with the authority so that the smart card can trust the mobile device. In this process we will need to make some assumptions. The first problem is that we need to  ensure that the mobile device communicates with the right server (authority). By hardcoding the server URL in the mobile device application and making sure that the user installs the right application on his device we can mitigate this threat. To make sure that the user installs the right application we need a secure distribution platform. By using Google Play as distribution platform, we can minimize the risk that the user will download a rogue application with the same name \cite{googlePlaySecureDist}. To further mitigate the risk of installing the wrong application the user can disable the ability to side-load applications and avoid using a rooted device.
 
-The other attack vector on the mobile device and user is man-in-the-middle attacks. If we assume that the user was able to download the correct application we will need to secure the communication channel. To secure the channel we will need to use Transport Layer Security (TLS) \cite{rfc793} which also provides us with protection from replay attacks \cite[~Ch. 9.2.2]{TLS101}. The only downside by using TLS in our case is that we will need the server certificate to verify the server. Traditionally we will need to either pre-install certificates on the mobile device (makes ``bring your own device'' more difficult) or register with a certificate authority (depend on third party). In our case the server certificate is already on the smart card and we can install it on the mobile device. An added benefit of this is that if the mobile device is rogue and tries to connect to the wrong server; the data sent to the server will be encrypted by the smart card.
+%The other attack vector on the mobile device and user is man-in-the-middle attacks.
+Another possible attack we should defend against, is man-in-the-middle attacks between the application and the server. If we assume that the user was able to download the correct application we will need to secure the communication channel. To secure the channel we will need to use Transport Layer Security (TLS) \cite{rfc793} which also provides us with protection from replay attacks \cite[~Ch. 9.2.2]{TLS101}. The only downside by using TLS in our case is that we will need the server certificate to verify the server. Traditionally we will need to either pre-install certificates on the mobile device (makes ``bring your own device'' more difficult) or register with a certificate authority (depend on third party). In our case the server certificate is already on the smart card and we can install it on the mobile device. If the mobile device is compromised the certificate may not be used at all or replaced by a malicious certificate. This can be done as the smart card has no control over the mobile device. However, as we describe later, we encrypt some particular data with the public key of the authority on the smart card, and we are thus not prone to man-in-the-middle attacks since the attack cannot decrypt it.
 
 Further we will need the user to authenticate with the authority. We have two options in order to achieve this. First option is that users use a username and password combination directly with the authority, but considering the binding is normally a one time case a more simplified process may be to hand out a one time code along with the smart card. One could also look into distributing one time codes through e-mail or a text message (SMS).
 
-The second option is that the user inputs a pin code to the smart card and if the pin code is correct the smart card can verify that the user is the user he claims to be. This option requires very little overhead and saves a lot of resources in that regard.
+The second option is that the user inputs a PIN to the smart card and if the pin code is correct the smart card can verify that the user is the user he claims to be. This option requires very little overhead and saves a lot of resources in that regard. The problem with this approach is that if the mobile device is already compromised the PIN code may be stolen before the user is able to bind the mobile device with the smart card. If the PIN is a PIN the user regularly uses an attacker may also be able to get the information from the user via other means (social engineering, key loggers, etc.). A one time PIN (OTP) may be a better option than a PIN although this does add more overhead to the process.
+
+The final requirement for the binding process, is that we have a cryptographic mechanism that in practice binds the mobile device and smart card together. We define the binding process to be done when both parties have the public key of each other and have verified that the keys they have are in fact the keys of the two parties. When this is completed, the mobile device and smart card can mutually authenticate each other before initiating any transaction involving sensitive data.
 
 We have described how the parties can authenticate each other, but we will need to describe this as a unified process (refer to section \ref{sec:proposedSolution}) and identify attack vectors and weaknesses (refer to section \ref{sec:attackVectors}).
 
@@ -85,40 +106,44 @@ H\textsubscript{0} - Verification package \\
 
 
 \begin{enumerate}
-  \item Install Android application on mobile device (M) and insert smart card (U).
-  \item M generates RSA key-pair and stores it.
+  \item Install the (correct) Android application the on mobile device (M) and insert smart card (U).
+  \item M generates RSA key-pair and stores it securely on the device.
   \item M sends M\textsubscript{pub} to U and requests verification package (H\textsubscript{0}) from (U).
-  \item U asks for a PIN code.
-  \item M provides PIN code.
+  \item U asks for a PIN/OTP.
+  \item M provides PIN/OTP.
   \item U generates H\textsubscript{0} (refer to figure \ref{fig:h0}) and sends it to M.
-  \item M connects to the server (S) and sends (H\textsubscript{0}) to S.
+  \item M connects (URL is either hardcoded into application or from certificate) to the server (S) via TLS and sends (H\textsubscript{0}) to S.
   \item S decrypts (H\textsubscript{0}) using S\textsubscript{prv} and verifies the signature of U.
-  \item S saves AES\textsubscript{(M+U)} for safekeeping, signs M\textsubscript{pub} and sends the signed  M\textsubscript{pub} to M.
+  \item If everything is ok then S saves AES\textsubscript{(M+U)} for safekeeping, signs M\textsubscript{pub} and sends the signed  M\textsubscript{pub} to M.
   \item M forwards the signed M\textsubscript{pub} to U.
   \item U verifies that M\textsubscript{pub} was signed by S and if successful U sends U\textsubscript{pub} to M.
 \end{enumerate}
 
-\newpage
+\clearpage
 \begin{figure}[h!]
+  \captionsetup{justification=centering,margin=1.5cm}
   \caption{Sequence diagram for binding mobile device with smart card.}
   \label{fig:sqd}
   \centering
     \includegraphics[height=0.93\textheight]{images/SQD_handshake.png}
 \end{figure}
-\newpage
+\clearpage
 The end result of the transactions is that the smart card and mobile device have shared their public keys through the trusted third party and can thus communicate securely. The server will also have a record of the transactions and the parties. If we chose to do so we can also save a backup of the first symmetric key on the server.
 
 Potentially we could add more steps to the process to further heighten the security. In step 7 we could add that a user may need to answer a challenge such as provide a one time password (OTP). This would add more overhead and require more resources administrating.
 
-A direct consequence of a successful binding is that the smart card is now locked to the mobile device. Inserting the smart card into a different device will simply not work due to the fact that the smart card has the public key of the original device and they have already agreed upon a symmetric key. To further enhance this trait we can once in a while challenge the mobile device which requires the private key of the original bound device to solve (e.g. challenge is encrypted with M\textsubscript{pub}).
+A direct consequence of a successful binding is that the smart card is now locked to the mobile device. Inserting the smart card into a different device will simply not work due to the fact that the smart card has the public key of the original device and they have already agreed upon a symmetric key. To further enhance this trait, we require the mobile device to identify itself if sensitive services are requested. This can be done by sending a challenge from the smart card to the mobile device which requires the private key of the original bound device to solve (e.g. challenge is encrypted with M\textsubscript{pub}). In addition since the smart card is able to securely communicate with the authority the smart card can lock itself up and require a signed package from the authority. This package could contain information regarding deletion of keys, force a new binding, etc. We discuss this possibility further in section \ref{sec:policies}.
 
-\subsection{Architecture evaluation}
-In this section we will justify and evaluate the parts of the solution that have security implications.
+\subsection{Protocol analysis}
+In this section we will justify and evaluate the parts of the solution that have security implications. Steps that are present for the solution to function, but with no security implications, will be skipped.
 
-\paragraph{M generates RSA key-pair and stores it.}\mbox{}\\
+\paragraph{1. Install the (correct) Android application the on mobile device (M) andinsert smart card (U).}\mbox{}\\
+Installing the correct application is a vital part of the protocol. If the wrong Android application is installed the binding process will not complete and the user is not able to use the services we provide. As mentioned earlier we can use Google Play as our distribution platform which will minimize the risks involved.
+
+\paragraph{2. M generates RSA key-pair and stores it securely on the device}\mbox{}\\
 For the smart card to bind itself to a mobile device we need a unique identifier or key that no other device is able to replicate or spoof. An RSA key-pair provides this functionality as the mobile can use the private key to sign data and the smart card can encrypt data with the mobile device public key. Unless another mobile device is able to extract the private key we are in the clear security wise. More on this and other solutions in section \ref{sec:mobileDeviceKeys}.
 
-\paragraph{U asks for PIN code.}\mbox{}\\
+\paragraph{4. U asks for PIN/OTP}\mbox{}\\
 We chose to add a PIN code step to the binding process to add another layer of security. The PIN code ensures that a person is verified by the employer to perform the binding process. Using PIN codes is not a guaranteed measure against someone unauthorized trying to carry out the binding process. The important steps to make sure the PIN code process is secure are:
 \begin{itemize}
   \item The binding process should be carried out as soon as possible after obtaining the PIN code to avoid someone leaking or losing the PIN code.
@@ -126,16 +151,19 @@ We chose to add a PIN code step to the binding process to add another layer of s
   \item In connection to the previous point; the PIN code length should correspond to the number of tries.
 \end{itemize}
 
-\paragraph{U generates the verification package.}\mbox{}\\
+\paragraph{5. M provides PIN/OTP}\mbox{}\\
+At some point the user will need to supply the mobile device the PIN or OTP in order for the mobile device to send it to the smart card. Theoretically an attacker can have compromised the device and intercept the PIN/OTP to use it with another device. This scenario is unlikely as the attacker will also need to get the physical smart card before the binding process is completed. Potentially an attacker can perform a denial of service attack in this step and never let the binding process complete. In section \ref{sec:attackVectors} we discuss the possibility to use Google SafetyNet to detect malware on the device.
+
+\paragraph{6. U generates the verification package.}\mbox{}\\
 The smart card is a secure environment and should be in charge of generating the verification package. We include the AES key for safekeeping on the server incase the user lose the smart card. We sign the package using the private key of the smart card and the server can verify that it is a legit smart card since the server has the public key. This step is necessary as anyone would be able to send a verification package to the server as the server public key is public. Lastly the smart card encrypts the verification package using the server's public key. The end product, the verification package, is secure in the sense that only the server can read the data and the server can authenticate the sender using the signature.
 
-\paragraph{M connects to the server (S) and sends the verification package to S.}\mbox{}\\
-The verification package is encrypted with the server's public key. The direct result is that even if the package is lost or leaked no third party would be able to read the content. We will use TLS for the connection regardless as it may be necessary to add additional functionality such as username-password login to verify the user. TLS will also serve as a counter to replay-attacks and man-in-the-middle attacks.
+\paragraph{7. M connects to the server (S) and sends the verification package to S.}\mbox{}\\
+The verification package is encrypted with the server's public key. The direct result is that even if the package is lost or leaked no third party would be able to read the content. We will use TLS for the connection regardless as it may be necessary to add additional functionality such as username-password login to verify the user. To establish a TLS connection one would access to the server certificate either via a third party certificate provider or via a pre-installed certificate. TLS will also serve as a counter to replay-attacks and man-in-the-middle attacks.
 
-\paragraph{The server signs the public key of M.}\mbox{}\\
-The server signs the public key of the mobile device. This is done because of the need to confirm that the verification package was indeed sent to the server. By letting the server sign it we ensure that the public key that is sent back to the smart card is in fact the public key that was in the verification package.
+\paragraph{9. The server signs the public key of M.}\mbox{}\\
+If the signature of the smart card is in order we can proceed with generating the response package. The server signs the public key of the mobile device. This is done because of the need to confirm that the verification package was indeed sent to the server. By letting the server sign it we ensure that the public key that is sent back to the smart card is in fact the public key that was in the verification package.
 
-\paragraph{U verifies that M\textsubscript{pub} was signed by S and if successful U sends U\textsubscript{pub} to M.}\mbox{}\\
+\paragraph{11. U verifies that M\textsubscript{pub} was signed by S and if successful U sends U\textsubscript{pub} to M.}\mbox{}\\
 Even though public keys usually are publicly known we choose to keep the public key of the smart card semi-public or on a ``need to know basis''. Using this technique F not inherently make the solution secure, but it does add another hurdle a potential attack will need to overcome. In theory, the more steps an attacker will need to do; the higher the chance for detecting him. By rotating the keys the effectiveness of this measure increases substantially.
 
 
@@ -150,7 +178,7 @@ We are not directly utilizing the symmetric-key cryptography system AES, but it 
 
 In the solution we mitigate man-in-the-middle attacks using TLS for secure communication. TLS can utilize both RSA and AES and if we use strong keys we deem it secure (assuming TLS 1.2) from a mathematical perspective. If TLS is implemented correctly and does not allow for common attacks (Heartbleed, DROWN \cite{drown}, etc.) it is classified as ``probably secure'' or ``secure until proven otherwise''.
 
-Correct key generation is discussed in section \ref{sec:mobileDeviceKeys} and the conclusion is that it is possible to securely generate keys. All cryptographic parts of the solution is considered secure if done correctly and we can thus conclude that the cryptography included in the solution is secure. 
+Correct key generation is discussed in section \ref{sec:mobileDeviceKeys} and the conclusion is that it is possible to securely generate keys. All cryptographic parts of the solution is considered secure if done correctly and we can thus conclude that the cryptography included in the solution is secure.
 %TODO
 
 
@@ -163,7 +191,7 @@ The three technical parties involved are the server, the mobile device and the s
 
 Thus the only attack vector on technical parties is where the mobile device is rogue. By rogue in the context of the mobile device we mean compromised as in rooted or malware/spyware. In our solution we have no way of knowing if the user is binding a rogue mobile device. The end result is that we have securely bound the mobile device and smart card, but the mobile device cannot be trusted.
 
-To combat this we need to do two things. First and foremost we need to educate the user on mobile security and how they should not install applications from untrusted sources etc. Secondly we can run tests on the mobile device to try and detect if the mobile device is rooted or has malware/spyware. This can prove to be hard as it is very difficult, if not impossible, to detect malware/spyware which operate with root access. Google has been working on a security framework, SafetyNet, which goal is to detect if a device has been tampered with or is infected \cite{googleSafetynet}. In order to decide if this is sufficient we would have to do more research on SafetyNet specifically.
+To address this we need to do two things. First and foremost we need to educate the user on mobile security and how they should not install applications from untrusted sources etc. Secondly we can run tests on the mobile device to try and detect if the mobile device is rooted or has malware/spyware. This can prove to be hard as it is very difficult, if not impossible, to detect malware/spyware which operate with root access. Google has been working on a security framework, SafetyNet, which goal is to detect if a device has been tampered with or is infected \cite{googleSafetynet}. In order to decide if this is sufficient we would have to do more research on SafetyNet specifically.
 
 \paragraph{Rogue user or administrator}\mbox{}\\
 Potentially we can have a rogue user which deliberately installs malware/spyware on their mobile device to compromise our system. We will disregard this case as if we have a rogue user we have bigger problems than a compromised mobile device. It is also important to note that any information the mobile device receives the user is also likely to know regardless, and can thus release this information independently of the mobile device.
@@ -179,15 +207,15 @@ In step 9 and 10 of the proposed solution we can add a payload to the signed M\t
 \label{sec:mobileDeviceKeys}
 
 
-\subsection{Problem statement}
-Even though one of the features of the smart card is to store and manage keys we are still dependent on the mobile device being able to store at least one set of keys. This is directly tied to the binding process of the mobile device and the smart card which were discussed in section \ref{sec:bindingcardandphone}. The problem lies in the fact that how do we ensure that the key pair are generated and stored securely? By solving this problem we are able to perform the binding process of the mobile device and smart card. We can also envision that there might emerge other use cases at later stages which require keys on the mobile device.
+\subsection{Problem description}
+Even though one of the features of the smart card is to store and manage keys, we are still dependent on the mobile device being able to securely store at least one set of keys. This is directly tied to the binding process of the mobile device and the smart card which were discussed in section \ref{sec:bindingcardandphone}. The problem lies in the fact that we assume that the key pair generated by the mobile devices cannot be extracted and installed on another device and can only be used by our application. The question is: how we can be sure that this is the case? We have no way of proving that the keys are generated on the mobile device. And even if we were, are they stored securely? We can also envision that there might emerge other use cases at later stages which require keys on the mobile device.
 
-\subsection{Goal}
+\subsection{Goals}
 Our primary goals for mobile device keys are:
 
 \begin{itemize}
-  \item Generate keys on mobile device or receive externally generated keys.
-  \item Store keys securely on the mobile device.
+  \item Make sure that the device keys are actually on the device.
+  \item Store keys securely, ensuring that they cannot be exported or used by other applications or devices.
 \end{itemize}
 
 \subsection{Key concepts}
@@ -200,15 +228,15 @@ The applications do not have direct access to the keys. If an application wants 
 In early iterations the keys were stored in a software-protected file meaning that only the Android Keystore had access to the data. This system had a flaw in which any users or applications with root access could access the Keystore file. The solution to this is using secure hardware such as ``Secure Element'' (more or less a smart card) and ``Trusted Execution Environment (TTE)'' \cite{TEE}. If hardware-backed storage is enabled (as seen in figure \ref{fig:hardwareBacked}), it is not possible to extract keys even if the operating system is compromised.
 
 \begin{figure}[h!]
+  \captionsetup{justification=centering,margin=1.5cm}
   \caption{Screenshot of Android settings showing hardware-backed storage ``enabled''.}
   \label{fig:hardwareBacked}
   \centering
     \includegraphics[width=0.45\textwidth]{images/hardwareBacked.png}
 \end{figure}
-
 An application can check if the mobile device uses secure hardware for key storage using the Android class \texttt{KeyInfo}. The \texttt{KeyInfo} class contains all available information about a key and a single call to the method \texttt{\allowbreak isInsideSecureHardware()} will determine the storage status. Listing \ref{lst:KeyInfo} provides a sample implementation of this functionality. \texttt{KeyInfo} was added in API 23 and requires Android version 6.0 or newer.
 
-\newpage
+
 \begin{lstlisting}[caption=Obtaining storage status of keys using KeyInfo., label=lst:KeyInfo,escapechar=å]
 public boolean checkStatus(PrivateKey key){
     KeyFactory factory = KeyFactory.getInstance(
@@ -237,7 +265,7 @@ public KeyPair generateKeyPair(){
 }
 \end{lstlisting}
 
-\subsection{Generate keys on server //p12-fil etc.}
+\subsection{Generate keys on server}
 \label{sec:generateKeysOnServer}
 The Android Keystore system accepts \textit{PKCS\#12} archive files which it then stores on the mobile device. The PKCS\#12 file can contain certificates, keys and key pairs \cite{pkcs12}. After the archive file is manually installed on the device, applications that are authorized are free to use the keys via the Android Keystore system. The consequence of this is that we do not have to rely on the mobile device to generate the secure keys.
 
@@ -312,6 +340,7 @@ One disadvantage of using smart cards is that once an applet has been installed 
 To enable policies or set parameters for the policies we require a protocol to exchange information with the smart card from a server. One of challenges we are ``How do we ensure that the mobile device relays policy updates to the smart card?''. One solution is to have the smart card lock itself and require a verification package from a trusted server. To ensure that the server is the only party that can provide the verification package, is to send a challenge from the smart card which only the server knows the answer to (shared key/secret). Refer to figure \ref{fig:OH} and figure \ref{fig:NH} for challenge and challenge response.
 
 \begin{figure}[h!]
+  \captionsetup{justification=centering,margin=1.5cm}
   \caption{Smart card policy challenge.}
   \label{fig:OH}
   \centering
@@ -319,6 +348,7 @@ To enable policies or set parameters for the policies we require a protocol to e
 \end{figure}
 
 \begin{figure}[h!]
+  \captionsetup{justification=centering,margin=1.5cm}
   \caption{Smart card policy challenge response.}
   \label{fig:NH}
   \centering
@@ -350,6 +380,7 @@ First we assume the binding of card and phone from section \ref{sec:bindingcarda
 \end{enumerate}
 
 \begin{figure}[h!]
+  \captionsetup{justification=centering,margin=1.5cm}
   \caption{Sequence diagram for smart card policy exchange.}
   \label{fig:SQD_policy}
   \centering
@@ -392,6 +423,7 @@ In the body we will use the payload data field to send information on the policy
 The individual policies data structure needs to be carefully crafted and specialized, but we should also focus on making it as dynamic as possible. This is best described using an example. To demonstrate how it can be done, we will use listing \ref{lst:jsonPolicies} as example data. The resulting APDU is figure \ref{fig:policyAPDU} and it clearly shows that we have to hardcode how many fields a policy will need.
 
 \begin{figure}[h!]
+  \captionsetup{justification=centering,margin=1.5cm}
   \caption{Example policy APDU with two policies}
   \label{fig:policyAPDU}
   \centering

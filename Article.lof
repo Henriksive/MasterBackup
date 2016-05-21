@@ -34,52 +34,52 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Trust based on a third party.\relax }}{36}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Using a third party (Authority) to establish a trust relationship between two parties (Application and smart card) lacking trust.\relax }}{37}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Server, mobile device and smart card communication flow.\relax }}{37}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Server, mobile device and smart card communication flow.\relax }}{38}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Verification package structure.\relax }}{39}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Verification package structure.\relax }}{41}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Sequence diagram for binding mobile device with smart card.\relax }}{41}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Sequence diagram for binding mobile device with smart card.\relax }}{43}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Screenshot of Android settings showing hardware-backed storage ``enabled''.\relax }}{48}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Screenshot of Android settings showing hardware-backed storage ``enabled''.\relax }}{50}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Smart card policy challenge.\relax }}{54}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Smart card policy challenge.\relax }}{57}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Smart card policy challenge response.\relax }}{55}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Smart card policy challenge response.\relax }}{57}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Sequence diagram for smart card policy exchange.\relax }}{56}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Sequence diagram for smart card policy exchange.\relax }}{59}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Example policy APDU with two policies\relax }}{58}
-\defcounter {refsection}{0}\relax 
-\addvspace {10\p@ }
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Abstraction layer between Android activities and smart cards.\relax }}{67}
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Simplified class diagram for Android Library.\relax }}{69}
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Library package diagram.\relax }}{70}
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Diagram showing which responsibilities the layers in an Android application have.\relax }}{72}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Example policy APDU with two policies\relax }}{61}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Data flow of data transfer speed test for NFC.\relax }}{75}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Abstraction layer between Android activities and smart cards.\relax }}{70}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Graphical representation of table 6.1\hbox {}.\relax }}{76}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Simplified class diagram for Android Library.\relax }}{72}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Graphical representation of table 6.3\hbox {}.\relax }}{80}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Library package diagram.\relax }}{73}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Diagram showing which responsibilities the layers in an Android application have.\relax }}{75}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Data flow of data transfer speed test for NFC.\relax }}{78}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Graphical representation of table 6.1\hbox {}.\relax }}{79}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Graphical representation of table 6.3\hbox {}.\relax }}{83}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {C.1}{\ignorespaces Class diagram for Android Library.\relax }}{114}
+\addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {D.1}{\ignorespaces Configuring Java Card kit 2.2.2 for Eclipse.\relax }}{116}
+\contentsline {figure}{\numberline {C.1}{\ignorespaces Class diagram for Android Library.\relax }}{117}
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {D.1}{\ignorespaces Configuring Java Card kit 2.2.2 for Eclipse.\relax }}{119}
