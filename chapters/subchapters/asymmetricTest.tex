@@ -1,0 +1,60 @@
+% !TEX root = ../../Article.tex
+\subsection{Public-key cryptography}
+\label{sec:AsymmetricTest}
+Similarly to the symmetric-key encryption test we want to investigate the feasibility of public-key encryption of sensitive data. The smart cards and Java Card version we have supports RSA cryptography, but we will need to run performance tests to confirm that it functions properly and finish within a timely manner.
+
+Another part of public-key cryptography we want to investigate is digital signing. Being able to sign and verify data is an essential part of many security mechanism and a vital part of what we wish to achieve by using smart cards. If tests show that digital signing is unfeasible on smart cards we will need to re-evaluate their use in a mobile device ecosystem.
+
+\paragraph{Test setup}\mbox{}\\
+Just as with symmetric-key cryptography, we will be using the Android framework we have created, which uses extended APDUs, and as a result we cannot perform these tests on our micro SD cards.
+
+For digital signing we will be using keys of length 512-bit. Early tests shows that key sizes greater than 512-bit crashes our NFC cards (refer to section \ref{sec:limitsBinding}). This is problematic as we wish to use longer keys, minimum 2048-bit and preferably up to 4096-bit, as this is what is recommended by the industry \cite{rsaRec}. Even though 512-bit keys does not represent our goals, it could point us in the right direction when it comes to feasibility. We use the \texttt{Signature} class for signing with the algorithm \texttt{ALG\_RSA\_SHA\_PKCS1} meaning that we do not need to pad our data.
+
+For RSA encryption we were able to test with both 512-bit keys and 2048-bit keys. We will be using the \texttt{Cipher} class to perform the encryption, but one important thing to note is that the plaintext sent in to the cipher function is limited by the key size. 512-bit and 2048-bit keys are only able to process 52 byte and 244 byte of data respectively. This is because of the architecture of RSA and iff we wish to encrypt more data we will need to split the data in the Android application.
+
+\paragraph{Results}\mbox{}\\
+
+\begin{table}[h!]
+\caption{Table of digital signing (RSA) speed test.}
+\label{tbl:RSASigningSpeed}
+\centering
+
+    \begin{tabular}{ | l | r |}
+        \hline
+        \thead{Data size (byte)}
+        & \thead{Elapsed time} \\ \hline
+
+        10000  & 0,74s \\ \hline
+        32000  & 5,32s \\ \hline
+        100000 & 15,49s \\ \hline
+        1000000 & 141,79s \\ \hline
+
+    \end{tabular}
+
+\end{table}
+
+The test results from digital signing in table \ref{tbl:RSASigningSpeed} shows that there are large differences between small amounts of data and large amounts of data. The byte per second value for 10.000 byte is close to 13.000, whereas the byte per second value for 32.000 byte is half of that with around 6000 byte per second. 100.000 byte has as expected around the same byte per second value as 32.000. This is caused by the fact that 100.000 byte is the same as 3 32.000 byte operations due to the limitations of extended APDUs.
+
+\begin{table}[h!]
+\caption{Table of RSA encryption speed test.}
+\label{tbl:RSAEncryptionSpeed}
+\centering
+
+    \begin{tabular}{ | l | l | r |}
+        \hline
+        \thead{Data size (byte)}
+        & \thead{Key size}
+        & \thead{Elapsed time} \\ \hline
+
+        52 & 512-bit & 0,62s \\ \hline
+        144 & 2048-bit & 1,33s \\ \hline
+
+    \end{tabular}
+
+\end{table}
+Encrypting with RSA is an expensive operation and is clearly shown by table \ref{tbl:RSAEncryptionSpeed}. We are at maximum able to encrypt 52 bytes of data with a key size of 512-bit and 144 byte of data with 2048-bit keys at the time. Compared to AES encryption the byte per second value is terrible. 512-bit keys have byte per second value of 70 byte and 2048-bit keys have a byte per second value of 108 byte. AES encryption from table \ref{tbl:AESSpeed}, is able to reach a byte per second value of around 500 byte.
+
+\paragraph{Conclusion}\mbox{}\\
+We have learned two things from testing public-key cryptography on smart cards. Digital signing on the smart card seem to be viable, at least with a key size of 512-bit. We are able to sign 10.000 byte of data in under 1 second and from a ``real world'' perspective 10.000 byte is able to represent a lot of information. However, we are not able to use digital signing for signing large files such as images or videos. This problem can be solved by signing hashes of the files instead of signing the files directly.
+
+Encrypting data using RSA is not viable according to our test results. The intention of RSA was never to be able to encrypt large amounts of data so the test results are of no surprise to us. If we need to protect large amounts of data, such as if we chose to encrypt the policy response data from section \ref{sec:policySolution}, we can use RSA encryption to encrypt a AES key which in turn is used to encrypt the actual data.

@@ -676,6 +676,17 @@
   \field{year}{1981}
 \endentry
 
+\entry{rsaRec}{online}{}
+  \field{sortinit}{T}
+  \field{note}{Last visited: 22.05.2016}
+  \field{title}{TWIRL AND RSA KEY SIZE}
+  \verb{url}
+  \verb http://www.emc.com/emc-plus/rsa-labs/historical/twirl-and-rsa-key-size.
+  \verb htm
+  \endverb
+  \field{year}{2003}
+\endentry
+
 \entry{TEE}{online}{}
   \name{author}{1}{}{%
     {{}%
