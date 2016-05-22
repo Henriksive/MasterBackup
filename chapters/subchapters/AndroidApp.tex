@@ -1,5 +1,39 @@
 % !TEX root = ../../Article.tex
-\section{Android Application}
+\section{Android framework}
+\label{sec:androidApp}
+We used the same approach on the Android framework as on the smart card application; an autonomous and easy to extend platform for tests. This resulted in a new library, ``smartcardlibrary'',  which sole purpose is to transmit APDUs as easily as possible along with some essential functionality.
+
+\subsection{Achieving framework goals}
+In section \ref{sec:designAndroidGoals} we described the goals of the framework. We wanted a framework that was easy to use, preferably requiring little to no understanding of smart cards, and at the same time be extendable. To achieve this, we abstract as much as possible of the smart card aspect, and create controllers that developers can utilize.
+
+Figure \ref{fig:package} is a package diagram of the Android framework and the easiest way of using the framework is to only focus on the \texttt{Controller} package. More specifically one will only need to understand \texttt{CommunicationController} to be able to communicate with smart cards (either via pre-implemented methods or custom APDUs, this is described in \ref{sec:func}). To accommodate the need for more advanced functionality, or rather have the framework be extendable, developers have, if they choose, direct access to the NFC and mSD controllers in the same package.
+
+\begin{figure}[h!]
+  \captionsetup{justification=centering,margin=1.5cm}
+  \caption{Library package diagram.}
+  \label{fig:package}
+  \centering
+    \includegraphics[width=0.95\textwidth]{images/package2.png}
+\end{figure}
+The package diagram, figure \ref{fig:package}, shows how  the packages in the library are structured.
+
+\subsection{Responsibility areas}
+In light of chapter \ref{ch:challenges} it is important to understand how the smart card library fit into the bigger picture and what it is responsible of. In figure \ref{fig:responsibility} we can see that there are 3 main ``layers''; the Android operating system, the Android application and the smart card library. Even though we define these layers as separate entities, we are technically incorrect when stating so, e.g., the smart card library is technically a part of the Android application and thus they are the same layer. From a more abstract perspective the separation of layers are more correct and can help give a better understanding of the architecture.
+
+The first layer is the Android operating system. The Android operating system is in charge of persistent storage (if needed), key storage and key generation. We discussed key storage and key generation in section \ref{sec:mobileDeviceKeys} and how it should be handled. It is also worth noting that the Android operating system is responsible for running the Android application.
+
+The second layer is the Android application. This layer is responsible for serving the user interface to the user. This may include PIN input, displaying sensitive data, etc. If the Android application handles sensitive data it is vital that it disposes the information correctly after use.
+
+The last layer is the smart card library. The smart card library handles the incoming and outgoing communication with the smart cards. The smart card library utilizes a temporary cache to achieve asynchronous communication with smart cards and as with the Android application, it is necessary to clean out the temporary cache if sensitive data has been passing through the library.
+
+\begin{figure}[h!]
+  \captionsetup{justification=centering,margin=1.5cm}
+  \caption{Diagram showing which responsibilities the layers in an Android application have.}
+  \label{fig:responsibility}
+  \centering
+    \includegraphics[width=0.95\textwidth]{images/Component_diagram.png}
+\end{figure}
+\clearpage
 
 \subsection{3rd party libraries}
 \label{sec:gemaltoApp}
@@ -13,12 +47,9 @@ The part of IDGo800 SDK we are interested in is very small and enables us to sen
 
 We will be using the ``android.nfc'' package in order to communicate with NFC smart cards. This package is included in the standard Android SDK which in turns means that all Android devices with a NFC reader and minimum API level 9 \cite{androidNFCminSDK} can use our library.
 
-\subsection{Application}
-\label{sec:androidApp}
-
-In section \ref{sec:designAndroidGoals} we described the goals of the framework. The first goal we will describe the implementation of is ``extendable'' or in other words, being able to send custom APDUs. Explaining how this is implemented will give a better understanding of how the framework is built up and makes it easier to understand the pre-implemented methods.
-
-We used the same approach on the Android application as on the smart card application; an autonomous and easy to extend platform for tests. This resulted in a new library, ``smartcardlibrary'',  which sole purpose is to transmit APDUs as easily as possible along with some basic functionality.
+\subsection{Framework functionality}
+\label{sec:func}
+The first functionality we will describe of the implementation is ``extendable'' or in other words, being able to send custom APDUs. Explaining how this is implemented will give a better understanding of how the framework is built up and makes it easier to understand the pre-implemented methods.
 
 \paragraph{Custom APDUs}\mbox{}\\
 To send custom APDUs to a smart card,\texttt{CommunicationController} must be instantiated and the application must know the application identifier of the smart card application. Further the current activity must implement\\ \texttt{NfCSmartcardControllerInterface} or \texttt{MSDSmartcardControllerInterface} (depending on smart card type) in order to be notified when the transaction is complete. Before continuing one will need to call the methods \texttt{setupNFCController} or \texttt{setupmSDController} depending on the smart card. Listing \ref{lst:NFCLibraryExample} shows an example implementation on how an activity may utilize the library for sending custom commands to a NFC smart card.
@@ -133,7 +164,7 @@ public class SigningActivity extends AppCompatActivity
 \end{lstlisting}
 
 
-Figure \ref{fig:classdiagram_simple} provides a simplified and technical overview of how the Android side of the library is built up. This diagram also shows which parameters are required for the methods available in \texttt{CommunicationController}. The complete class diagram for the Android library can be found in Appendix \ref{app:c}, figure \ref{fig:classdiagram_extended}. The package diagram, figure \ref{fig:package}, shows how  the packages in the library are structured.
+Figure \ref{fig:classdiagram_simple} provides a simplified and technical overview of how the Android side of the library is built up. This diagram also shows which parameters are required for the methods available in \texttt{CommunicationController}. The complete class diagram for the Android library can be found in Appendix \ref{app:c}, figure \ref{fig:classdiagram_extended}. %The package diagram, figure \ref{fig:package}, shows how  the packages in the library are structured.
 
 \begin{figure}[h!]
   \caption{Simplified class diagram for Android Library.}
@@ -142,27 +173,3 @@ Figure \ref{fig:classdiagram_simple} provides a simplified and technical overvie
     \includegraphics[width=1.25\textwidth, angle =90]{images/Class_Diagram.png}
 \end{figure}
 \clearpage
-
-\begin{figure}[h!]
-  \caption{Library package diagram.}
-  \label{fig:package}
-  \centering
-    \includegraphics[width=0.95\textwidth]{images/package2.png}
-\end{figure}
-
-\newpage
-\subsection{Responsibility areas}
-In the previous section we described what functionality the smart card library has and how it is built up. In light of chapter \ref{ch:challenges} it is important to understand how the smart card library fit into the bigger picture and what it is responsible of. In figure \ref{fig:responsibility} we can see that there are 3 main ``layers''; the Android operating system, the Android application and the smart card library. Even though we define these layers as separate entities, we are technically incorrect when stating so, e.g., the smart card library is technically a part of the Android application and thus they are the same layer. From a more abstract perspective the separation of layers are more correct and can help give a better understanding of the architecture.
-
- The first layer is the Android operating system. The Android operating system is in charge of persistent storage (if needed), key storage and key generation. We discussed key storage and key generation in section \ref{sec:mobileDeviceKeys} and how it should be handled. It is also worth noting that the Android operating system is responsible for running the Android application.
-
-The second layer is the Android application. This layer is responsible for serving the user interface to the user. This may include PIN code input, displaying sensitive data, etc. If the Android application handles sensitive data it is vital that it disposes the information correctly after use.
-
-The last layer is the smart card library. The smart card library handles the incoming and outgoing communication with the smart cards. The smart card library utilizes a temporary cache to achieve asynchronous communication with smart cards and as with the Android application, it is necessary to clean out the temporary cache if sensitive data has been passing through the library.
-
-\begin{figure}[h!]
-  \caption{Diagram showing which responsibilities the layers in an Android application have.}
-  \label{fig:responsibility}
-  \centering
-    \includegraphics[width=0.95\textwidth]{images/Component_diagram.png}
-\end{figure}

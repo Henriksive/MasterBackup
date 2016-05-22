@@ -11,12 +11,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {lstlisting}{\numberline {5.1}Pseudo code for javacard test application.}{65}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.2}Java code example showing how to send and receive commands to a NFC smart card.}{68}
+\contentsline {lstlisting}{\numberline {5.2}Java code example showing how to send and receive commands to a NFC smart card.}{71}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.3}Java code example showing how to send sign a message using a NFC smart card.}{70}
+\contentsline {lstlisting}{\numberline {5.3}Java code example showing how to send sign a message using a NFC smart card.}{74}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {6.1}Java Card failed signing.}{87}
+\contentsline {lstlisting}{\numberline {6.1}Java Card failed signing.}{88}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {A.1}SecureCard.java.}{99}
+\contentsline {lstlisting}{\numberline {A.1}SecureCard.java.}{101}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {B.1}CommunicationController.java.}{111}
+\contentsline {lstlisting}{\numberline {B.1}CommunicationController.java.}{113}

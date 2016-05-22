@@ -1,8 +1,6 @@
 % !TEX root = ../../Article.tex
-\section{Java Card Application}
-\subsection{Application}
-\paragraph{Goal}\mbox{}\\
-The goal of the smart card application was to create an autonomous and easy to extend platform for future tests. This resulted in an application split into three parts.
+\section{Java Card applet}
+The Java Card side of the complete framework includes functionality for performing basic data exchange with the Android application, basic cryptography and operations needed to implement the binding protocol. The goal of the smart card application was to create an autonomous and easy to extend platform for future tests. This resulted in an application split into three parts: initialization, data processing and finalization.
 
 \paragraph{Initialization}\mbox{}\\
 As described in section \ref{sec:javacard} all Java Card applications must implement the method \texttt{Install}. \texttt{Install} invokes the constructor of the smart card and this is where all variables that need initialization are initialized. For instance if the smart card application needs to generate keys or random numbers this is where it is done as the constructor will be invoked only once. All buffers that needs to be used should also be initialized here to avoid allocating memory every time the application is activated.

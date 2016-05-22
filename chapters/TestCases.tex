@@ -1,7 +1,10 @@
 % !TEX root = ../Article.tex
-\chapter{Testing}
+%\chapter{Testing}
+\chapter{Testing and use case implementation}
 \label{ch:testing}
-In this chapter we will perform tests on the smart card regarding cryptographic performance and proof of concept implementation to evaluate the proposed solutions from the previous chapter. The tests will help us determine if smart cards are a valuable addition to mobile security or if they lack the power to function properly in a mobile device environment.
+%In this chapter we will perform tests on the smart card regarding cryptographic performance and proof of concept implementation to evaluate the proposed solutions from the previous chapter. The tests will help us determine if smart cards are a valuable addition to mobile security or if they lack the power to function properly in a mobile device environment.
+In this chapter we describe the tests we designed and ran to evaluate the cryptographic capabilities and performance of the smart cards, communication and compatibility between smart cards and Android, and possible technical problems that may present themselves when using smart cards. The implementation and tests took a lot of resources and time as it was difficult to debug problems that occurred on the smart cards and in the third party libraries we used. The remaining time was spent on implementing and testing the binding protocol we described in section \ref{sec:bindingcardandphone}.
+
 \input{chapters/Setup.tex}
 
 \input{chapters/subchapters/TransferSpeedTests.tex}

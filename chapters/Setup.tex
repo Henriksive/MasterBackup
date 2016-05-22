@@ -17,7 +17,7 @@ GSMArena.com \cite{sonym2}.
 \paragraph{Java smart card}\mbox{}\\
 We will be using two types of smart cards. The first type is a micro SD memory card (IDCore 8030 MicroSD card) as shown in figure \ref{fig:msdcard} produced by Gemalto. The reason for using this card for testing is that Gemalto delivers ready-to-use cards along with a framework for communicating with them. The cards we will be using have nothing pre-installed on them and we can freely deploy custom applications to the card. In order to use the provided framework we need a key provided by Gemalto which has a validity period of 120 days.
 
-The second type of card we will be using is a plain hybrid smart card (ref. figure \ref{fig:nfccard}) with no pre-installed software which is also provided by Gemalto along with a standard card reader. In this case we are not reliant on the framework provided by Gemalto as Android has built in support for NFC communication in the standard SDK.
+The second type of card we will be using is a contactless smart card with no pre-installed software which is also provided by Gemalto \cite{gemaltoidgo3010} along with a standard card reader. In this case we are not reliant on the framework provided by Gemalto as Android has built in support for NFC communication in the standard SDK.
 
 Both types of card are able to run the same application and thus makes it very convenient when comparing their performance against each other.
 
@@ -170,6 +170,8 @@ Figure \ref{fig:package} shows how the library is structured and the entry point
 
 \fi %UNCOMMENT
 
-\subsection{Limitations}
+\subsection{Limitations and problems}
 \label{sec:limitationsMSD}
+We encountered problems with the library provided by Gemalto. The library refused to function properly and returned error codes that we had no basis for understanding. It was not possible to debug the library as the library had been run through an obfuscator \cite[~Ch. 5]{obfus}, meaning that we could not inspect the code to find the error. After a lot of back and forth between us and Gemalto it became evident that they had provided us with the wrong license key for the framework.
+
 When we started testing the implementation it became evident that the micro SD smart card we had did not support extended APDU. As a result we are not able to perform tests that involve micro SD cards and extended APDU.

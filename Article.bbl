@@ -196,6 +196,27 @@
   \field{year}{2014}
 \endentry
 
+\entry{obfus}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Dang}{D.}%
+     {Bruce}{B.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{2}{%
+    {John Wiley}%
+    {Sons}%
+  }
+  \strng{namehash}{DB1}
+  \strng{fullhash}{DB1}
+  \field{sortinit}{D}
+  \field{isbn}{9781118787311}
+  \field{title}{Practical reverse engineering x86, x64, ARM, Windows Kernel,
+  reversing tools, and obfuscation}
+  \field{year}{2014}
+\endentry
+
 \entry{eclipseJCDE}{online}{}
   \field{sortinit}{E}
   \field{note}{Last visited: 18.01.2016}
