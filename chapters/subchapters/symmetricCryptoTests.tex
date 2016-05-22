@@ -1,20 +1,27 @@
 % !TEX root = ../../Article.tex
-\section{Symmetric-key Cryptography}
+\subsection{Symmetric-key Cryptography}
 \label{sec:symmetricTest}
-\subsection{Description and Motivation}
-We want to discover the encryption abilities on the smart card and decide if it is feasible to let the smart card handle the encryption of confidential data. From the smart card documentation we know that we are able to use AES to encrypt data, but we do not know how long it will take to encrypt the data. We will need to perform a run time tests with different amounts of data in order to determine the performance of the smart card.
+%\subsection{Description and Motivation}
+We want to discover the encryption abilities on the smart card and decide if it is feasible to let the smart card handle the encryption of confidential data. From the smart card documentation we know that we are able to use AES to encrypt data, but we do not know how long it will take to encrypt the data. We will need to perform a run time tests with different amounts of data in order to determine the performance of the smart card. This test will help us establish guidelines for how much data it is reasonable to encrypt directly on the smart card without affecting the user experience of an Android application.
 
-\subsection{Test setup}
+\paragraph{Test setup}\mbox{}\\
+%\subsection{Test setup}
 The framework we are using is designed around extended APDU and the test platform we have designed in Java Card utilizes extended APDU. As a result we are not able to use the micro SD cards (as described in section \ref{sec:limitationsMSD}) and we will be using the NFC smart cards.
 
 The encryption algorithm we will use is AES cipher algorithm with block chaining (CBC). The version of Java Card that we are using along with our smart cards limits us to using 128 bits keys and no padding. More specifically the only working AES algorithm from javacard is \texttt{ALG\_AES\_BLOCK\_128\_CBC\_NOPAD}, even though the Java Card documentation for \texttt{Cipher} supports more algorithms \cite{javacardCipher}. Others have encountered the same discrepancy \cite{javacardCipherFail} suggesting that only three of the twelve supported algorithms works, but there exists no official information on the issue.
 
 \texttt{ALG\_AES\_BLOCK\_128\_CBC\_NOPAD} is as the name suggest an algorithm with no padding. The block size the AES algorithm expects is 16 byte and as a result we will need to pad the data ourselves on the mobile device.
 
-\subsection{Results}
+\paragraph{Results}\mbox{}\\
+%\subsection{Results}
 \input{tables/AESSpeed.tex}
 \input{graphs/AESspeedGraph.tex}
-\subsection{Conclusion}
+
+The test results show that the encryption process of AES on smart card is very close to being linear. Even though the relationship between time and bytes processed is close to linear the encryption process is slow. The processing power of the AES setup translates to roughly 500 bytes of data per second. 
+
+
+\paragraph{Conclusion}\mbox{}\\
+%\subsection{Conclusion}
 From the test results we can learn that encrypting data on the NFC smart card takes a lot of time. Encrypting 1MB of data uses approximately 30 minutes, which from a real world perspective is an unacceptable amount of time. Using the NFC smart card for full encryption of user data is in other words not achievable and we will need to look for other options for encryption.
 
 Encrypting 16 bytes of data uses 0,15 seconds. A use for the encryption capabilities on the smart card may be to encrypt small amounts of data such as GPS coordinates. GPS coordinates can be represented by only 16 bytes (depending on accuracy). One could also imagine that we will only need to encrypt parts of a document, and as long as we keep the data size small we can let the smart card do the encryption.

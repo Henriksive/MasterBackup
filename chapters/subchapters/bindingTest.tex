@@ -1,6 +1,5 @@
 % !TEX root = ../../Article.tex
-\section{Binding card and mobile device}
-\subsection{Motivation}
+\subsection{Binding card and mobile device}
 In section \ref{sec:bindingcardandphone} we describe and motivate a solution where the we want to bind a mobile device to a smart card. We find it important to do an empirical test of the solution due to the fact that we have time constraints regarding running time. The parts of the binding process we want to test is:
 
 \begin{itemize}
@@ -9,7 +8,8 @@ In section \ref{sec:bindingcardandphone} we describe and motivate a solution whe
     \item Smart card can generate the \textit{verifaction package} from section \ref{sec:proposedSolution}.
 \end{itemize}
 
-\subsection{Implementation}
+\paragraph{Implementation}\mbox{}\\
+%\subsection{Implementation}
 In light of the parts of the binding process we want to test the outline of the implementation are:
 
 \begin{enumerate}
@@ -33,11 +33,10 @@ To manage PIN verification and management we will use \texttt{OwnerPIN} class fr
 
 All public keys are represented as byte arrays when they are transmitted between the mobile device and the smart card. The format for the byte array is \textbar{}ModulusLength\textbar{}Modulus\textbar{}ExponentLength\textbar{}Exponent\textbar{} to allow for extension of key length and dynamic importing. After the APDU is received the public key is stored in a \texttt{RSAPublicKey} object for storage.
 
-When we construct the verification package on the smart card we have to convert the all keys on the smart card over to the same format as the mobile device's public key. After we have transformed all relevant keys (see figure \ref{fig:h0}) to byte arrays we can finally put them together, sign the package and encrypt it with the public key of the server.
+When we construct the verification package on the smart card we have to convert all the keys on the smart card over to the same format as the mobile device's public key. After we have transformed all relevant keys (see figure \ref{fig:h0}) to byte arrays we can finally put them together, sign the package and encrypt it with the public key of the server.
 
-\subsection{Tests and results}
-\paragraph{Configuration 1}\mbox{}\\
-This configuration uses 512-bit keys as the public key between the mobile device and smart card. Although we wish to use keys that are greater than 2048-bit we feel that this is a good starting point.
+\paragraph{Configurations}\mbox{}\\
+\textit{Configuration 1} uses 512-bit keys as the public key between the mobile device and smart card. Although we wish to use keys that are greater than 2048-bit we feel that this is a good starting point.
 \begin{itemize}
     \item NFC card
     \item 512-bit mobile device public key
@@ -46,8 +45,7 @@ This configuration uses 512-bit keys as the public key between the mobile device
     \item 128-bit AES key
 \end{itemize}
 
-\paragraph{Configuration 2}\mbox{}\\
-This configuration uses 2048-bit keys as the public key between the mobile device and smart card to simulate a real-world example.
+\textit{Configuration 2} uses 2048-bit keys as the public key between the mobile device and smart card to simulate a real-world example.
 \begin{itemize}
     \item NFC card
     \item 2048-bit mobile device public key
@@ -57,9 +55,10 @@ This configuration uses 2048-bit keys as the public key between the mobile devic
 \end{itemize}
 
 \paragraph{Installation test}\mbox{}\\
-We want to find out if initializing the keys we need for generating the verification package affects the installation of the smart cards. We will deploy and install the smart card application using GlobalPlatfromPro and time how long it takes. Our test set is 100 tests.
+We want to find out if initializing the keys we need for generating the verification package affects the installation of the smart cards. We will deploy and install the smart card application using GlobalPlatfromPro and time how long it takes. Our test limit is set to 100 tests. Table \ref{tbl:bindingInstall} shows that the average and maximum times increases significantly from configuration 1 to configuration 2.
 
 \begin{table}[h!]
+\captionsetup{justification=centering,margin=1.5cm}
 \caption{Time required to install the application on the smart card.}
 \label{tbl:bindingInstall}
 \centering
@@ -77,8 +76,9 @@ We want to find out if initializing the keys we need for generating the verifica
 \end{table}
 
 \paragraph{Run test}\mbox{}\\
-In this test we will generate the verification package. We will skip the parts of the process involving user input (PIN code).
+In this test we will generate the verification package. We will skip the parts of the process involving user input (PIN code). Table \ref{tbl:bindingRun} shows that configuration used 1,2 seconds to generate a verification package.
 \begin{table}[h!]
+\captionsetup{justification=centering,margin=1.5cm}
 \caption{Time required to generate the verification package on the smart card application.}
 \label{tbl:bindingRun}
 \centering

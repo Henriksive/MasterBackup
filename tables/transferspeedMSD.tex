@@ -1,7 +1,3 @@
-T1 configuration, from NFC was dropped when testing transfers speed for micro SD as it became clear from previous tests on NFC that T1 is vastly inferior to T2 and T3. A non-asynchronous (not using streams) Android application is not representative of the ``real-world'' and we decided on not pursuing further test results using this configuration.
-
-T2 configuration consist of the Android application sending data to the smart card application using frames of size 255 byte until all data is sent. Simultaneously the responses are written to an internal file using FileOutputStream (provided by the standard Java library).
-
 We were not able to test T3 configuration as explained in section \ref{sec:limitationsMSD}.
 
 \begin{table}[h!]

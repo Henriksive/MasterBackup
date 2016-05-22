@@ -1,9 +1,3 @@
-T1 configuration consists of the Android application sending 255 byte of data to the smart card application, receive the response and write the response to an internal file. This process is repeated until all of the data is processed.
-
-T2 configuration consist of the Android application sending data to the smart card application using frames of size 255 byte until all data is sent. Simultaneously the responses are written to an internal file using FileOutputStream (provided by the standard Java library).
-
-T3 configuration consist of the Android application sending data to the smart card application using frames of size 32768 byte until all data is sent. Simultaneously the responses are written to an internal file using FileOutputStream (provided by the standard Java library).
-
 \begin{table}[h!]
 \caption{Table of NFC transfer speed test.}
 \label{tbl:nfcspeed}

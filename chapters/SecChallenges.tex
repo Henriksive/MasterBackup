@@ -340,12 +340,12 @@ The core abilities of a smart card are: generate keys, store keys, encrypt and d
 One disadvantage of using smart cards is that once an applet has been installed it is a static application. It is not possible to add new code to a running applet. What we can do is to program all policies we may wish to utilize and disable them. With this technique we can dynamically turn on and off policies, given that we are able to communicate with the card. The first premise is to install all possible security policies we may need on the smart card before shipping the smart card to the user. The second premise is to translate all policies to a set of parameters which can be combined logically to form rules. If both premises are met we are able to manipulate the parameters and effectively changing the rules.
 
 \paragraph{Enable and update policies}\mbox{}\\
-To enable policies or set parameters for the policies we require a protocol to exchange information with the smart card from a server. One of challenges we have is ``How do we ensure that the mobile device relays policy updates to the smart card?''. One solution is to have the smart card lock itself and require a verification package from a trusted server after a number of operations. It is important to note that the smart card have no concept of time and therefore the smart card cannot use time to control lock cycles. A way to ensure that the server is the only party that can provide the verification package, is to utilize keys that are already on the smart card. For example the public key of the server or the symmetric key exchanged a the beginning of the binding protocol. Refer to figure \ref{fig:OH} and figure \ref{fig:NH} for challenge and challenge response.
+To enable policies or set parameters for the policies we require a protocol to exchange information with the smart card from a server. One of challenges we have is ``How do we ensure that the mobile device relays policy updates to the smart card?''. One solution is to have the smart card lock itself and require a verification package from a trusted server after a number of operations. It is important to note that the smart card have no concept of time and therefore the smart card cannot use time to control lock cycles. A way to ensure that the server is the only party that can provide the verification package, is to utilize keys that are already on the smart card. For example the public key of the server or the symmetric key exchanged a the beginning of the binding protocol. The simplest way of doing this is utilizing signed policy requests and policy response as shown in figure \ref{fig:OH} and figure \ref{fig:NH}. The smart card sends a policy request to the server and the server answers with a policy response.
 %is to send a challenge from the smart card which only the server knows the answer to (shared key/secret).
 
 \begin{figure}[h!]
   \captionsetup{justification=centering,margin=1.5cm}
-  \caption{Smart card policy challenge.}
+  \caption{Smart card policy request.}
   \label{fig:OH}
   \centering
     \includegraphics[width=0.65\textwidth]{images/challenge.png}
@@ -353,45 +353,14 @@ To enable policies or set parameters for the policies we require a protocol to e
 
 \begin{figure}[h!]
   \captionsetup{justification=centering,margin=1.5cm}
-  \caption{Smart card policy challenge response.}
+  \caption{Smart card policy response.}
   \label{fig:NH}
   \centering
-    \includegraphics[width=0.75\textwidth]{images/challenge_response.png}
+    \includegraphics[width=0.65\textwidth]{images/challenge_response.png}
 \end{figure}
 
-\newpage
 
-\paragraph{Challenge transaction}\mbox{}\\
 
-U - Users smart card \\
-M - Mobile device \\
-S - Server, representation of authority \\
-OH - Original hash \\
-NH - New hash \\
-\{Entity\}\textsubscript{prv} - Private key of an entity (U, M, S)\\
-
-First we assume the binding of card and phone from section \ref{sec:bindingcardandphone} was successful. Secondly we assume that the server and smart card has a shared secret: a securely generated 256-bit AES key.
-
-\begin{enumerate}
-    \item U generates a challenge which is a long random hash (OH).
-    \item U signs OH with U\textsubscript{prv}.
-    \item U sends the signed OH package to S via the mobile device.
-    \item S computes new hash (NH) using the AES key S and U agreed upon.
-    \item S signs NH and the policy update.
-    \item S sends the signed NH package (with policy update) to U via the mobile device.
-    \item U computes the new hash and compares it to the NH it received.
-    \item U applies policy updates.
-\end{enumerate}
-
-\begin{figure}[h!]
-  \captionsetup{justification=centering,margin=1.5cm}
-  \caption{Sequence diagram for smart card policy exchange.}
-  \label{fig:SQD_policy}
-  \centering
-    \includegraphics[width=0.95\textwidth]{images/SQD_Policy_Exchange.png}
-\end{figure}
-
-\newpage
 %The "challenge" consists of a long random hash which is then signed by the smart card and sent to the server via the mobile device (see figure). The server computes the new hash using the AES key the smart card and server agreed upon. The new hash and any policy update is signed by the server and sent to the smart card.
 
 \paragraph{Policy format}\mbox{}\\
@@ -493,10 +462,12 @@ public class cardApplication extends Applet implements å\allowbreak åExtendedL
 Section \ref{sec:policySolution} described how a smart card can enforce policies and how to manage policies. The solution is complex, intricate, requires a lot of overhead and is very rigid. Despite these drawbacks, using a smart card for policy enforcement could be well worth it. If an organization need a system where they are in full control and that is tamper proof, a smart card solution is viable option.
 
 \subsection{Potential attack vectors}
-\paragraph{Known-plaintext attack}\mbox{}\\
-The challenge we use is simply two parties creating the same ciphertext from a hash and then comparing them. We then use digital signing to ensure that the challenge-response cannot be intercepted and spoofed. Since we do not encrypt the challenge-response in any way we have to vary of ``known-plaintext attacks'' \cite[~Ch. 2.3.2]{cryptoMath}. To protect against this type of attack the smart card and server must use keys that are long and algorithms that are difficult to brute-force. The final solution should use at least 256-bit long AES keys and as an added measure rotate keys.
+\paragraph{Replay attack}\mbox{}\\
+%The challenge we use is simply two parties creating the same ciphertext from a hash and then comparing them. We then use digital signing to ensure that the challenge-response cannot be intercepted and spoofed. Since we do not encrypt the challenge-response in any way we have to vary of ``known-plaintext attacks'' \cite[~Ch. 2.3.2]{cryptoMath}. To protect against this type of attack the smart card and server must use keys that are long and algorithms that are difficult to brute-force. The final solution should use at least 256-bit long AES keys and as an added measure rotate keys.
+As we are not encrypting the policy response from the server we run the risk of an attacker replaying older policy responses to the smart card. This can be mitigated by adding a version number or counter to the policy response. All the smart card needs to do with this solution is keeping track of which version it is currently on, and refuse policy responses with older version numbers.
 
-
+\paragraph{Policy disclosure}\mbox{}\\
+This proposed solution does not encrypt the policy response to save resources on the server and on the smart card. A direct consequence of this is that anyone receiving the policy response is able to read what policies are currently being enforced. For example, sharing how many password attempts or minimum password length may not be something an organization wishes to do. If this is a requirement for the organization the policy response should also be encrypted with the public key of the smart card.
 
 
 
