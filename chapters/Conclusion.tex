@@ -46,6 +46,11 @@ The lack of literature on how other companies have solved similar problems to th
 
 The consequence of this is that we have to approach the smart card field by looking at hard facts. ISO standards, RFC standards and documentation directly from the vendors are our main resources. Our experience shows that gathering information directly from the vendor yields a better result than looking at third-party literature as the vendor can provide updated information. See the bibliography for what we consider the best sources for information on the research topic.
 
+\section{Remarkable results}
+Apart from the experience gained from working with smart cards and mobile device there is one limitation that we want to classify as extra interesting. When looking at the Java Card documentation, the smart cards are supposed to support the cryptographic functions RSA (2048-bit) and AES-256. This is further confirmed by the documentation by Gemalto (ref. section \ref{sec:smartcardGemalto}). Our test results show that we are only able to use up to 1024-bit RSA keys for signing and AES-128 for symmetric-key cryptography. The claimed supported algorithms and actual working algorithms do not correspond, which is worrying.
+
+The consequence of this discrepancy is that organizations may find themselves unable to use smart cards, as the available cryptography does not meet the industry standards. This realization could potentially happen late in the development process when substantial amounts of resources have already been used.
+
 \section{Future work}
 \label{sec:future}
 The research we have presented in this thesis is a good starting point for developing custom security applications on the Android platform in conjunction with smart cards. The test cases we have looked into point to that micro SD cards have better performance than NFC cards, but our micro SD cards did not support extended APDUs and thus we cannot confirm that micro SD are better than NFC cards. More work on micro SD cards must be performed in order to confirm these suspicions.

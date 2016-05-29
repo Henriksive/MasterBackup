@@ -1,6 +1,6 @@
 % !TEX root = ../../Article.tex
 \subsection{Data Transfer Speed}
-\paragraph{Description and Motivation}\mbox{}\\
+\paragraph{Description and motivation}\mbox{}\\
 %\subsection{Description and Motivation}
 Transfer speed is a very vital for part of the smart card interaction. If the smart card application or the transportation layer is incapable of handling large amounts of the data we will need to take that into account when examining the usability of smart cards. In order to test and eliminate as many variables as possible the smart card is programmed to receive data, copy the incoming data to the buffer and send the exact same data in return. Figure \ref{fig:nfcDataflowTest} describes this process using an NFC card as a platform for the Java Card Applet.
 
@@ -13,7 +13,7 @@ Transfer speed is a very vital for part of the smart card interaction. If the sm
 
 %\paragraph{Tests and Results}\mbox{}\\
 %\subsection{Tests and Results}
-\paragraph{Tests setup}\mbox{}\\
+%\paragraph{Test setup}\mbox{}\\
 The design of the tests was an iterative process. Transfer speed test was one of the first tests we ran on the smart cards and we did not know beforehand how much data a smart card would be able to handle. As a result we ended up with 3 different configurations.
 
 T1 configuration consists of the Android application sending 255 byte of data to the smart card application, receive the response and write the response to an internal file. This process is repeated until all of the data is processed.

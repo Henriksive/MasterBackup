@@ -427,6 +427,12 @@ public class SecureCard extends Applet implements ExtendedLength{
 		apdu.setOutgoing();
 		apdu.setOutgoingLength(size);
 		apdu.sendBytesLong(output, (short) 0, size);
+		cleanBuffers();
+	}
+
+	private void cleanBuffers(){
+		h0Buffer = new byte[32767];
+		output = new byte[32767];
 	}
 }
 \end{lstlisting}

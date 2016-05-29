@@ -18,7 +18,7 @@ Figure \ref{fig:package} is a package diagram of the Android framework and the e
 The package diagram, figure \ref{fig:package}, shows how  the packages in the library are structured.
 
 \subsection{Responsibility areas}
-In light of chapter \ref{ch:challenges} it is important to understand how the smart card library fit into the bigger picture and what it is responsible of. In figure \ref{fig:responsibility} we can see that there are 3 main ``layers''; the Android operating system, the Android application and the smart card library. Even though we define these layers as separate entities, we are technically incorrect when stating so, e.g., the smart card library is technically a part of the Android application and thus they are the same layer. From a more abstract perspective the separation of layers are more correct and can help give a better understanding of the architecture.
+In light of chapter \ref{ch:challenges} it is important to understand how the smart card library fit into the bigger picture and what it is responsible of. In figure \ref{fig:responsibility} we can see that there are 3 main ``layers''; the Android operating system, the Android application and the smart card library. Even though we define these layers as separate entities, we are technically incorrect when stating so, e.g., the smart card library is technically a part of the Android application and thus they are the same layer. From a more abstract perspective the separation of layers is more correct and can help give a better understanding of the architecture.
 
 The first layer is the Android operating system. The Android operating system is in charge of persistent storage (if needed), key storage and key generation. We discussed key storage and key generation in section \ref{sec:mobileDeviceKeys} and how it should be handled. It is also worth noting that the Android operating system is responsible for running the Android application.
 
@@ -163,8 +163,14 @@ public class SigningActivity extends AppCompatActivity
 
 \end{lstlisting}
 
+\paragraph{Available classes}\mbox{}\\
+Figure \ref{fig:classdiagram_simple} provides a simplified and technical overview of how the Android side of the library is built up. The classes seen in the simplified class diagram \ref{fig:classdiagram_simple} shows the three controller classes, \texttt{CommunicationController}, \texttt{NFCSmartCardController} and \texttt{MSDSmartCardController}, we have implemented along with their method signatures. The enum class \texttt{CommunicationType} is used for indicating which type of communication one wishes to invoke when using the methods of \texttt{CommunicationController}.
 
-Figure \ref{fig:classdiagram_simple} provides a simplified and technical overview of how the Android side of the library is built up. This diagram also shows which parameters are required for the methods available in \texttt{CommunicationController}. The complete class diagram for the Android library can be found in Appendix \ref{app:c}, figure \ref{fig:classdiagram_extended}. %The package diagram, figure \ref{fig:package}, shows how  the packages in the library are structured.
+The two controllers, \texttt{NFCSmartCardController} and \texttt{MSDSmartCardController}, can be used directly. If this is done, one cannot use the pre-implemented methods in the Android library. The corresponding methods on the smart card are still available, but with this approach one will need to construct the APDUs manually and conform to their message structure. This approach is still a viable way of using the framework, as both controllers provide a method for sending data to the smart card using the parameters: card AID, INS, P1, P2 and Payload. The method ensures that the APDU being sent to the smart cards conform to the ISO standards of APDUs, but the developer run the risk of invoking functionality that does not exist or with wrong parameters.
+
+Depending on which type of communication type one wishes to use, one will need to implement the corresponding interface in the Android Activity as we discussed earlier. This can be seen in action in listing \ref{lst:NFCSigning}.
+
+The complete class diagram for the Android library can be found in Appendix \ref{app:c}, figure \ref{fig:classdiagram_extended}. This figure contains all implemented classes, interfaces and enums. If there is a need to implement custom controllers for smart card communication it is possible to use the classes which communicates directly with the Gemalto library or the Android.nfc package. A potential future need might be to add communication with a new type of smart card. Classes such \texttt{Converter}, \texttt{StorageHandler}, \texttt{ApduStatics} and \texttt{FilePaths} provide necessary functionality for APDU construction, message parsing and asynchronous message handling. The package diagram in figure \ref{fig:package} shows how the specific smart card controllers include these classes. %The package diagram, figure \ref{fig:package}, shows how  the packages in the library are structured.
 
 \begin{figure}[h!]
   \caption{Simplified class diagram for Android Library.}
@@ -173,3 +179,5 @@ Figure \ref{fig:classdiagram_simple} provides a simplified and technical overvie
     \includegraphics[width=1.25\textwidth, angle =90]{images/Class_Diagram.png}
 \end{figure}
 \clearpage
+
+We have deliberately not made any of the classes protected, meaning that all classes can be instantiate anywhere. This allows new frameworks or new functionality to build on our work without having to edit the library. Of course, this opens up the possibility for uses which are not possible to execute. For example sending APDUs to a smart card without opening the channel. We expect developers that chooses this path to have an understanding of how smart card communication must be built up.

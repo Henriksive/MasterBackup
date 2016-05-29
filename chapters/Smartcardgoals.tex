@@ -30,6 +30,7 @@ Along with the Android framework we will also provide a simple Java Card applet 
 \label{sec:devAndTech}
 
 \subsection{Smart card}
+\label{sec:smartcardGemalto}
 The first part of the complete framework is the application on the smart card. This part of the framework will perform the tasks that we can place on the smart card.
 
 \paragraph{Java Card version}\mbox{}\\
@@ -65,6 +66,7 @@ When we decided on Java Card 2.2.2. we had to consider if we wanted a newer Java
 The micro SD card we have access to are certified with EAL5, but only supports Java Card 2.2.2. \cite{gemaltoidgo8030}. This is also the case with the contact+contactless cards we have access to \cite{gemaltoidgo3010}. The Java Card operating system supports ``Java Card v2.2.2 (3.0.1 for the Elliptic Curves algorithms)'', which means that some of the cryptographic functionality of Java Card 3.0.1 is present. Refer to table \ref{tbl:algos} for available cryptographic algorithms.
 
 \begin{table}[h!]
+\captionsetup{justification=centering,margin=1.5cm}
 \caption{Available cryptographic algorithms in IDCore 3010 and IDCore 8030.}
 \label{tbl:algos}
 \centering

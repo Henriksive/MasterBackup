@@ -52,7 +52,7 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Library package diagram.\relax }}{66}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Library package diagram.\relax }}{67}
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Diagram showing which responsibilities the layers in an Android application have.\relax }}{68}
 \defcounter {refsection}{0}\relax 
@@ -62,13 +62,11 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Data flow of data transfer speed test for NFC.\relax }}{77}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Data flow of data transfer speed test for NFC.\relax }}{78}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Graphical representation of table 6.1\hbox {}.\relax }}{79}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Graphical representation of table 6.1\hbox {}.\relax }}{80}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Graphical representation of table 6.3\hbox {}.\relax }}{82}
-\defcounter {refsection}{0}\relax 
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Graphical representation of table 6.3\hbox {}.\relax }}{83}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
@@ -76,8 +74,10 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {C.1}{\ignorespaces Class diagram for Android Library.\relax }}{120}
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {C.1}{\ignorespaces Class diagram for Android Library.\relax }}{121}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {D.1}{\ignorespaces Configuring Java Card kit 2.2.2 for Eclipse.\relax }}{122}
+\contentsline {figure}{\numberline {D.1}{\ignorespaces Configuring Java Card kit 2.2.2 for Eclipse.\relax }}{123}

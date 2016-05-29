@@ -19,11 +19,11 @@
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {1.4}Chapter organization}{3}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Chapter 1 - Introduction}{3}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Chapter 2 - Background}{3}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Chapter 3 - Smart card framework}{3}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Chapter 4 - Challenges}{4}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Chapter 5 - Framework Implementation}{4}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Chapter 6 - Test cases}{4}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Chapter 7 - Discussion and Conclusion}{4}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Chapter 3 - Smart Card Framework - Goals and Environment}{3}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Chapter 4 - Challenges and use cases}{4}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Chapter 5 - Framework design and implementation}{4}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Chapter 6 - Testing and use case implementation}{4}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Chapter 7 - Conclusion}{4}}
 \citation{iso7810}
 \citation{iso7816}
 \citation{smartcardHandbook}
@@ -108,6 +108,7 @@
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.2}Development tools and technology}{24}}
 \newlabel{sec:devAndTech}{{3.2}{24}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Smart card}{24}}
+\newlabel{sec:smartcardGemalto}{{3.2.1}{24}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Java Card version}{24}}
 \citation{securityEngineering}
 \citation{gemaltoidgo8030}
@@ -248,9 +249,9 @@
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.2}Android framework}{65}}
 \newlabel{sec:androidApp}{{5.2}{65}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Achieving framework goals}{65}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Library package diagram.\relax }}{66}}
-\newlabel{fig:package}{{5.1}{66}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Responsibility areas}{67}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Responsibility areas}{66}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Library package diagram.\relax }}{67}}
+\newlabel{fig:package}{{5.1}{67}}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Diagram showing which responsibilities the layers in an Android application have.\relax }}{68}}
 \newlabel{fig:responsibility}{{5.2}{68}}
 \citation{GemaltoIDGo800}
@@ -267,118 +268,119 @@
 \newlabel{fig:instantiateflow}{{5.3}{71}}
 \newlabel{lst:NFCSigning}{{5.3}{72}}
 \@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {lstlisting}{\numberline {5.3}Java code example showing how to send sign a message using a NFC smart card.}{72}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Available classes}{73}}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Simplified class diagram for Android Library.\relax }}{74}}
 \newlabel{fig:classdiagram_simple}{{5.4}{74}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {6}Testing and use case implementation}{75}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {6}Testing and use case implementation}{76}}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:testing}{{6}{75}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {6.1}Setup}{75}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}Equipment}{75}}
-\newlabel{sec:equipment}{{6.1.1}{75}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Test device}{75}}
+\newlabel{ch:testing}{{6}{76}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {6.1}Setup}{76}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}Equipment}{76}}
+\newlabel{sec:equipment}{{6.1.1}{76}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Test device}{76}}
 \citation{sonym2}
 \citation{gemaltoidgo3010}
 \citation{obfus}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Java smart card}{76}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.2}Limitations and problems}{76}}
-\newlabel{sec:limitationsMSD}{{6.1.2}{76}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {6.2}Tests}{77}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Data Transfer Speed}{77}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Description and Motivation}{77}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Data flow of data transfer speed test for NFC.\relax }}{77}}
-\newlabel{fig:nfcDataflowTest}{{6.1}{77}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Tests setup}{78}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{NFC results}{78}}
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces Table of NFC transfer speed test.\relax }}{78}}
-\newlabel{tbl:nfcspeed}{{6.1}{78}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces Graphical representation of table 6.1\hbox {}.\relax }}{79}}
-\newlabel{fig:nfcgraph}{{6.2}{79}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Micro SD results}{80}}
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces Table of micro SD transfer speed test.\relax }}{80}}
-\newlabel{tbl:msdspeed}{{6.2}{80}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Conclusion}{80}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Java smart card}{77}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.2}Limitations and problems}{77}}
+\newlabel{sec:limitationsMSD}{{6.1.2}{77}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {6.2}Tests}{78}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Data Transfer Speed}{78}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Description and motivation}{78}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Data flow of data transfer speed test for NFC.\relax }}{78}}
+\newlabel{fig:nfcDataflowTest}{{6.1}{78}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{NFC results}{79}}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces Table of NFC transfer speed test.\relax }}{79}}
+\newlabel{tbl:nfcspeed}{{6.1}{79}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces Graphical representation of table 6.1\hbox {}.\relax }}{80}}
+\newlabel{fig:nfcgraph}{{6.2}{80}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Micro SD results}{81}}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces Table of micro SD transfer speed test.\relax }}{81}}
+\newlabel{tbl:msdspeed}{{6.2}{81}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Conclusion}{81}}
 \citation{javacardCipher}
 \citation{javacardCipherFail}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}Symmetric-key cryptography}{81}}
-\newlabel{sec:symmetricTest}{{6.2.2}{81}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Test setup}{81}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Results}{81}}
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {6.3}{\ignorespaces Table of AES encryption speed test.\relax }}{82}}
-\newlabel{tbl:AESSpeed}{{6.3}{82}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces Graphical representation of table 6.3\hbox {}.\relax }}{82}}
-\newlabel{fig:AESgraph}{{6.3}{82}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Conclusion}{82}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}Symmetric-key cryptography}{82}}
+\newlabel{sec:symmetricTest}{{6.2.2}{82}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Test setup}{82}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Results}{82}}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {6.3}{\ignorespaces Table of AES encryption speed test.\relax }}{83}}
+\newlabel{tbl:AESSpeed}{{6.3}{83}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces Graphical representation of table 6.3\hbox {}.\relax }}{83}}
+\newlabel{fig:AESgraph}{{6.3}{83}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Conclusion}{83}}
 \citation{rsaRec}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.3}Public-key cryptography}{83}}
-\newlabel{sec:AsymmetricTest}{{6.2.3}{83}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Test setup}{83}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Results}{84}}
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {6.4}{\ignorespaces Table of digital signing (RSA) speed test.\relax }}{84}}
-\newlabel{tbl:RSASigningSpeed}{{6.4}{84}}
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {6.5}{\ignorespaces Table of RSA encryption speed test.\relax }}{84}}
-\newlabel{tbl:RSAEncryptionSpeed}{{6.5}{84}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Conclusion}{84}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.4}Binding card and mobile device}{85}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Implementation}{85}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.3}Public-key cryptography}{84}}
+\newlabel{sec:AsymmetricTest}{{6.2.3}{84}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Test setup}{84}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Results}{85}}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {6.4}{\ignorespaces Table of digital signing (RSA) speed test.\relax }}{85}}
+\newlabel{tbl:RSASigningSpeed}{{6.4}{85}}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {6.5}{\ignorespaces Table of RSA encryption speed test.\relax }}{85}}
+\newlabel{tbl:RSAEncryptionSpeed}{{6.5}{85}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Conclusion}{85}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.4}Binding card and mobile device}{86}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Implementation}{86}}
 \citation{ownerpin}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Configurations}{86}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Installation test}{87}}
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {6.6}{\ignorespaces Time required to install the application on the smart card.\relax }}{87}}
-\newlabel{tbl:bindingInstall}{{6.6}{87}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Run test}{87}}
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {6.7}{\ignorespaces Time required to generate the verification package on the smart card application.\relax }}{87}}
-\newlabel{tbl:bindingRun}{{6.7}{87}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Configurations}{87}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Installation test}{88}}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {6.6}{\ignorespaces Time required to install the application on the smart card.\relax }}{88}}
+\newlabel{tbl:bindingInstall}{{6.6}{88}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Run test}{88}}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {6.7}{\ignorespaces Time required to generate the verification package on the smart card application.\relax }}{88}}
+\newlabel{tbl:bindingRun}{{6.7}{88}}
 \citation{signingtrouble2}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.5}Limitations}{88}}
-\newlabel{sec:limitsBinding}{{6.2.5}{88}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Signing not working with 2048-bit key size}{88}}
-\newlabel{lst:signing2048}{{6.1}{88}}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {lstlisting}{\numberline {6.1}Java Card failed signing.}{88}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Out of memory}{89}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Code rigidity}{89}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.6}Conclusion}{90}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {7}Conclusion}{91}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.5}Limitations}{89}}
+\newlabel{sec:limitsBinding}{{6.2.5}{89}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Signing not working with 2048-bit key size}{89}}
+\newlabel{lst:signing2048}{{6.1}{89}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {lstlisting}{\numberline {6.1}Java Card failed signing.}{89}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Out of memory}{90}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Code rigidity}{90}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.6}Conclusion}{91}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {7}Conclusion}{92}}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:conclusion}{{7}{91}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {7.1}Research questions}{91}}
+\newlabel{ch:conclusion}{{7}{92}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {7.1}Research questions}{92}}
 \citation{javacardErrors}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {7.2}Experience}{93}}
-\newlabel{sec:experience}{{7.2}{93}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Getting started with smart card programming}{93}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Debugging smart card applications}{93}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Java Card documentation}{94}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Deploying smart card applications}{94}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Literature}{94}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {7.3}Future work}{95}}
-\newlabel{sec:future}{{7.3}{95}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{References}{96}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {A}Java Card code}{102}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {7.2}Experience}{94}}
+\newlabel{sec:experience}{{7.2}{94}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Getting started with smart card programming}{94}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Debugging smart card applications}{94}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Java Card documentation}{95}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Deploying smart card applications}{95}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{Literature}{95}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {7.3}Remarkable results}{96}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {7.4}Future work}{97}}
+\newlabel{sec:future}{{7.4}{97}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{References}{97}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {A}Java Card code}{103}}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{app:A}{{A}{102}}
-\newlabel{lst:SecureCard}{{A.1}{102}}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {lstlisting}{\numberline {A.1}SecureCard.java.}{102}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {B}Android library}{114}}
+\newlabel{app:A}{{A}{103}}
+\newlabel{lst:SecureCard}{{A.1}{103}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {lstlisting}{\numberline {A.1}SecureCard.java.}{103}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {B}Android library}{115}}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{app:b}{{B}{114}}
-\newlabel{lst:CommunicationController}{{B.1}{114}}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {lstlisting}{\numberline {B.1}CommunicationController.java.}{114}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {C}Diagrams}{120}}
+\newlabel{app:b}{{B}{115}}
+\newlabel{lst:CommunicationController}{{B.1}{115}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {lstlisting}{\numberline {B.1}CommunicationController.java.}{115}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {C}Diagrams}{121}}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{app:c}{{C}{120}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {C.1}{\ignorespaces Class diagram for Android Library.\relax }}{120}}
-\newlabel{fig:classdiagram_extended}{{C.1}{120}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {D}Framework installation}{121}}
+\newlabel{app:c}{{C}{121}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {C.1}{\ignorespaces Class diagram for Android Library.\relax }}{121}}
+\newlabel{fig:classdiagram_extended}{{C.1}{121}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {D}Framework installation}{122}}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{app:D}{{D}{121}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {D.1}Smart card development environment}{121}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {D.1}{\ignorespaces Configuring Java Card kit 2.2.2 for Eclipse.\relax }}{122}}
-\newlabel{fig:javacardkit}{{D.1}{122}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {D.2}Smart card deployment}{122}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {D.3}Smart card testing}{122}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {D.4}Android development environment}{123}}
+\newlabel{app:D}{{D}{122}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {D.1}Smart card development environment}{122}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {D.1}{\ignorespaces Configuring Java Card kit 2.2.2 for Eclipse.\relax }}{123}}
+\newlabel{fig:javacardkit}{{D.1}{123}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {D.2}Smart card deployment}{123}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {D.3}Smart card testing}{123}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {D.4}Android development environment}{124}}

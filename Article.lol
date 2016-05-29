@@ -15,8 +15,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {lstlisting}{\numberline {5.3}Java code example showing how to send sign a message using a NFC smart card.}{72}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {6.1}Java Card failed signing.}{88}
+\contentsline {lstlisting}{\numberline {6.1}Java Card failed signing.}{89}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {A.1}SecureCard.java.}{102}
+\contentsline {lstlisting}{\numberline {A.1}SecureCard.java.}{103}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {B.1}CommunicationController.java.}{114}
+\contentsline {lstlisting}{\numberline {B.1}CommunicationController.java.}{115}
