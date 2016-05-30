@@ -4,19 +4,21 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Contact smart card and reader.\relax }}{6}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Contact smart card and reader.\relax }}{5}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Door lock using smart card to unlock.\relax }}{9}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Smart card architecture\relax }}{6}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Door lock using smart card to unlock with corresponding APDU commands\relax }}{10}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Door lock using smart card to unlock.\relax }}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Smart card architecture\relax }}{11}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Door lock using smart card to unlock with corresponding APDU commands\relax }}{10}
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Micro SD card from Gemalto.\relax }}{12}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Asymmetric key encryption/decryption using public-private key pair.\relax }}{17}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Java Card architecture\relax }}{12}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Digital signing using public-private key pair.\relax }}{18}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Asymmetric key encryption/decryption using public-private key pair.\relax }}{17}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Digital signing using public-private key pair.\relax }}{18}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
@@ -24,29 +26,29 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Deployment line using GlobalPlatformPro.\relax }}{28}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Select APDU sent to smart card via PyApduTool\relax }}{30}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Select APDU sent to smart card via PyApduTool\relax }}{29}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Android Debug Bridge memory monitor connected to a running Android device.\relax }}{32}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Android Debug Bridge memory monitor connected to a running Android device.\relax }}{31}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Android Debug Bridge CPU monitor connected to a running Android device.\relax }}{32}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Android Debug Bridge CPU monitor connected to a running Android device.\relax }}{31}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Development flow of the smart card framework\relax }}{34}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Development flow of the smart card framework\relax }}{33}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Using a third party (Authority) to establish a trust relationship between two parties (Application and smart card) lacking trust.\relax }}{38}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Using a third party (Authority) to establish a trust relationship between two parties (Application and smart card) lacking trust.\relax }}{37}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Server, mobile device and smart card communication flow.\relax }}{39}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Server, mobile device and smart card communication flow.\relax }}{38}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Verification package structure.\relax }}{41}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Verification package structure.\relax }}{40}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Sequence diagram for binding mobile device with smart card.\relax }}{43}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Sequence diagram for binding mobile device with smart card.\relax }}{42}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Screenshot of Android settings showing hardware-backed storage ``enabled''.\relax }}{50}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Screenshot of Android settings showing hardware-backed storage ``enabled''.\relax }}{49}
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {4.6}{\ignorespaces Smart card policy request.\relax }}{57}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Smart card policy response.\relax }}{58}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Smart card policy response.\relax }}{57}
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {4.8}{\ignorespaces Example policy APDU with two policies\relax }}{59}
 \defcounter {refsection}{0}\relax 
@@ -54,30 +56,30 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Library package diagram.\relax }}{67}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Diagram showing which responsibilities the layers in an Android application have.\relax }}{68}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Diagram showing which responsibilities the layers in an Android application have.\relax }}{69}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Abstraction layer between Android activities and smart cards.\relax }}{71}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Abstraction layer between Android activities and smart cards.\relax }}{72}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Simplified class diagram for Android Library.\relax }}{74}
-\defcounter {refsection}{0}\relax 
-\addvspace {10\p@ }
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Data flow of data transfer speed test for NFC.\relax }}{78}
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Graphical representation of table 6.1\hbox {}.\relax }}{80}
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Graphical representation of table 6.3\hbox {}.\relax }}{83}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Simplified class diagram for Android Library.\relax }}{76}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Data flow of data transfer speed test for NFC.\relax }}{79}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Graphical representation of table 6.1\hbox {}.\relax }}{81}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Graphical representation of table 6.3\hbox {}.\relax }}{84}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {C.1}{\ignorespaces Class diagram for Android Library.\relax }}{121}
+\addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {D.1}{\ignorespaces Configuring Java Card kit 2.2.2 for Eclipse.\relax }}{123}
+\contentsline {figure}{\numberline {C.1}{\ignorespaces Class diagram for Android Library.\relax }}{123}
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {D.1}{\ignorespaces Configuring Java Card kit 2.2.2 for Eclipse.\relax }}{125}

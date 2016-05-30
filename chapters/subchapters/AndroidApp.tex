@@ -13,10 +13,10 @@ Figure \ref{fig:package} is a package diagram of the Android framework and the e
   \caption{Library package diagram.}
   \label{fig:package}
   \centering
-    \includegraphics[width=0.95\textwidth]{images/package2.png}
+    \includegraphics[width=0.85\textwidth]{images/package2.png}
 \end{figure}
 The package diagram, figure \ref{fig:package}, shows how  the packages in the library are structured.
-
+\newpage
 \subsection{Responsibility areas}
 In light of chapter \ref{ch:challenges} it is important to understand how the smart card library fit into the bigger picture and what it is responsible of. In figure \ref{fig:responsibility} we can see that there are 3 main ``layers''; the Android operating system, the Android application and the smart card library. Even though we define these layers as separate entities, we are technically incorrect when stating so, e.g., the smart card library is technically a part of the Android application and thus they are the same layer. From a more abstract perspective the separation of layers is more correct and can help give a better understanding of the architecture.
 
@@ -53,7 +53,7 @@ The first functionality we will describe of the implementation is ``extendable''
 
 \paragraph{Custom APDUs}\mbox{}\\
 To send custom APDUs to a smart card,\texttt{CommunicationController} must be instantiated and the application must know the application identifier of the smart card application. Further the current activity must implement\\ \texttt{NfCSmartcardControllerInterface} or \texttt{MSDSmartcardControllerInterface} (depending on smart card type) in order to be notified when the transaction is complete. Before continuing one will need to call the methods \texttt{setupNFCController} or \texttt{setupmSDController} depending on the smart card. Listing \ref{lst:NFCLibraryExample} shows an example implementation on how an activity may utilize the library for sending custom commands to a NFC smart card.
-
+\newpage
 \begin{lstlisting}[caption=Java code example showing how to send and receive commands to a NFC smart card., label=lst:NFCLibraryExample,escapechar=å]
 
 public class PayloadActivity extends AppCompatActivity
@@ -178,6 +178,5 @@ The complete class diagram for the Android library can be found in Appendix \ref
   \centering
     \includegraphics[width=1.25\textwidth, angle =90]{images/Class_Diagram.png}
 \end{figure}
-\clearpage
 
 We have deliberately not made any of the classes protected, meaning that all classes can be instantiate anywhere. This allows new frameworks or new functionality to build on our work without having to edit the library. Of course, this opens up the possibility for uses which are not possible to execute. For example sending APDUs to a smart card without opening the channel. We expect developers that chooses this path to have an understanding of how smart card communication must be built up.

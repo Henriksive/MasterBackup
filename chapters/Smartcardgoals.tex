@@ -64,7 +64,7 @@ Table \ref{tbl:EAL} shows the difference between EAL levels. Comparing the EAL l
 When we decided on Java Card 2.2.2. we had to consider if we wanted a newer Java Card version with more functionality or if we wanted to comply with government directives (EAL requirements). The obvious choice was the latter as we have to comply with government directives.
 
 The micro SD card we have access to are certified with EAL5, but only supports Java Card 2.2.2. \cite{gemaltoidgo8030}. This is also the case with the contact+contactless cards we have access to \cite{gemaltoidgo3010}. The Java Card operating system supports ``Java Card v2.2.2 (3.0.1 for the Elliptic Curves algorithms)'', which means that some of the cryptographic functionality of Java Card 3.0.1 is present. Refer to table \ref{tbl:algos} for available cryptographic algorithms.
-
+\newpage
 \begin{table}[h!]
 \captionsetup{justification=centering,margin=1.5cm}
 \caption{Available cryptographic algorithms in IDCore 3010 and IDCore 8030.}
@@ -83,7 +83,6 @@ The micro SD card we have access to are certified with EAL5, but only supports J
 
     \end{tabular}
 \end{table}
-\clearpage
 
 \paragraph{Development environment}\mbox{}\\
 %\subsection{Development environment}
@@ -97,7 +96,7 @@ In order to develop applications for the smart cards we will be using Eclipse 3.
 \end{figure}
 
 In figure \ref{fig:eclipse} we can see the tools for generating the deployable smart card application package (.cap file). The screenshot also shows how the editor looks like any other Eclipse version. Even though this version of Eclipse includes tools for sending and receiving APDUs to the application (testing), we have decided not to use these tools as they proved themselves to be unstable and not representative of real world use. This is mostly due to the fact that the application is deployed to an emulator and does not have \textit{any} hardware limitations of a physical smart card.
-
+\newpage
 \paragraph{Deployment}\mbox{}\\
 We will be using GlobalPlatformPro (GP) \cite{globalplatform} to deploy and manage applets on the physical smart cards. GP is a command line tool and is compatible with our hybrid Gemalto card with reader as well as the micro SD card. In figure \ref{fig:deployFlow} we can see which part of the assembly line GP is responsible for. GP takes the generated .cap file and deploys it to the smart card via the card reader using the computer drivers.
 
@@ -137,7 +136,6 @@ PyApduTool does not support extended APDU and this limits us to a high degree wh
 
 As a result we are very limited when it comes to testing the performance of the smart cards. The only way of measuring resource usage on the smart cards are with time stamps and by looking at the elapsed time do an evaluation on the performance. This makes it difficult to identify bottlenecks on the smart cards.
 
-\clearpage
 \subsection{Android application}
 The second part of the framework is an Android library. The library will serve as an intermediate between the Android application and the smart card application.
 

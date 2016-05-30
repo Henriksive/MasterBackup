@@ -5,9 +5,9 @@ In this chapter we will provide the background information necessary to understa
 
 \section{Smart card}
 \label{sec:smartcard}
-The term smart card refers to a card with an integrated circuit. In essence a smart card is a miniature computer with limited computing power. In practice, it is a miniature computer with limited computing power, which can process information in a secure isolated environment and exchange data with the device that usually also provides it with the necessary power to operate.
+The term smart card refers to a card with an integrated circuit. In practice, it is a miniature computer with limited computing power, which can process information in a secure isolated environment and exchange data with the device that usually also provides it with the necessary power to operate.
 
-\subsection{Smart card architecture}
+\subsection{Smart card architecture and specifications}
 The micro processor is able to perform tasks that involve processing input, give ouput and storing small amounts of data. Smart cards vary in sizes defined by the standards ISO/IEC 7810 \cite{iso7810} and ISO/IEC 7816 \cite{iso7816}. The most common card dimensions are approximately 85x54 mm \cite[~Ch. 3.1]{smartcardHandbook}. The processing power of smart cards are between 25-32 MHz and sport anywhere from 8Kbit to 128Kbit memory (EEPROM) \cite{cardProcessing}.
 
 The micro processor can be powered and communicate in two ways. Contact smart cards have integrated contact pads. When the smart card is inserted into a card reader the contact pads of the card reader provides power to the micro processor via the contact pads of the smart card. The contact pads also functions as a medium for transferring data. Contactless smart cards uses radio-frequency induction to power the micro processor and to transmit data between an antenna and the card. Most modern smart cards supports both technologies (hybrid cards). Figure \ref{fig:nfccard} shows a contact smart card and reader.
@@ -23,6 +23,15 @@ An everyday example of a smart card is the modern credit and debit card. Most of
 \end{flushright}
   \captionof{figure}{Contact smart card and reader.}
   \label{fig:nfccard}
+\end{figure}
+
+In figure \ref{fig:smartcardArchitecture} we can see how the architecture of a smart card (NFC) is built up. In the bottom we have the hardware of the smart card which includes the ROM, EPROM, RAM and in the case of NFC cards the NFC receiver. On top of the hardware is the operating system of the smart card. The operating system has drivers installed along with API which it provides to the virtual machine. On top of the virtual machine multiple applets are able to run as mentioned above.
+
+\begin{figure}[h!]
+  \caption{Smart card architecture}
+  \label{fig:smartcardArchitecture}
+  \centering
+    \includegraphics[width=0.95\textwidth]{images/javacardArchitecture.png}
 \end{figure}
 
 \subsection{Communication standard for smart cards}
@@ -166,14 +175,6 @@ On most smart cards there is an application manager which listen for a special t
 \label{sec:javacard}
 In section \ref{sec:smartcard} we described that smart cards are able to store data as well as process input and output. All smart cards have their own operating system that allows developers to write applications that run on the smart cards. Smart cards are not limited to one applications per card, but are able to have multiple applications installed. Traditionally it was not feasible to create programs that ran on different smart cards as the micro processors were manufacturer specific \cite{javacardapplet}. This created an environment where smart card issuers and their developers were locked to a specific manufacturer.
 
-In figure \ref{fig:smartcardArchitecture} we can see how the architecture of a smart card is built up. In the bottom we have the hardware of the smart card which includes the ROM, EPROM, RAM and in the case of NFC cards the NFC receiver. On top of the hardware is the operating system of the smart card. The operating system has drivers installed along with API which it provides to the virtual machine. On top of the virtual machine multiple applets are able to run as mentioned above.
-\begin{figure}[h!]
-  \caption{Smart card architecture}
-  \label{fig:smartcardArchitecture}
-  \centering
-    \includegraphics[width=0.95\textwidth]{images/javacardArchitecture.png}
-\end{figure}
-
 The company Schlumberger \cite{schlumberger}, later joined by Sun Microsystems \cite{sunMicroSystems}, outlined Java Card 1.0. Java Card were to alleviate the problem of manufacturer specific code and to let developers write generic applications. Newer Java Card version includes a development kit that provides a test environment and a converter tool that prepares the Java Card applet/program for installation onto a smart card. The newest Java Card version is currently 3.0.5 \cite{javacard305}.
 
 The Java Card language is in practice a very basic version of the standard Java language. Many Java classes and features are not present. For example: int, double, long, java.lang.SecurityManager, threading and object cloning \cite{javacardlimits}. The structure of the applets differs from standard Java applets. All Java Card applets must implement:
@@ -197,6 +198,15 @@ The fact that there is now a standardized smart card platform based on Java Card
     \includegraphics[width=0.75\textwidth]{images/msd.png}
 \end{figure}
 
+Figure \ref{fig:jca} shows how the general outline of smart card architecture (see figure \ref{fig:smartcardArchitecture}) translates to Java Card. The Loader/Installer is responsible for installing the applet onto the smart card so that it can run in the Java Card VM where as the Card Manager is responsible for activating the correct applet and forwarding APDUs.
+
+\begin{figure}[h!]
+  \caption{Java Card architecture}
+  \label{fig:jca}
+  \centering
+    \includegraphics[width=0.85\textwidth]{images/javacardspecificArcitecture.png}
+\end{figure}
+\clearpage
 
 \subsection{Other smart card programming languages}
 Besides Java Card, another widespread smart card operative system is MULTOS \cite{multos}. MULTOS was the first open high security operating system that supported multiple applets and supports the programming languages native assembly (MEL), C and Java. Java Card and MULTOS differs from how they handle applets shared space/memory on the smart cards. MULTOS security targets are: Applets can only be loaded by the card issuer, applets are segregated and secure package deployment. Java Card uses a secure channel to distribute applications whereas MULTOS uses secure packaging. The essence is that third parties can deploy new applets to the smart card containing sensitive data. This is possible as the package is encrypted with the public key of MULTOS (card unique) and thus you do not need a secure channel \cite{smartcardThesis, multosVSjavacard}.
@@ -205,13 +215,13 @@ There exists a .NET version of a smart card OS started by Microsoft which led to
 
 \section{Android operating system}
 \label{sec:androidOS}
-Mobile operating system refers to the operating system running on a mobile device (smartphones, GPS devices, tablets, etc.). In this thesis we will focus mainly on smartphones and tablets since their capabilities are within our scope and the fact that they often share the same operating system.
+Mobile operating system refers to the operating system running on a mobile device (smartphones, GPS devices, tablets, etc.). In this thesis we will focus mainly on smartphones and tablets since their capabilities are within our scope and the fact that they often share the same operating system. For practical reasons and because of time constraints we will restrict ourselves to one mobile operating system and the operating system we chose is Android.
 
 Android is an open source licensed mobile operating system and is based on one of the LTS (long-term support) branches of the Linux kernel. Google Inc. \cite{google} is the current developer of the mobile operating system and their primary focus has been smartphones and tablets. In later years Google has put resources into incorporating Android with TVs, wrist watches and cars. In 2015 Q2 82,8 \% of smartphones worldwide was shipped with a version of the Android mobile operating system \cite{androidMarketShare}.
 
 The Android mobile operating system supports applications that are written in Java, GO and C/C++. The applications run in their own sandbox with their own allocated memory space, but applications can also access shared resources given permission to do so by the user.
 
-For practical reasons and because of time constraints we have restricted us to one mobile operating system. The mobile operating system of choice is Android. The reason for picking Android as our mobile platform is the flexibility of the Android system and devices when it comes to secure element support. iOS devices have no support for micro SD smart cards and Windows Phones does not seem to have any libraries support smart card communication. Blackberry is an alternative, especially their latest iterations which is a custom Android version, but due to their low market share they are not representative in a ``bring your own device'' situation. We discuss the Blackberry Priv more in depth in section \ref{sec:blackberry}.
+ Another reason for picking Android as our mobile platform is the flexibility of the Android system and devices when it comes to secure element support. iOS devices have no support for micro SD smart cards and Windows Phones does not seem to have any libraries support smart card communication. Blackberry is an alternative, especially their latest iterations which is a custom Android version, but due to their low market share they are not representative in a ``bring your own device'' situation. We discuss the Blackberry Priv more in depth in section \ref{sec:blackberry}.
 
 % devices as iPhone OS does not support micro SD cards and Windows Phone devices does not seem to support secure elements at all.
 
@@ -221,9 +231,10 @@ In Android version 2.3 (API level 9) NFC support was added which enabled a mobil
 
 As mentioned in section \ref{sec:javacard} smart card applications can run on micro SD cards. Mobile devices with a micro SD card slot can in theory communicate with these types of smart cards, but Android has no native support for communicating with them. This essentially means that the hardware is there on some mobile devices, but developers lack the bridge between their application to the hardware.
 
-The Secure Element Evaluation Kit (SEEK) for the Android platform is an open source project, maintained by Giesecke \& Devrient GmbH \cite{Giesecke}, which have a vision to make it easier to use secure elements in Android applications. The framework enables access to a variety of secure elements such as SIM cards, micro SD cards and embedded secure elements. Their final goal is to have their library as an integrated part of the Android operating system such that all new mobile devices comes with hardware-backed security support \cite{SEEK}. Some mobile device manufactures have included this framework, but there exists no documentation stating which devices have it, what channels are open and how to access the secure elements. Often the case is that only the channel to the mobile device SIM card is open meaning you cannot access custom secure elements.
+The Secure Element Evaluation Kit (SEEK) for the Android platform is an open source project, maintained by Giesecke \& Devrient GmbH \cite{Giesecke}, which has a vision to make it easier to use secure elements in Android applications. The framework enables access to a variety of secure elements such as SIM cards, micro SD cards and embedded secure elements. Their final goal is to have their library as an integrated part of the Android operating system such that all new mobile devices comes with hardware-backed security support \cite{SEEK}. Some mobile device manufactures have included this framework, but there exists no documentation stating which devices have it, what channels are open and how to access the secure elements. Often the case is that only the channel to the mobile device SIM card is open meaning you cannot access custom secure elements.
 
-Since SEEK for Android is open source and we can look into how the software works (although this require resources), but if the pre-installed operating system does not have it installed we will need to build our own version and flash the device. Running a custom version of an operating system requires the organization to maintain and support it. From a security standpoint this is not viable as you will not automatically get security updates and will be running an unofficial version of an operating system. Running a custom operating system may also cause issues for the users as some services may block the user if they detect it (banking applications, proprietary applications, etc.).
+%Since SEEK for Android is open source and we can look into how the software works (although this require resources), but if the pre-installed operating system does not have it installed we will need to build our own version and flash the device.
+Even though SEEK is open source and gives us access to the source code which would let us modify and tailor it to our needs, the main obstacle to its adoption is that it must be compiled with the kernel. This translates to creating, compiling and installing a custom operating system on our test devices. However, we made it clear from the beginning that our goal is to use off-the-shelf mobile devices. Another reason for not running a custom version of an operating system, is that it requires an organization to maintain and support it. From a security standpoint this is not viable as you will not automatically get security updates and will be running an unofficial version of an operating system. Running a custom operating system may also cause issues for the users as some services may block the user if they detect it (banking applications, proprietary applications, etc.).
 
 As an alternative to flashing the operating system one can use proprietary drivers from smart card manufacturers. Gemalto produces a Java library, IDGo800, which is a cryptographic and communication middleware for their smart cards (more on this in section \ref{sec:gemaltoApp}). Installing/using third-party applications/libraries to communicate with smart cards may not always be the best option, as you make yourself dependent on a third-party. In essence, opting for this solution results in a vendor lock. Security wise you should not blindly trust a third-party and you may not have access to the software if you wish to evaluate it.
 
@@ -241,7 +252,7 @@ In this thesis we will not seek further investigation on the Blackberry Priv and
 
 \section{Cryptography}
 %What is cryptography?
-Cryptography is a method for protecting confidential data using complex mathematics and computer science. Most cryptographic functions/algorithms relies heavily on the fact that the mathematics are so complex that they are ``unbreakable'' without knowledge of the encryption/decryption key.
+Cryptography is a method for protecting confidential data using complex mathematics and computer science. Most cryptographic functions/algorithms relies heavily on the fact that the mathematical problems which they are based on are so complex that they are ``unbreakable'' without knowledge of the encryption/decryption key.
 
 \subsection{Public-key cryptography}
 \label{sec:publicKeyCrypto}

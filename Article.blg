@@ -2,9 +2,51 @@ This is BibTeX, Version 0.99dThe top-level auxiliary file: Article.aux
 The style file: biblatex.bst
 Database file #1: Article-blx.bib
 Database file #2: references/references.bib
-Repeated entry---line 76 of file references/references.bib
+Repeated entry---line 88 of file references/references.bib
  : @online{multos
  :               ,
 I'm skipping whatever remains of this entry
 Biblatex version: 2.9
-(There was 1 error message)
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2513 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2513 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2513 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2513 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2517 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2523 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2527 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2527 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2531 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2537 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2541 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2541 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2595 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2659 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2659 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2659 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2659 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2659 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2659 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2659 of file biblatex.bst
+Name 1 in "Tim Cooijmans, Joeri de Ruiter, and Erik Poll" has a comma at the end for entry KeyStorage
+while executing---line 2659 of file biblatex.bst
+(There were 22 error messages)
